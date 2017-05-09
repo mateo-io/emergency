@@ -1,32 +1,20 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import FontIcon from 'material-ui/FontIcon';
-import MapsPersonPin from 'material-ui/svg-icons/maps/person-pin';
 import PropTypes from 'prop-types';
+import StatusBar from './StatusBar';
 
-          /*
-          <SwipeableViews
-            index={this.state.slideIndex}
-            onChangeIndex={this.handleChange}
-            >
+      export default class CallView extends React.Component {
+
+        render() {
+          const { call, actions } = this.props;
+          const { callStart, status, origin, poste,
+             comments, type, dispatched, arrived } = call[0];
+          console.log("Call is: ", call)
+          return (
             <div>
-              <h2 style={styles.headline}>Tabs with slide effect</h2>
-              Swipe to see the next slide.<br />
+              <StatusBar origin={origin} poste={poste} status={status} />
             </div>
-              <div style={styles.slide}>
-                slide n°2
-              </div>
-              <div style={styles.slide}>
-                slide n°3
-              </div>
-          </SwipeableViews>
-          */
+          )
+        }
 
-
-      const CallView = ({match}) => (
-        <div>
-        This call id is {match.url}
-        </div>
-      )
-
-      export default CallView
+  }
