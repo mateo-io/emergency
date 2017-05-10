@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import * as constants from 'constants/Colors';
 
-const Profile = styled.a`
+const Wrapper = styled.div`
+  height: 150;
+
   color: ${constants.textPrimary};
-  display: inline-flex;
+  display: block;
   padding: 0.25em 0.2em;
   margin: 1em;
   text-decoration: none;
@@ -29,4 +31,4 @@ const Profile = styled.a`
 
 `;
 
-export default Profile;
+export default Wrapper;

@@ -1,4 +1,4 @@
-import { ADD_CALL, DELETE_CALL, EDIT_CALL, COMPLETE_CALL, COMPLETE_ALL, CLEAR_COMPLETED }
+import { ADD_CALL, DELETE_CALL, EDIT_TYPE, COMPLETE_CALL, COMPLETE_ALL, CLEAR_COMPLETED }
 from 'constants/CallActions'
 
 
@@ -9,6 +9,7 @@ const initialState = [
     callStart: new Date(),
     status: "VIVO",
     active: true,
+    open: true,
     origin: "El tablazo",
     poste: "12",
     comments: ["2 Heridos por una tractomula"],
@@ -20,7 +21,8 @@ const initialState = [
     id: 1,
     callStart: new Date(),
     status: "ESPERA",
-    active: true,
+    active: false,
+    open: true,
     origin: "Soledad",
     poste: "21",
     comments: [""],
@@ -30,8 +32,9 @@ const initialState = [
   },
   {
     id: 2,
-    active: true,
-    callStart: undefined,
+    active: false,
+    open: true,
+    callStart: new Date(),
     status: "COLA",
     origin: "Las nieves KM 12",
     poste: "130",
@@ -60,19 +63,14 @@ export default function calls(state = initialState, action) {
         call.id !== action.id
       )
 
-    case EDIT_CALL:
+    case EDIT_TYPE:
+        console.log("ACTION: ", action)
       return state.map(call =>
         call.id === action.id ?
-          { ...call,
-            firstName: action.firstName,
-            lastName: action.lastName,
-            phone: action.phone,
-            state: action.state,
-            active: action.active,
-            completed: false
-          } :
+          { ...call, type: action.text  } :
           call
       )
+
 
     case COMPLETE_CALL:
       return state.map(call =>

@@ -3,21 +3,22 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { SearchActions } from 'actions';
+import CallList from 'components/CallList';
 
 // ALL TODO  THIS IS A COPY!!!!!!!!
-const Search = ({activeCalls, actions}) => (
+const Search = ({calls, actions}) => (
   <div>
-   This is search
+    <CallList calls={calls} actions={actions} />
   </div>
 )
 
 Search.propTypes = {
-  activeCalls: PropTypes.array.isRequired,
+  calls: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  activeCalls: state.calls
+  calls: state.calls
 })
 
 const mapDispatchToProps = dispatch => ({

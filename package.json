@@ -32,7 +32,7 @@
   },
   "browserslist": "electron 1.4",
   "build": {
-    "productName": "ElectronReact",
+    "productName": "Emergency",
     "appId": "org.develar.ElectronReact",
     "files": [
       "dist/",
@@ -123,6 +123,7 @@
     "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-dynamic-import-webpack": "^1.0.1",
     "babel-plugin-flow-runtime": "^0.10.0",
+    "babel-plugin-syntax-flow": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-classes": "^6.24.1",
     "babel-polyfill": "^6.23.0",
@@ -184,6 +185,9 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
     "electron-debug": "^1.1.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "font-awesome": "^4.7.0",

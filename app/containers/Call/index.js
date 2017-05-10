@@ -6,19 +6,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-  const Call = ({call, id, actions}) => (
+  const Call = ({call, actions}) => (
     <div>
-      <CallView id={id} call={call} />
+      <CallView call={call} actions={actions} />
     </div>
   )
 
   Call.propTypes = {
-    call: PropTypes.array.isRequired,
+    call: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
   }
 
   const mapStateToProps = (state, ownProps) => ({
-    call: state.calls.filter( (call) => call.id==ownProps.match.params['id'])
+    call: state.calls.filter( (call) => call.id==ownProps.match.params['id'])[0]
   })
 
   const mapDispatchToProps = dispatch => ({
