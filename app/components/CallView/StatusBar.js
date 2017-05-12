@@ -15,7 +15,7 @@ const StatusBar = ({origin, poste, status, callStart}) => (
   <div>
     <div className="row">
       <div className="col-md-4">
-         <PaperBox zDepth={2} >
+         <PaperBox center zDepth={2} >
            <div>
                 <H2>{origin} - Poste {poste}</H2>
                 <Text> Origen </Text>
@@ -24,7 +24,7 @@ const StatusBar = ({origin, poste, status, callStart}) => (
       </div>
 
       <div className="col-md-3">
-         <PaperBox style={ style[status] } zDepth={2} >
+         <PaperBox  center style={ style[status] } zDepth={2} >
         <H2>{status}</H2>
         <Text>Estado</Text>
         </PaperBox>
@@ -32,7 +32,7 @@ const StatusBar = ({origin, poste, status, callStart}) => (
 
 
       <div className="col-md-4">
-         <PaperBox style={style} zDepth={2} >
+         <PaperBox center style={style} zDepth={2} >
         <Clock callStart={callStart} />
         <Text> Duración</Text>
         </PaperBox>

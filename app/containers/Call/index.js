@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-  const Call = ({call, actions}) => (
+  const Call = ({call, actions, history}) => (
     <div>
-      <CallView call={call} actions={actions} />
+      <CallView history={history} call={call} actions={actions} />
     </div>
   )
 

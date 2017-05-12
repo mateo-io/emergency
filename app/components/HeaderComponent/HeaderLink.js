@@ -5,10 +5,10 @@ import { omit } from 'lodash';
 import * as constants from 'constants/Colors';
 
 const HeaderLink = styled((props) =>
-  <Link {...omit(props, ['activeCalls', 'actions'])} />)`
+  <Link {...omit(props, ['activeCalls', 'actions', 'white'])} />)`
   color: ${constants.textPrimary};
   display: inline-block;
-  padding: 0.25em 0.2em;
+  padding: 0.25em 2.5em;
   margin: 1em;
   text-decoration: none;
   border-radius: 4px;
@@ -22,8 +22,11 @@ const HeaderLink = styled((props) =>
   font-size: 16px;
   font-weight: bold;
 
+  background: ${(props) => props.white && 'white'};
+
   &:hover {
     color: ${constants.accent}};
+    text-decoration: none !important;
   }
 
 `;

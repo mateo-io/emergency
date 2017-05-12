@@ -17,7 +17,7 @@ Header.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  activeCalls: state.calls
+  activeCalls: state.calls.filter( (call) => call.open)
 })
 
 const mapDispatchToProps = dispatch => ({

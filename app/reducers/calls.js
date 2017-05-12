@@ -1,4 +1,6 @@
-import { ADD_CALL, DELETE_CALL, EDIT_TYPE, COMPLETE_CALL, COMPLETE_ALL, CLEAR_COMPLETED }
+import { ADD_CALL, DELETE_CALL, EDIT_TYPE,
+  UPDATE_DISPATCHED, UPDATE_ARRIVED, ADD_COMMENT,
+  COMPLETE_CALL, COMPLETE_ALL, CLEAR_COMPLETED }
 from 'constants/CallActions'
 
 
@@ -7,6 +9,7 @@ const initialState = [
   {
     id: 0,
     callStart: new Date(),
+    duration: undefined,
     status: "VIVO",
     active: true,
     open: true,
@@ -20,6 +23,7 @@ const initialState = [
   {
     id: 1,
     callStart: new Date(),
+    duration: undefined,
     status: "ESPERA",
     active: false,
     open: true,
@@ -28,12 +32,13 @@ const initialState = [
     comments: [""],
     type: "GRUA",
     dispatched: new Date(),
-    arrived: new Date(Date.now()+3600000)
+    arrived: undefined
   },
   {
     id: 2,
     active: false,
-    open: true,
+    duration: 23,
+    open: false,
     callStart: new Date(),
     status: "COLA",
     origin: "Las nieves KM 12",
@@ -41,7 +46,7 @@ const initialState = [
     comments: ["2 Ladrones hurtaron una moto en el parador Las Colinas"],
     type: "POLICIA",
     dispatched: new Date(),
-    arrived: undefined
+    arrived:  new Date(Date.now()+3600000)
   },
 ]
 
@@ -53,7 +58,16 @@ export default function calls(state = initialState, action) {
           ...state.call,
           id: state.reduce((maxId, call) => Math.max(call.id, maxId), -1) + 1,
           active: true,
-          completed: false
+          duration: undefined,
+          open: true,
+          callStart: new Date(),
+          status: "VIVO",
+          origin: "ALGUN LUGAR",
+          poste: "1984",
+          comments: [],
+          type: "",
+          dispatched: undefined,
+          arrived:  undefined
         },
         ...state
       ]
@@ -72,10 +86,37 @@ export default function calls(state = initialState, action) {
       )
 
 
+    case UPDATE_DISPATCHED:
+        console.log("ACTION: ", action)
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, dispatched: action.date  } :
+          call
+      )
+
+    case UPDATE_ARRIVED:
+        console.log("ACTION: ", action)
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, arrived: action.date  } :
+          call
+      )
+
+    case ADD_COMMENT:
+        console.log("ACTION: ", action)
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call,
+            comments: [...call.comments, action.text]
+          } :
+          call
+      )
+
+
     case COMPLETE_CALL:
       return state.map(call =>
         call.id === action.id ?
-          { ...call, completed: !call.completed } :
+          { ...call, open: false } :
           call
       )
 

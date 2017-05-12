@@ -9,7 +9,6 @@ const Navbar = styled.div`
 }
   width: 100%;
   height: 60px;
-  text-align: center;
   background: ${constants.darkPrimary};
 `
 

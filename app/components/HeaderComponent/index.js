@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import HeaderLink from './HeaderLink';
 import Profile from './Profile';
+import H2 from 'components/H2';
 
 export default class HeaderComponent extends React.Component {
     constructor(props) {
@@ -29,6 +30,7 @@ export default class HeaderComponent extends React.Component {
           <HeaderLink to="#">
             MATEO MEJIA
           </HeaderLink>
+          <a href="#" onClick={ actions.addCall}>ADD CALL</a>
         </Navbar>
       )
     }
