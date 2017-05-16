@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { CallActions } from 'actions';
 import HeaderComponent from 'components/HeaderComponent'
 
+
+
+
 const Header = ({activeCalls, actions}) => (
   <div>
     <HeaderComponent activeCalls={activeCalls} actions={actions} />

@@ -6,6 +6,7 @@ import TimePicker from 'material-ui/TimePicker';
 
 import SvgIcon from 'material-ui/SvgIcon';
 import PoliceIcon from 'assets/police.js';
+import OtherIcon from 'assets/other.js';
 import TruckIcon from 'assets/truck.js';
 import AmbulanceIcon from 'material-ui/svg-icons/maps/local-hospital';
 
@@ -24,7 +25,8 @@ class EmergencySelector extends React.Component {
     const servicesIndex = {
       "AMBULANCIA" : 0,
       "GRUA" : 1,
-      "POLICIA" : 2
+      "POLICIA" : 2,
+      "OTRO" : 3
     }
     return servicesIndex[type]
   }
@@ -38,7 +40,8 @@ class EmergencySelector extends React.Component {
     const servicesIndex = {
       0 : "AMBULANCIA",
       1 : "GRUA",
-      2 : "POLICIA"
+      2 : "POLICIA",
+      3 : "OTRO"
     }
     this.setState({selectedIndex: index});
     this.props.editType(this.props.callId, servicesIndex[index] )
@@ -65,6 +68,7 @@ class EmergencySelector extends React.Component {
         AMBULANCIA: 'red',
         GRUA: '#e9e820',
         POLICIA: 'green',
+        OTRO: 'blue'
       }
     }
 
@@ -72,6 +76,7 @@ class EmergencySelector extends React.Component {
     styles.icon[0] = styles.default_icon;
     styles.icon[1] = styles.default_icon;
     styles.icon[2] = styles.default_icon;
+    styles.icon[3] = styles.default_icon;
     styles.icon[this.state.selectedIndex] = Object.assign({},   styles.icon[this.state.selectedIndex], styles.active_icon);
 
     return (
@@ -96,6 +101,14 @@ class EmergencySelector extends React.Component {
               label="Policia"
               icon={<SvgIcon color={styles.icon[2]['POLICIA']} style={ {height: '100px', width: '120px'}}><PoliceIcon /></SvgIcon>}
               onTouchTap={() => this.select(2)}
+            />
+            <BottomNavigationItem
+              key={4}
+              label="Otro"
+              icon={<SvgIcon color={styles.icon[3]['OTRO']} style={ {height: '100px', width: '120px'}}>
+                <OtherIcon />
+              </SvgIcon>}
+              onTouchTap={() => this.select(3)}
             />
           </BottomNavigation>
         </div>

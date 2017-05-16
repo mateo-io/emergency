@@ -28,6 +28,7 @@ class CallComments extends React.Component {
     const text = e.target.value.trim()
     if (e.which === 13) {
       this.props.addComment(this.props.callId, text)
+      this.setState( {input: ''})
       console.log("IM good", text)
     }
   }

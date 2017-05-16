@@ -1,8 +1,8 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "ElectronReact",
+  "name": "Emergency",
+  "productName": "EmergencySystem",
   "version": "0.11.0",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "description": "Highway emergency management software",
   "main": "main.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings ./test/runTests.js",
@@ -203,6 +203,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
+    "socket.io-client": "^2.0.1",
     "source-map-support": "^0.4.14",
     "styled-components": "^1.4.5",
     "tachyons": "^4.7.1"
