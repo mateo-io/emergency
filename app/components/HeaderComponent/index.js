@@ -13,9 +13,7 @@ export default class HeaderComponent extends React.Component {
 
     constructor(props) {
       super(props);
-    }
 
-    componentWillMount() {
       socket.on('connected', function(data) {
         console.log("ready for data");
         socket.emit('ready for data', {});
@@ -25,7 +23,6 @@ export default class HeaderComponent extends React.Component {
         console.log("Call added dude")
         this.props.actions.addCall()
       }.bind(this))
-
     }
 
 

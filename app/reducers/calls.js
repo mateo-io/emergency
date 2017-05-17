@@ -1,5 +1,6 @@
 import { ADD_CALL, DELETE_CALL, EDIT_TYPE,
   UPDATE_DISPATCHED, UPDATE_ARRIVED, ADD_COMMENT,
+  OPEN_CALL,
   COMPLETE_CALL, COMPLETE_ALL, CLEAR_COMPLETED }
 from 'constants/CallActions'
 
@@ -7,9 +8,9 @@ from 'constants/CallActions'
 
 const initialState = [
   {
-    id: 0,
+    id: 2,
     callStart: new Date(),
-    duration: undefined,
+    duration: 100,
     status: "VIVO",
     active: true,
     open: true,
@@ -35,7 +36,7 @@ const initialState = [
     arrived: undefined
   },
   {
-    id: 2,
+    id: 0,
     active: false,
     duration: 23,
     open: false,
@@ -43,7 +44,7 @@ const initialState = [
     status: "COLA",
     origin: "Las nieves KM 12",
     poste: "130",
-    comments: ["2 Ladrones hurtaron una moto en el parador Las Colinas"],
+    comments: ["Ladrones hurtaron una moto en el parador Las Colinas"],
     type: "POLICIA",
     dispatched: new Date(),
     arrived:  new Date(Date.now()+3600000)
@@ -58,7 +59,7 @@ export default function calls(state = initialState, action) {
           ...state.call,
           id: state.reduce((maxId, call) => Math.max(call.id, maxId), -1) + 1,
           active: true,
-          duration: undefined,
+          duration: 0,
           open: true,
           callStart: new Date(),
           status: "VIVO",
@@ -116,9 +117,17 @@ export default function calls(state = initialState, action) {
     case COMPLETE_CALL:
       return state.map(call =>
         call.id === action.id ?
-          { ...call, open: false } :
+          { ...call, open: false, duration:(new Date()-call.callStart)/1000 } :
           call
       )
+
+    case OPEN_CALL:
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, open: true, status: 'CONTESTADA'  } :
+          call
+      )
+
 
     case COMPLETE_ALL:
       const areAllMarked = state.every(call => call.completed)
