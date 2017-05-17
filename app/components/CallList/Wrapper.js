@@ -2,32 +2,16 @@ import styled from 'styled-components';
 import * as constants from 'constants/Colors';
 
 const Wrapper = styled.div`
-  height: 150;
+  height: 250;
 
   color: ${constants.textPrimary};
   display: block;
   padding: 0.25em 0.2em;
   margin: 1em;
   text-decoration: none;
-  border-radius: 4px;
-  -webkit-font-smoothing: antialiased;
-  -webkit-touch-callout: none;
-  user-select: none;
-  cursor: pointer;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 16px;
-  font-weight: bold;
-
-  &:hover {
-    color: ${constants.accent}};
-  }
-  &:active {
-    color: #00BDA3;
-  }
-
-
-
+  font-weight: bold !important;
+  font-size: 15px;
 
 `;
 

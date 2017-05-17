@@ -18,7 +18,7 @@ Search.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  calls: state.calls
+  calls: state.calls.filter( (call) => call.open==false)
 })
 
 const mapDispatchToProps = dispatch => ({

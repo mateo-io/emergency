@@ -9,6 +9,7 @@ export const updateArrived = (id, date) => ({ type: types.UPDATE_ARRIVED, id, da
 
 
 export const completeCall = id => ({ type: types.COMPLETE_CALL, id })
+export const openCall = id => ({ type: types.OPEN_CALL, id })
 
 //CallComments
 export const addComment = (id, text) => ({type: types.ADD_COMMENT, id, text })

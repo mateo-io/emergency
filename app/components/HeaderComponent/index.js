@@ -25,10 +25,6 @@ export default class HeaderComponent extends React.Component {
       }.bind(this))
     }
 
-    componentWillMount() {
-
-    }
-
 
     render() {
       const { activeCalls, actions } = this.props;
