@@ -11,11 +11,11 @@ export default class CallDetails extends React.Component {
     return newDate;
   }
 
-  parseMinutes = (time) => {
+  parseSeconds = (time) => {
     if (time > 60) {
-      return `${Math.floor(time/60)}:${Math.floor(time%60)}`
+      return `${Math.floor(time/60)} m ${Math.floor(time%60)} s`
     } else
-      return Math.floor(time) + ' segundos'
+      return Math.floor(time) + ' s'
   }
 
   handleOpenCall = () => {
@@ -59,8 +59,8 @@ export default class CallDetails extends React.Component {
           </div>
 
           <div className="col-md-2">
-            <div style={{}}><Text>Duracion Llamada: </Text>{this.parseMinutes(duration)}</div>
-            <div style={{}}><Text>Duracion Servicio: </Text>{(arrived - dispatched).toString()}</div>
+            <div style={{}}><Text>Duracion Llamada: </Text>{this.parseSeconds(duration)}</div>
+            <div style={{}}><Text>Duracion Servicio: </Text>{this.parseSeconds( (arrived - dispatched)/1000 )}</div>
           </div>
 
         </div>
