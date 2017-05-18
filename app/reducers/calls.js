@@ -1,6 +1,6 @@
 import { ADD_CALL, DELETE_CALL, EDIT_TYPE,
   UPDATE_DISPATCHED, UPDATE_ARRIVED, ADD_COMMENT,
-  OPEN_CALL,
+  OPEN_CALL, ADD_PHONE_INFO,
   COMPLETE_CALL, COMPLETE_ALL, CLEAR_COMPLETED }
 from 'constants/CallActions'
 
@@ -12,32 +12,31 @@ const initialState = [
     callStart: new Date(),
     duration: 100,
     status: "VIVO",
-    active: true,
     open: true,
     origin: "El tablazo",
     poste: "12",
     comments: ["2 Heridos por una tractomula"],
     type: "AMBULANCIA",
     dispatched: new Date(),
-    arrived: undefined
+    arrived: undefined,
+    uniqueid: undefined
   },
   {
     id: 1,
     callStart: new Date(),
     duration: undefined,
     status: "ESPERA",
-    active: false,
     open: true,
     origin: "Soledad",
     poste: "21",
     comments: [""],
     type: "GRUA",
     dispatched: new Date(),
-    arrived: undefined
+    arrived: undefined,
+    uniqueid: undefined
   },
   {
     id: 0,
-    active: false,
     duration: 23,
     open: false,
     callStart: new Date(),
@@ -47,7 +46,8 @@ const initialState = [
     comments: ["Ladrones hurtaron una moto en el parador Las Colinas"],
     type: "POLICIA",
     dispatched: new Date(),
-    arrived:  new Date(Date.now()+3600000)
+    arrived:  new Date(Date.now()+3600000),
+    uniqueid: 1494962212.27
   },
 ]
 
@@ -58,7 +58,6 @@ export default function calls(state = initialState, action) {
         {
           ...state.call,
           id: state.reduce((maxId, call) => Math.max(call.id, maxId), -1) + 1,
-          active: true,
           duration: 0,
           open: true,
           callStart: new Date(),
@@ -68,7 +67,8 @@ export default function calls(state = initialState, action) {
           comments: [],
           type: "",
           dispatched: undefined,
-          arrived:  undefined
+          arrived:  undefined,
+          uniqueid: undefined
         },
         ...state
       ]
@@ -113,6 +113,18 @@ export default function calls(state = initialState, action) {
           call
       )
 
+
+    case ADD_PHONE_INFO:
+        console.log("ACTION: ", action)
+        console.log("PAYLOAD: ", action.data.payload)
+        console.log("ID: ", action.id)
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call,
+            uniqueid: action.data.payload
+          } :
+          call
+      )
 
     case COMPLETE_CALL:
       return state.map(call =>

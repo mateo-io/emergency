@@ -2,9 +2,17 @@ import React from 'react';
 import Wrapper from './Wrapper';
 import Text from './Text';
 import ReactAudioPlayer from 'react-audio-player';
+import fs from 'fs';
 
 export default class CallDetails extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      file: ''
+    }
+
+  }
   formatDate = (date) => {
     const newDate = date.getHours() + ':' + date.getMinutes() + ' - ' + date.getDay()
     + '/' + date.getMonth()
@@ -23,6 +31,37 @@ export default class CallDetails extends React.Component {
     this.props.openCall(this.props.call.id)
   }
 
+  getRecordingId = (uniqueid) => {
+    console.log("UNIK is ", uniqueid)
+    if (uniqueid==undefined) {console.log("SHITE"); return 0};
+    const id = uniqueid.split('-');
+    const realId = id[1].slice(-3);
+    return realId
+  }
+
+  getRecordingPath = () => {
+    return fs.readdirSync('/calldir/0003/').forEach(file => {
+    const fileId = this.getRecordingId(file);
+    console.log("Type of fileId is ", typeof fileId)
+
+    const uniqueid = this.props.call.uniqueid;
+    console.log("MY UNIKKKKK", uniqueid)
+    console.log(typeof uniqueid)
+    const parsedId = String(Math.round(Number(uniqueid)));
+    const callAsteriskId = parsedId ? parsedId.slice(-3) : 0;
+    console.log("FileID ", fileId)
+    console.log("CallAsteriskid ", callAsteriskId)
+    if (fileId == callAsteriskId ) {
+      console.log("I found it EUREKKA!");
+      console.log(file);
+      this.setState({file: file});
+    }
+})
+  }
+  componentWillMount(){
+    this.getRecordingPath()
+  }
+
   render() {
     const { id, duration, status, origin, poste,
       comments, type, dispatched, arrived } = this.props.call;
@@ -32,8 +71,6 @@ export default class CallDetails extends React.Component {
       }
     }
 
-    var audio = new Audio('/home/dude/cool/' +'reason.mp3');
-    console.log("AUDIO! ", audio);
 
       return (
         <Wrapper style={ style.wrapper } onDoubleClick={ ()=>this.handleOpenCall }>
@@ -66,7 +103,7 @@ export default class CallDetails extends React.Component {
         </div>
         <div className="row" style= { {textAlign: 'center', marginTop: '20px'}}>
           <ReactAudioPlayer
-            src="/calldir/0003/20170517-11051495038212-0003.wav"
+            src={"/calldir/0003/"+this.state.file}
             controls
             />
         </div>

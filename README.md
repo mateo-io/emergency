@@ -1,3 +1,52 @@
+CREATE TABLE cdr(
+    id SERIAL NOT NULL PRIMARY KEY,
+    duration character varying(128),
+    channel character varying(128),
+    uniqueid character varying(128),
+    disposition character varying(128),
+    calldate character varying(128),
+    clid character varying(128),
+    src character varying(128),
+    dst character varying(128)
+);
+
+create function notify_realtime() returns trigger
+    language plpgsql
+    as $$
+begin
+    perform pg_notify('addedrecord',
+    new.duration, new.channel, new.uniqueid, new.disposition, new.calldate,
+    new.clid, new.src, new.dst);
+    return null;
+end;
+$$;
+
+CREATE TRIGGER updated_realtime_trigger AFTER INSERT ON cdr
+FOR EACH ROW EXECUTE PROCEDURE notify_realtime();
+
+//ONLY uniqueid
+create function notify_uniqueid() returns trigger
+    language plpgsql
+    as $$
+begin
+    perform pg_notify('addedrecord',
+    NEW.uniqueid);
+    return null;
+end;
+$$;
+
+
+CREATE TRIGGER updated_realtime_trigger AFTER INSERT ON cdr
+FOR EACH ROW EXECUTE PROCEDURE notify_uniqueid();
+
+//END uniqueid
+
+
+
+INSERT INTO cdr (duration, uniqueid) VALUES (23,'1494962212.27');
+
+
+
 20170508-09051494254699-0003.wav
 20170508-14051494271963-0003.wav
 20170509-09051494340409-0003.wav
@@ -28,31 +77,30 @@ uniqueid
 disposition
 calldate
 clid
-
 src
 dst
 
 
 
-  Columna   |          Tipo          |                           Modificadores                            | Almacenamiento | Estadísticas | Descripción 
+  Columna   |          Tipo          |                           Modificadores                            | Almacenamiento | Estadísticas | Descripción
 -------------+------------------------+--------------------------------------------------------------------+----------------+--------------+-------------
- calldate    | character varying(80)  | not null                                                           | extended       |              | 
- clid        | character varying(80)  | not null                                                           | extended       |              | 
- identifier  | integer                | not null valor por omisión nextval('cdr_identifier_seq'::regclass) | plain          |              | 
- src         | character varying(80)  | not null                                                           | extended       |              | 
- dst         | character varying(80)  | not null                                                           | extended       |              | 
- context     | character varying(80)  | not null                                                           | extended       |              | 
- channel     | character varying(80)  | not null                                                           | extended       |              | 
- dstchannel  | character varying(80)  | not null                                                           | extended       |              | 
- lastapp     | character varying(80)  | not null                                                           | extended       |              | 
- lastdata    | character varying(80)  | not null                                                           | extended       |              | 
- duration    | bigint                 | not null                                                           | plain          |              | 
- billsec     | bigint                 | not null                                                           | plain          |              | 
- disposition | character varying(45)  | not null                                                           | extended       |              | 
- amaflags    | bigint                 | not null                                                           | plain          |              | 
- accountcode | character varying(20)  | not null                                                           | extended       |              | 
- uniqueid    | character varying(32)  | not null                                                           | extended       |              | 
- userfield   | character varying(255) | not null                                                           | extended       |              | 
+ calldate    | character varying(80)  | not null                                                           | extended       |              |
+ clid        | character varying(80)  | not null                                                           | extended       |              |
+ identifier  | integer                | not null valor por omisión nextval('cdr_identifier_seq'::regclass) | plain          |              |
+ src         | character varying(80)  | not null                                                           | extended       |              |
+ dst         | character varying(80)  | not null                                                           | extended       |              |
+ context     | character varying(80)  | not null                                                           | extended       |              |
+ channel     | character varying(80)  | not null                                                           | extended       |              |
+ dstchannel  | character varying(80)  | not null                                                           | extended       |              |
+ lastapp     | character varying(80)  | not null                                                           | extended       |              |
+ lastdata    | character varying(80)  | not null                                                           | extended       |              |
+ duration    | bigint                 | not null                                                           | plain          |              |
+ billsec     | bigint                 | not null                                                           | plain          |              |
+ disposition | character varying(45)  | not null                                                           | extended       |              |
+ amaflags    | bigint                 | not null                                                           | plain          |              |
+ accountcode | character varying(20)  | not null                                                           | extended       |              |
+ uniqueid    | character varying(32)  | not null                                                           | extended       |              |
+ userfield   | character varying(255) | not null                                                           | extended       |              |
 Índices:
     "pk_cdr" PRIMARY KEY, btree (identifier)
 
@@ -65,6 +113,3 @@ dst
        29 | SIP/0003-00000012 | 1494962049.27 | ANSWERED    | 2017-05-16 14:14:09 | "telefono" <0003> | 0003 | 0002
        31 | SIP/0003-00000000 | 1495038212.0  | ANSWERED    | 2017-05-17 11:23:32 | "telefono" <0003> | 0003 | 0002
 (3 filas)
-
-
-
