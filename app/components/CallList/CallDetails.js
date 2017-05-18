@@ -47,7 +47,7 @@ export default class CallDetails extends React.Component {
     const uniqueid = this.props.call.uniqueid;
     console.log("MY UNIKKKKK", uniqueid)
     console.log(typeof uniqueid)
-    const parsedId = String(Math.round(Number(uniqueid)));
+    const parsedId = String(Math.floor(Number(uniqueid)));
     const callAsteriskId = parsedId ? parsedId.slice(-3) : 0;
     console.log("FileID ", fileId)
     console.log("CallAsteriskid ", callAsteriskId)
