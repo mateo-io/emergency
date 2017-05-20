@@ -7,7 +7,7 @@ import PaperBox from 'components/PaperBox';
 const style = {
   "VIVO" : {borderColor: "green"},
   "ESPERA" : {borderColor: "red"},
-  "COLA" : {borderColor: "blue"}
+  "FINALIZADO" : {borderColor: "blue"}
 };
 
 
@@ -33,7 +33,7 @@ const StatusBar = ({origin, poste, status, callStart}) => (
 
       <div className="col-md-4">
          <PaperBox center style={style} zDepth={2} >
-        <Clock callStart={callStart} />
+        <Clock status={status} callStart={callStart} />
         <Text> Duración</Text>
         </PaperBox>
       </div>

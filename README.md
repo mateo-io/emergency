@@ -1,3 +1,9 @@
+tcpdump -l -nS dst port 5060 | sh script.sh >> calls.log
+
+tcpdump -l -nS dst port 5060 >> call.log
+tail -f -fn+1 call.log | bash script.sh
+
+
 CREATE TABLE cdr(
     id SERIAL NOT NULL PRIMARY KEY,
     duration character varying(128),

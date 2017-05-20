@@ -3,7 +3,7 @@ import React from 'react';
 export default class Clock extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {duration: new Date()};
+    this.state = {duration: 0};
   }
 
   componentDidMount() {
@@ -18,11 +18,19 @@ export default class Clock extends React.Component {
   }
 
   tick() {
-    this.setState({
-      date: new Date()
-    });
+    if(this.props.status){
+      this.setState({
+        duration: this.state.duration + 1
+      });
+    }
   }
 
+  parseSeconds = (time) => {
+    if (time > 60) {
+      return `${Math.floor(time/60)} m ${Math.floor(time%60)} s`
+    } else
+      return Math.floor(time) + ' s'
+  }
   render() {
 
   function getTimeRemaining(endtime){
@@ -41,12 +49,13 @@ export default class Clock extends React.Component {
     'seconds': parsedSeconds
   };
 }
-    const timeDiff = getTimeRemaining(this.props.callStart);
 
+        const timeDiff = getTimeRemaining(this.props.callStart);
+        //Get duration as props and increase it by 1 each second
+//{this.parseSeconds(this.state.duration)}
     return (
       <div>
-        <h2>{timeDiff.hours ? timeDiff.hours : ''}{timeDiff.minutes}:{timeDiff.seconds}
-        </h2>
+        <h2>{timeDiff.hours ? timeDiff.hours : ''}{timeDiff.minutes}:{timeDiff.seconds}</h2>
       </div>
     );
   }

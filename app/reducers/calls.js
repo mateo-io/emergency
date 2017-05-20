@@ -15,7 +15,7 @@ const initialState = [
     open: true,
     origin: "El tablazo",
     poste: "12",
-    comments: ["2 Heridos por una tractomula"],
+    comments: ["Heridos por una tractomula"],
     type: "AMBULANCIA",
     dispatched: new Date(),
     arrived: undefined,
@@ -40,7 +40,7 @@ const initialState = [
     duration: 23,
     open: false,
     callStart: new Date(),
-    status: "COLA",
+    status: "FINALIZADO",
     origin: "Las nieves KM 12",
     poste: "130",
     comments: ["Ladrones hurtaron una moto en el parador Las Colinas"],
@@ -129,7 +129,9 @@ export default function calls(state = initialState, action) {
     case COMPLETE_CALL:
       return state.map(call =>
         call.id === action.id ?
-          { ...call, open: false, duration:(new Date()-call.callStart)/1000 } :
+          { ...call, open: false, duration:(new Date()-call.callStart)/1000,
+           status: 'FINALIZADO'}
+           :
           call
       )
 

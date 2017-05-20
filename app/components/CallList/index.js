@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Wrapper from './Wrapper';
 import CallDetails from './CallDetails';
+import FilterLink from 'containers/FilterLink';
 
 import * as constants from 'constants/Colors';
 
-export default class CallList extends React.Component {
 
+
+
+export default class CallList extends React.Component {
   render() {
     const style = {height: "200px",
     borderRadius: '10px',
@@ -23,6 +26,11 @@ export default class CallList extends React.Component {
     console.log("CALLS IS!!!!!! ", calls)
     return (
       <div>
+      <FilterLink filter='MOSTRAR_TODOS'>TODOS</FilterLink>
+      <FilterLink filter='MOSTRAR_AMBULANCIA'>AMBULANCIA</FilterLink>
+      <FilterLink filter='MOSTRAR_GRUA'>GRUA</FilterLink>
+      <FilterLink filter='MOSTRAR_POLICIA'>POLICIA</FilterLink>
+      <FilterLink filter='MOSTRAR_OTRO'>OTRO</FilterLink>
       {calls.map((call, i) => {
         return (
             <Wrapper style={ style } key={i}>
