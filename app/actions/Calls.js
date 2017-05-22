@@ -17,6 +17,15 @@ export const setVisibilityFilter = (filter) => ({
   filter
 })
 
+export const setInitialDate = (date) => ({
+  type: 'SET_INITIAL_DATE',
+  date
+})
+
+export const setFinalDate = (date) => ({
+  type: 'SET_FINAL_DATE',
+  date
+})
 //CallComments
 export const addComment = (id, text) => ({type: types.ADD_COMMENT, id, text })
 

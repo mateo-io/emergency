@@ -14,7 +14,7 @@ export default class CallDetails extends React.Component {
 
   }
   formatDate = (date) => {
-    const newDate = date.getHours() + ':' + date.getMinutes() + ' - ' + date.getDay()
+    const newDate = date.getHours() + ':' + date.getMinutes() + ' - ' + date.getDate()
     + '/' + date.getMonth() + '/' + date.getFullYear()
     return newDate;
   }
@@ -77,12 +77,13 @@ export default class CallDetails extends React.Component {
 
         <div className="row">
           <div className="col-md-2">
-            <p><Text>ID</Text>: {id} </p>
-            <p><Text>Poste: </Text>{poste}</p>
-            <p><Text>Tipo: </Text>{type}</p>
             <p><Text>Estado: </Text>{status}</p>
+            <p><Text>Poste: </Text>{poste}</p>
+            <p><Text>Origen: </Text>{origin}</p>
+            <p><Text>ID</Text>: {id} </p>
           </div>
           <div className="col-md-2">
+            <p><Text>Tipo: </Text>{type}</p>
             <p><Text>Despacho: </Text>{dispatched ? this.formatDate(dispatched) : 'NA'} </p>
             <p><Text>Llegada: </Text>{arrived ? this.formatDate(arrived) : 'NA'} </p>
           </div>

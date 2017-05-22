@@ -8,9 +8,9 @@ import CallList from 'components/CallList';
 // ALL TODO  THIS IS A COPY!!!!!!!!
 
 
-const Search = ({calls, actions}) => (
+const Search = ({calls, visibilityFilter, actions}) => (
   <div>
-    <CallList calls={calls} actions={actions} />
+    <CallList visibilityFilter={visibilityFilter} calls={calls} actions={actions} />
   </div>
 )
 
@@ -19,7 +19,15 @@ const getClosedCalls = (calls) => {
   return calls.filter( (call) => call.open==false)
 }
 
-const getVisibleCalls = (calls, filter) => {
+const getCallsByDate = (calls, startDate, endDate) => {
+  console.log("CALL: ",calls[0].callStart);
+  console.log("FILTER: ", startDate);
+  return calls.filter( (call) =>
+    startDate <= call.callStart && call.callStart <= endDate
+  )
+}
+
+const getCallsByType = (calls, filter) => {
   switch (filter) {
     case 'MOSTRAR_TODOS':
       return calls
@@ -36,6 +44,14 @@ const getVisibleCalls = (calls, filter) => {
   }
 }
 
+const getVisibleCalls = (calls, filterObject) => {
+  const closedCalls = getClosedCalls(calls);
+  const typeMatches = getCallsByType(closedCalls, filterObject.type);
+  const dateMatches = getCallsByDate(typeMatches, filterObject.initialDate, filterObject.endDate);
+
+  return dateMatches
+}
+
 Search.propTypes = {
   calls: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
@@ -43,7 +59,8 @@ Search.propTypes = {
 
   //calls: state.calls.filter( (call) => call.open==false)
 const mapStateToProps = (state) => ({
-  calls: getVisibleCalls(getClosedCalls(state.calls), state.visibilityFilter)
+  calls: getVisibleCalls(state.calls, state.visibilityFilter),
+  visibilityFilter: state.visibilityFilter
 })
 
 const mapDispatchToProps = dispatch => ({

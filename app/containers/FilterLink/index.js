@@ -3,7 +3,7 @@ import { CallActions } from 'actions'
 import Link from 'components/Link'
 
 const mapStateToProps = (state, ownProps) => ({
-  active: ownProps.filter === state.visibilityFilter
+  active: ownProps.filter === state.visibilityFilter.type
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

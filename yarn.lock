@@ -1887,6 +1887,10 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
+classnames@^2.2.1:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
+
 clean-css@4.0.x:
   version "4.0.12"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.0.12.tgz#a02e61707f1840bd3338f54dbc9acbda4e772fa3"
@@ -5707,6 +5711,10 @@ mksnapshot@^0.3.0:
     fs-extra "0.26.7"
     request "^2.79.0"
 
+moment@^2.10.6:
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+
 ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
@@ -6751,6 +6759,13 @@ prop-types@^15.0.0, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@~15.5.7:
   dependencies:
     fbjs "^0.8.9"
 
+prop-types@^15.5.10:
+  version "15.5.10"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
+
 proxy-addr@~1.1.3:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-1.1.4.tgz#27e545f6960a44a627d9b44467e35c1b6b4ce2f3"
@@ -6879,6 +6894,14 @@ react-addons-transition-group@^15.4.0:
 react-audio-player@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/react-audio-player/-/react-audio-player-0.5.0.tgz#c13be7cfbc09e46503b44ac42a043e48dc952e5c"
+
+react-date-range@^0.9.4:
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/react-date-range/-/react-date-range-0.9.4.tgz#d97515545a28edc717b674e169a50a215d69ec15"
+  dependencies:
+    classnames "^2.2.1"
+    moment "^2.10.6"
+    prop-types "^15.5.10"
 
 react-deep-force-update@^1.0.0:
   version "1.0.1"
