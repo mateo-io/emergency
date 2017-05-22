@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import * as constants from 'constants/Colors';
 
 const Wrapper = styled.div`
-  height: 250;
+  minHeight: 300;
+  height: auto;
+  position: relative;
 
   color: ${constants.textPrimary};
   display: block;

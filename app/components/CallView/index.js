@@ -30,7 +30,8 @@ export default class CallView extends React.Component {
           origin={origin}
           poste={poste}
           callStart={callStart}
-          status={status} />
+          status={status}
+           />
 
           <Divider style={ {width: '100%'}} />
 
