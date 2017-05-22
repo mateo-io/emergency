@@ -28,6 +28,7 @@ io.sockets.on('connection', function (socket) {
 
   pg_client.on('notification', function(data) {
     console.log("Insert notification")
+    console.log("Data is ", data)
     socket.emit('insert', data);
   });
 

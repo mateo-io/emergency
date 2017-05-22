@@ -20,8 +20,7 @@ const getClosedCalls = (calls) => {
 }
 
 const getCallsByDate = (calls, startDate, endDate) => {
-  console.log("CALL: ",calls[0].callStart);
-  console.log("FILTER: ", startDate);
+  if (typeof calls==undefined) {return}
   return calls.filter( (call) =>
     startDate <= call.callStart && call.callStart <= endDate
   )

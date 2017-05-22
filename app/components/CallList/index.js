@@ -12,7 +12,8 @@ import * as constants from 'constants/Colors';
 
 export default class CallList extends React.Component {
   render() {
-    const style = {height: "200px",
+    const style = {minHeight: "200px",
+    height: 'auto',
     borderRadius: '10px',
     background: `${constants.primary}`,
     color: "#e8e8e8",
@@ -27,12 +28,14 @@ export default class CallList extends React.Component {
     console.log("CALLS IS!!!!!! ", calls)
     return (
       <div>
-      <FilterLink filter='MOSTRAR_TODOS'>TODOS</FilterLink>
-      <FilterLink filter='MOSTRAR_AMBULANCIA'>AMBULANCIA</FilterLink>
-      <FilterLink filter='MOSTRAR_GRUA'>GRUA</FilterLink>
-      <FilterLink filter='MOSTRAR_POLICIA'>POLICIA</FilterLink>
-      <FilterLink filter='MOSTRAR_OTRO'>OTRO</FilterLink>
-      <DateSelector actions={actions} />
+      <div style={ {marginLeft: '15px'}}>
+        <FilterLink filter='MOSTRAR_TODOS'>TODOS</FilterLink>
+        <FilterLink filter='MOSTRAR_AMBULANCIA'>AMBULANCIA</FilterLink>
+        <FilterLink filter='MOSTRAR_GRUA'>GRUA</FilterLink>
+        <FilterLink filter='MOSTRAR_POLICIA'>POLICIA</FilterLink>
+        <FilterLink filter='MOSTRAR_OTRO'>OTRO</FilterLink>
+        <DateSelector actions={actions} />
+      </div>
       {calls.map((call, i) => {
         return (
             <Wrapper style={ style } key={i}>

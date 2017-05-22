@@ -1,8 +1,21 @@
+#TCP CONNECITON
+
+
 tcpdump -l -nS dst port 5060 | sh script.sh >> calls.log
 
 tcpdump -l -nS dst port 5060 >> call.log
 tail -f -fn+1 call.log | bash script.sh
 
+
+
+
+#POSTGRES
+
+
+##List functions
+
+
+\df
 
 CREATE TABLE cdr(
     id SERIAL NOT NULL PRIMARY KEY,
@@ -16,41 +29,49 @@ CREATE TABLE cdr(
     dst character varying(128)
 );
 
+
+##DROP FUNCTION
+
+
+DROP FUNCTION notify_realtime();
+
+
+##ALL FIELDS
+create function notify_realtime() returns trigger
+    language plpgsql
+    as $$
+begin
+    perform pg_notify('addedrecord', row_to_json(NEW)::text);
+    return null;
+end;
+$$;
+
+
+##UNIQUEID AND DURATION
 create function notify_realtime() returns trigger
     language plpgsql
     as $$
 begin
     perform pg_notify('addedrecord',
-    new.duration, new.channel, new.uniqueid, new.disposition, new.calldate,
-    new.clid, new.src, new.dst);
+    NEW.uniqueid, NEW.duration);
     return null;
 end;
 $$;
 
+
+##TRIGGER
 CREATE TRIGGER updated_realtime_trigger AFTER INSERT ON cdr
 FOR EACH ROW EXECUTE PROCEDURE notify_realtime();
 
-//ONLY uniqueid
-create function notify_uniqueid() returns trigger
-    language plpgsql
-    as $$
-begin
-    perform pg_notify('addedrecord',
-    NEW.uniqueid);
-    return null;
-end;
-$$;
-
-
-CREATE TRIGGER updated_realtime_trigger AFTER INSERT ON cdr
-FOR EACH ROW EXECUTE PROCEDURE notify_uniqueid();
-
-//END uniqueid
 
 
 
 INSERT INTO cdr (duration, uniqueid) VALUES (23,'1494962212.27');
 
+
+
+
+#LOGS & RANDOM INFO
 
 
 20170508-09051494254699-0003.wav

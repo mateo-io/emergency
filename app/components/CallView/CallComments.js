@@ -21,15 +21,13 @@ class CallComments extends React.Component {
   }
   updateText = (evt) => {
     this.setState({input: evt.target.value},
-    ()=> {console.log("input is ", this.state.input)}
   )}
 
   handleSubmit = e => {
     const text = e.target.value.trim()
     if (e.which === 13) {
-      this.props.addComment(this.props.callId, text)
       this.setState( {input: ''})
-      console.log("IM good", text)
+      this.props.addComment(this.props.callId, text)
     }
   }
 
@@ -38,18 +36,21 @@ class CallComments extends React.Component {
     const { callId, comments  } = this.props;
 
     return (
-      <Panel title={"Comentarios"}>
+      <Panel title={"Comentarios"} >
 
       <TextField
         hintText="Añade detalles adicionales"
+        value={this.state.input}
         onChange={this.updateText}
         onKeyDown={this.handleSubmit}
       />
+        <ul>
         {comments.map( (comment, index) => {
           return (
-            <p key={index}>{index+1} - {comment}</p>
+            <li key={index}>{comment}</li>
           )
         })}
+        </ul>
       </Panel>
     );
   }
