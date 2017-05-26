@@ -175,6 +175,7 @@ export default function calls(state = initialState, action) {
           { ...call,
             uniqueid: payload.uniqueid,
             callDuration: payload.duration,
+ callerId: payload.clid,
             poste: payload.src
           } :
           call
