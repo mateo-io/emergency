@@ -16,7 +16,9 @@ export default class CallView extends React.Component {
        "Content-Type": "application/json",
        "Access-Control-Allow-Origin":"*"
      }
-    const payload = JSON.stringify(data)
+     const data2 = data;
+     data2['open'] = false;
+    const payload = JSON.stringify(data2)
     console.log("payload is ", payload)
 
     fetch('http://localhost:3000/api/calls', {

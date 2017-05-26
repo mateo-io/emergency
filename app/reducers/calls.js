@@ -10,22 +10,6 @@ import { RECEIVE_CALLS} from 'constants/SearchActions'
 
 const initialState = [
   {
-    id: 5,
-    callStart: new Date(),
-    callEnd: new Date(Date.now()+3600),
-    callDuration: 12,
-    duration: 100,
-    status: "VIVO",
-    open: true,
-    origin: "El tablazo",
-    poste: "12",
-    comments: ["Heridos por una tractomula"],
-    type: "AMBULANCIA",
-    dispatched: new Date(),
-    arrived: undefined,
-    uniqueid: undefined
-  },
-  {
     id: 4,
     callStart: new Date(Date.now()-158400000),
     callEnd: new Date(Date.now()+3600),
@@ -206,7 +190,6 @@ export default function calls(state = initialState, action) {
         console.log("With data", action.calls )
         return [
           ...action.calls,
-          ...state
         ]
 
 

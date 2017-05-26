@@ -37,8 +37,11 @@ const getCallsByType = (calls, filter) => {
 
 const getVisibleCalls = (calls, filterObject) => {
   const closedCalls = getClosedCalls(calls);
+  console.log("Closed", closedCalls.length)
   const typeMatches = getCallsByType(closedCalls, filterObject.type);
+  console.log("type", typeMatches.length)
   const dateMatches = getCallsByDate(typeMatches, filterObject.initialDate, filterObject.endDate);
+  console.log("date", dateMatches.length)
 
   return dateMatches
 }
@@ -49,9 +52,7 @@ class Search extends React.Component {
 
   //calls: state.calls.filter( (call) => call.open==false)
   componentDidMount(){
-    console.log("ACTIONS", this.props.actions)
     this.props.actions.fetchCalls();
-    console.log("Tried to dispatch");
   }
 
 

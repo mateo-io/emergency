@@ -3,7 +3,14 @@ import * as types from 'constants/SearchActions'
 export function receiveCalls(json) {
   return {
     type: 'RECEIVE_CALLS',
-    calls: json.map(child => child.data),
+    calls: json.map(child => {
+      const call = child.data;
+      call.callStart = new Date(call.callStart)
+      call.dispatched = new Date(call.dispatched)
+      call.arrived = new Date(call.arrived)
+      return call;
+    }
+    ),
     receivedAt: Date.now()
   }
 }
