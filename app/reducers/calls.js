@@ -133,7 +133,6 @@ export default function calls(state = initialState, action) {
       return state.map(call =>
         call.id === action.id ?
           { ...call, dispatched: action.date,
-            duration: (Date.now()-call.callStart)/1000,
           status: 'DESPACHADO'  } :
           call
       )
@@ -150,7 +149,9 @@ export default function calls(state = initialState, action) {
         console.log("ACTION: ", action)
       return state.map(call =>
         call.id === action.id ?
-          { ...call, arrived: action.date  } :
+          { ...call,
+            duration: (Date.now()-call.callStart)/1000,
+	 arrived: action.date  } :
           call
       )
 
