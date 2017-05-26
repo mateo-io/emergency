@@ -53,7 +53,7 @@ class EmergencySelector extends React.Component {
   }
 
   updateArrived = (evt, date) => {
-    if ( (this.props.dispatched-this.props.arrived) < 0) {
+    if ( (this.props.arrived-this.props.dispatched) < 0) {
       console.log('alert true bitch')
       this.state.alert = true;
     } else {
