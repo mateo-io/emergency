@@ -21,12 +21,15 @@ export default class CallDetails extends React.Component {
 
   }
   formatDate = (date) => {
-    const newDate = date.getHours() + ':' + date.getMinutes() + ' - ' + date.getDate()
+    const newDate = (date.getHours()<10? '0'+date.getHours() : date.getHours())  + ':' + 
+(date.getMinutes()<10? '0'+date.getMinutes() : date.getMinutes())
+ + ' - ' + date.getDate()
     + '/' + date.getMonth() + '/' + date.getFullYear()
     return newDate;
   }
 
   parseSeconds = (time) => {
+	console.log("TIME IS", time)
     const minutes = Math.floor(time/60);
     const seconds = Math.floor(time%60);
     if (isNaN(time)) {return 'NA' }
@@ -47,6 +50,15 @@ export default class CallDetails extends React.Component {
     const realId = id[1].slice(-3);
     return realId
   }
+ getServiceDuration = (arrived, dispatched) => {
+	if( (dispatched-arrived)>0  ){
+	return this.parseSeconds( ((dispatched-arrived)/1000) )
+
+} else {
+	dispatched.setDate(dispatched.getDate()+1)
+	return this.parseSeconds( (dispatched-arrived)/1000 )
+}
+}
 
   getRecordingPath = () => {
     return fs.readdirSync('/calldir/0003/').forEach(file => {
@@ -112,7 +124,7 @@ export default class CallDetails extends React.Component {
           <div className="col-md-2">
             <div style={{}}><Text>Duracion Llamada: </Text>{this.parseSeconds(callDuration)}</div>
             <div style={{}}><Text>Duracion Atencion: </Text>{this.parseSeconds(duration)}</div>
-            <div style={{}}><Text>Duracion Servicio: </Text>{this.parseSeconds( (arrived - dispatched)/1000 )}</div>
+            <div style={{}}><Text>Duracion Servicio: </Text>{this.getServiceDuration(dispatched, arrived)}</div>
           </div>
 
         </div>

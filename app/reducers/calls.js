@@ -183,7 +183,7 @@ export default function calls(state = initialState, action) {
     case COMPLETE_CALL:
       return state.map(call =>
         call.id === action.id ?
-          { ...call, open: false, duration:(new Date()-call.callStart)/1000,
+          { ...call, open: false,
            status: 'FINALIZADO'}
            :
           call
