@@ -10,10 +10,32 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 export default class CallView extends React.Component {
 
+  updateDB = (data) => {
+    const configuration = {
+       "Accept":"application/json",
+       "Content-Type": "application/json",
+       "Access-Control-Allow-Origin":"*"
+     }
+    const payload = JSON.stringify(data)
+    console.log("payload is ", payload)
+
+    fetch('http://localhost:3000/api/calls', {
+      method: 'POST',
+      headers: configuration,
+      body: payload
+    }).then(function(response) {
+      console.log("Sent data to the server")
+
+    }).catch(function(err) {
+      console.log("ERROR UPDATING CALL IN DB", err)
+    });
+  }
+
+
   completeCall = (evt) => {
     this.props.actions.completeCall(this.props.call.id)
-    console.log("HISTORY", this.props.history)
     this.props.history.replace('/dashboard')
+    this.updateDB(this.props.call)
   }
 
   render() {

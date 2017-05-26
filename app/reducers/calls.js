@@ -4,6 +4,8 @@ import { ADD_CALL, DELETE_CALL, EDIT_TYPE,
   COMPLETE_CALL, COMPLETE_ALL, CLEAR_COMPLETED }
 from 'constants/CallActions'
 
+import { RECEIVE_CALLS} from 'constants/SearchActions'
+
 
 
 const initialState = [
@@ -199,16 +201,14 @@ export default function calls(state = initialState, action) {
           call
       )
 
+    case RECEIVE_CALLS:
+        console.log("I'm called");
+        console.log("With data", action.calls )
+        return [
+          ...action.calls,
+          ...state
+        ]
 
-    case COMPLETE_ALL:
-      const areAllMarked = state.every(call => call.completed)
-      return state.map(call => ({
-        ...call,
-        completed: !areAllMarked
-      }))
-
-    case CLEAR_COMPLETED:
-      return state.filter(call => call.completed === false)
 
     default:
       return state

@@ -7,14 +7,6 @@ import CallList from 'components/CallList';
 
 // ALL TODO  THIS IS A COPY!!!!!!!!
 
-
-const Search = ({calls, visibilityFilter, actions}) => (
-  <div>
-    <CallList visibilityFilter={visibilityFilter} calls={calls} actions={actions} />
-  </div>
-)
-
-
 const getClosedCalls = (calls) => {
   return calls.filter( (call) => call.open==false)
 }
@@ -51,12 +43,30 @@ const getVisibleCalls = (calls, filterObject) => {
   return dateMatches
 }
 
-Search.propTypes = {
-  calls: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
-}
+
+class Search extends React.Component {
+
 
   //calls: state.calls.filter( (call) => call.open==false)
+  componentDidMount(){
+    console.log("ACTIONS", this.props.actions)
+    this.props.actions.fetchCalls();
+    console.log("Tried to dispatch");
+  }
+
+
+render(){
+
+ const {calls, visibilityFilter, actions} = this.props;
+  return(
+    <div>
+      <CallList visibilityFilter={visibilityFilter} calls={calls} actions={actions} />
+    </div>
+  )
+}
+
+}
+
 const mapStateToProps = (state) => ({
   calls: getVisibleCalls(state.calls, state.visibilityFilter),
   visibilityFilter: state.visibilityFilter
@@ -65,5 +75,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(SearchActions, dispatch)
 })
+
+Search.propTypes = {
+  calls: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+}
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search)

@@ -9,7 +9,16 @@ tail -f -fn+1 call.log | bash script.sh
 
 
 
+
+
 #POSTGRES
+
+##CALLS SCHEMA
+
+CREATE TABLE calls(
+  id integer NOT NULL,
+  data jsonb
+);
 
 
 ##List functions

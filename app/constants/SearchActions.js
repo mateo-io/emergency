@@ -4,3 +4,5 @@ export const EDIT_CALL = 'EDIT_CALL'
 export const COMPLETE_CALL = 'COMPLETE_CALL'
 export const COMPLETE_ALL = 'COMPLETE_ALL'
 export const CLEAR_COMPLETED = 'CLEAR_COMPLETED'
+
+export const RECEIVE_CALLS = 'RECEIVE_CALLS' 

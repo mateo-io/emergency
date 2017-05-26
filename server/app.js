@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var util = require('util');
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -47,6 +49,7 @@ var newCall = function(io) {
 app.get('/addcall', newCall(io));
 
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -54,13 +57,82 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+
+
+//CRUD
+app.post('/api/calls', (req, res, next) => {
+  const results = [];
+  // Grab data from http request
+  // Get a Postgres client from the connection pool
+  const otherJSON = JSON.stringify(req.body);
+  console.log("OTHER JSON,", otherJSON)
+  console.log("********")
+  const parsedJSON = JSON.parse(otherJSON);
+  console.log("PARSED JSON", parsedJSON);
+  console.log("TYPE", typeof parsedJSON);
+  pg.connect(con_string, (err, client, done) => {
+    // Handle connection errors
+    if(err) {
+      done();
+      console.log(err);
+      return res.status(500).json({success: false, data: err});
+    }
+    // SQL Query > Insert Data
+    console.log("ID IS !", parsedJSON.id)
+    client.query('INSERT INTO calls values($1, $2)',
+    [parsedJSON.id, otherJSON]);
+    // SQL Query > Select Data
+    const query = client.query('SELECT * FROM calls ORDER BY id ASC');
+    // Stream results back one row at a time
+    query.on('row', (row) => {
+      results.push(row);
+    });
+    // After all data is returned, close connection and return results
+    query.on('end', () => {
+      done();
+      return res.json(results);
+    });
+  });
+});
+
+app.get('/api/calls', (req, res, next) => {
+  const results = [];
+  // Get a Postgres client from the connection pool
+  pg.connect(con_string, (err, client, done) => {
+    // Handle connection errors
+    if(err) {
+      done();
+      console.log(err);
+      return res.status(500).json({success: false, data: err});
+    }
+    // SQL Query > Select Data
+    const query = client.query('SELECT * FROM calls ORDER BY id ASC;');
+    // Stream results back one row at a time
+    query.on('row', (row) => {
+      results.push(row);
+    });
+    // After all data is returned, close connection and return results
+    query.on('end', () => {
+      done();
+      return res.json(results);
+    });
+  });
+});
+
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

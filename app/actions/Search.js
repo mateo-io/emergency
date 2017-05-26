@@ -1,5 +1,26 @@
 import * as types from 'constants/SearchActions'
 
+export function receiveCalls(json) {
+  return {
+    type: 'RECEIVE_CALLS',
+    calls: json.map(child => child.data),
+    receivedAt: Date.now()
+  }
+}
+
+export function fetchCalls() {
+  console.log("I'm fetching calls")
+  return dispatch => {
+    return fetch(`http://localhost:3000/api/calls`)
+      .then(response => response.json())
+      .then(json => {
+        console.log("JSON", json)
+        dispatch(receiveCalls(json))
+    })
+  }
+}
+
+
 export const addCall = text => ({ type: types.ADD_CALL, text })
 export const deleteCall = id => ({ type: types.DELETE_CALL, id })
 export const editCall = (id, text) => ({ type: types.EDIT_CALL, id, text })
