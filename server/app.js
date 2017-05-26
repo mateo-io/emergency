@@ -106,6 +106,7 @@ app.post('/api/calls', (req, res, next) => {
   });
 });
 
+//GET ALL
 app.get('/api/calls', (req, res, next) => {
   const results = [];
   // Get a Postgres client from the connection pool
@@ -117,7 +118,7 @@ app.get('/api/calls', (req, res, next) => {
       return res.status(500).json({success: false, data: err});
     }
     // SQL Query > Select Data
-    const query = client.query('SELECT * FROM calls ORDER BY id ASC;');
+    const query = client.query('SELECT * FROM calls ORDER BY id DESC;');
     // Stream results back one row at a time
     query.on('row', (row) => {
       results.push(row);
@@ -130,6 +131,39 @@ app.get('/api/calls', (req, res, next) => {
   });
 });
 
+
+//UPDATE
+app.put('/api/calls/:call_id', (req, res, next) => {
+  const results = [];
+  // Grab data from the URL parameters
+  const id = req.params.todo_id;
+  // Grab data from http request
+
+  const otherJSON = JSON.stringify(req.body);
+  const parsedJSON = JSON.parse(otherJSON);
+  // Get a Postgres client from the connection pool
+  pg.connect(con_string, (err, client, done) => {
+    // Handle connection errors
+    if(err) {
+      done();
+      console.log(err);
+      return res.status(500).json({success: false, data: err});
+    }
+    client.query('UPDATE calls SET data=($2) WHERE id=($1)',
+    [parsedJSON.id, otherJSON]);
+    // SQL Query > Select Data
+    const query = client.query("SELECT * FROM calls ORDER BY id ASC");
+    // Stream results back one row at a time
+    query.on('row', (row) => {
+      results.push(row);
+    });
+    // After all data is returned, close connection and return results
+    query.on('end', function() {
+      done();
+      return res.json(results);
+    });
+  });
+});
 
 
 

@@ -33,6 +33,7 @@ class EmergencySelector extends React.Component {
 
   state = {
     selectedIndex: this.getSelectedIndex(this.props.type),
+    alert: false
   };
 
 
@@ -52,6 +53,12 @@ class EmergencySelector extends React.Component {
   }
 
   updateArrived = (evt, date) => {
+    if ( (this.props.dispatched-this.props.arrived) < 0) {
+      console.log('alert true bitch')
+      this.state.alert = true;
+    } else {
+      this.state.alert = false;
+    }
     this.props.serviceArrived(this.props.callId, date)
   }
 
@@ -80,7 +87,7 @@ class EmergencySelector extends React.Component {
     styles.icon[this.state.selectedIndex] = Object.assign({},   styles.icon[this.state.selectedIndex], styles.active_icon);
 
     return (
-      <PaperBox style={ {height: '200px'}} center blank zDepth={2}>
+      <PaperBox style={ {minHeight: '220px'}} center blank zDepth={2}>
         <div className="type__icons" style={ {height: '70%'} }>
           <BottomNavigation selectedIndex={this.state.selectedIndex}>
             <BottomNavigationItem
@@ -112,10 +119,17 @@ class EmergencySelector extends React.Component {
             />
           </BottomNavigation>
         </div>
+        {this.state.alert ? <div style={ {
+          display: 'inline',
+          top: '-20px',
+          position: 'relative',
+          backgroundColor: 'red'
+          }}>Hora de llegada menor a despacho</div>: ''}
         <div className="type__time__selector">
           Despacho
           <TimePicker
             key={1}
+            value={this.props.dispatched}
             style={ {display: 'inline', padding: "0px 30px"} }
             format="24hr"
             hintText="Hora de despacho"
@@ -125,6 +139,8 @@ class EmergencySelector extends React.Component {
           Llegada
           <TimePicker
             key={2}
+            disabled={this.props.dispatched==undefined}
+            value={this.props.arrived}
             style={ {display: 'inline', padding: '0px 30px'} }
             format="24hr"
             hintText="Hora de llegada"

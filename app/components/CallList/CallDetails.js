@@ -29,10 +29,11 @@ export default class CallDetails extends React.Component {
   parseSeconds = (time) => {
     const minutes = Math.floor(time/60);
     const seconds = Math.floor(time%60);
+    if (isNaN(time)) {return 'NA' }
     if (time > 60) {
       return seconds>0 ? `${minutes}m ${seconds}s` : `${minutes}m`
     } else
-      return seconds>9 ? Math.floor(time) + 's' : `0${Math.floor(time)}`
+      return seconds>9 ? Math.floor(time) + 's' : `0${Math.floor(time)}s`
   }
 
   handleOpenCall = (evt) => {
@@ -75,7 +76,7 @@ export default class CallDetails extends React.Component {
       "OTRO" : <div><SvgIcon style={iconsStyle} color={blue500}><OtherIcon  /></SvgIcon></div>
     }
 
-    const { id, duration, status, origin, poste,
+    const { id, duration, status, origin, poste, callStart,
       comments, type, dispatched, arrived, callDuration } = this.props.call;
 
 
@@ -92,8 +93,9 @@ export default class CallDetails extends React.Component {
           </div>
           <div className="col-md-2">
             <p><Text>Tipo: </Text>{type}</p>
-            <p><Text>Despacho: </Text>{dispatched ? this.formatDate(dispatched) : 'NA'} </p>
-            <p><Text>Llegada: </Text>{arrived ? this.formatDate(arrived) : 'NA'} </p>
+            <p><Text>Fecha: </Text>{!isNaN(callStart) ? this.formatDate(callStart) : 'NA'} </p>
+            <p><Text>Despacho: </Text>{!isNaN(dispatched) ? this.formatDate(dispatched) : 'NA'} </p>
+            <p><Text>Llegada: </Text>{!isNaN(arrived) ? this.formatDate(arrived) : 'NA'} </p>
             <div>{iconsObject[type] }</div>
           </div>
           <div className="col-md-4">

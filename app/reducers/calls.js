@@ -1,7 +1,7 @@
 import { ADD_CALL, DELETE_CALL, EDIT_TYPE,
   UPDATE_DISPATCHED, UPDATE_ARRIVED, ADD_COMMENT,
   OPEN_CALL, ADD_PHONE_INFO,
-  COMPLETE_CALL, COMPLETE_ALL, CLEAR_COMPLETED }
+  COMPLETE_CALL, COMPLETE_ALL, CLEAR_COMPLETED, UPDATE_DURATION }
 from 'constants/CallActions'
 
 import { RECEIVE_CALLS} from 'constants/SearchActions'
@@ -132,7 +132,17 @@ export default function calls(state = initialState, action) {
         console.log("ACTION: ", action)
       return state.map(call =>
         call.id === action.id ?
-          { ...call, dispatched: action.date  } :
+          { ...call, dispatched: action.date,
+            duration: (Date.now()-call.callStart)/1000,
+          status: 'DESPACHADO'  } :
+          call
+      )
+    case UPDATE_DURATION:
+        console.log("ACTION: ", action)
+      return state.map(call =>
+        call.id === action.id ?
+        (!call.duration ?
+          { ...call, duration: action.value  } : '') :
           call
       )
 
@@ -181,7 +191,7 @@ export default function calls(state = initialState, action) {
     case OPEN_CALL:
       return state.map(call =>
         call.id === action.id ?
-          { ...call, open: true, status: 'CONTESTADA'  } :
+          { ...call, open: true, status: 'REABIERTO'  } :
           call
       )
 
@@ -189,6 +199,7 @@ export default function calls(state = initialState, action) {
         console.log("I'm called");
         console.log("With data", action.calls )
         return [
+          ...state.filter( (call) => call.open ),
           ...action.calls,
         ]
 

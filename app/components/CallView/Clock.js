@@ -18,11 +18,9 @@ export default class Clock extends React.Component {
   }
 
   tick() {
-    if(this.props.status){
       this.setState({
         duration: this.state.duration + 1
       });
-    }
   }
 
   parseSeconds = (time) => {
@@ -55,7 +53,10 @@ export default class Clock extends React.Component {
 //{this.parseSeconds(this.state.duration)}
     return (
       <div>
-        <h2>{timeDiff.hours ? timeDiff.hours : ''}{timeDiff.minutes}:{timeDiff.seconds}</h2>
+        {this.props.duration>0 ?
+          <h2>{this.parseSeconds(this.props.duration)}</h2> :
+          <h2>{timeDiff.hours ? timeDiff.hours : ''}{timeDiff.minutes}:{timeDiff.seconds}</h2>
+        }
       </div>
     );
   }

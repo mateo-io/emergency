@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { SearchActions } from 'actions';
+import { SearchActions, CallActions } from 'actions';
 import CallList from 'components/CallList';
 
 // ALL TODO  THIS IS A COPY!!!!!!!!
@@ -51,17 +51,16 @@ class Search extends React.Component {
 
 
   //calls: state.calls.filter( (call) => call.open==false)
-  componentDidMount(){
-    this.props.actions.fetchCalls();
-  }
 
 
 render(){
 
- const {calls, visibilityFilter, actions} = this.props;
+ const {calls, visibilityFilter, searchActions, callActions} = this.props;
   return(
     <div>
-      <CallList visibilityFilter={visibilityFilter} calls={calls} actions={actions} />
+      <CallList visibilityFilter={visibilityFilter} calls={calls}
+      callActions={callActions}
+      searchActions={searchActions} />
     </div>
   )
 }
@@ -74,12 +73,14 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(SearchActions, dispatch)
+    callActions: bindActionCreators(CallActions, dispatch),
+    searchActions: bindActionCreators(SearchActions, dispatch)
 })
 
 Search.propTypes = {
   calls: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  callActions: PropTypes.object.isRequired,
+  searchActions: PropTypes.object.isRequired
 }
 
 

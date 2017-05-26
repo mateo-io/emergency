@@ -24,8 +24,7 @@ export default class CallList extends React.Component {
     fontWeight: 700
   }
 
-    const { calls, actions, visibilityFilter } = this.props;
-    console.log("CALLS IS!!!!!! ", calls)
+    const { calls, searchActions, callActions, visibilityFilter } = this.props;
     return (
       <div>
       <div style={ {marginLeft: '15px'}}>
@@ -34,12 +33,12 @@ export default class CallList extends React.Component {
         <FilterLink filter='MOSTRAR_GRUA'>GRUA</FilterLink>
         <FilterLink filter='MOSTRAR_POLICIA'>POLICIA</FilterLink>
         <FilterLink filter='MOSTRAR_OTRO'>OTRO</FilterLink>
-        <DateSelector actions={actions} />
+        <DateSelector actions={callActions} />
       </div>
       {calls.map((call, i) => {
         return (
             <Wrapper style={ style } key={i}>
-              <CallDetails call={call} openCall={actions.openCall} />
+              <CallDetails call={call} openCall={callActions.openCall} />
             </Wrapper>
         )}
       )}

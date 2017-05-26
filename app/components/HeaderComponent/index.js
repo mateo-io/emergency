@@ -32,6 +32,10 @@ export default class HeaderComponent extends React.Component {
         this.props.actions.addPhoneInfo(id, data);
       }.bind(this))
     }
+    
+    componentDidMount(){
+      this.props.searchActions.fetchCalls();
+    }
 
 
     render() {
