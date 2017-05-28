@@ -165,7 +165,34 @@ app.put('/api/calls/:call_id', (req, res, next) => {
   });
 });
 
-
+//DELETE
+app.delete('/api/calls/:todo_id', (req, res, next) => {
+  const results = [];
+  // Grab data from the URL parameters
+  const id = req.params.todo_id;
+  // Get a Postgres client from the connection pool
+  pg.connect(con_string, (err, client, done) => {
+    // Handle connection errors
+    if(err) {
+      done();
+      console.log(err);
+      return res.status(500).json({success: false, data: err});
+    }
+    // SQL Query > Delete Data
+    client.query('DELETE FROM calls WHERE id=($1)', [id]);
+    // SQL Query > Select Data
+    var query = client.query('SELECT * FROM calls ORDER BY id ASC');
+    // Stream results back one row at a time
+    query.on('row', (row) => {
+      results.push(row);
+    });
+    // After all data is returned, close connection and return results
+    query.on('end', () => {
+      done();
+      return res.json(results);
+    });
+  });
+});
 
 
 
