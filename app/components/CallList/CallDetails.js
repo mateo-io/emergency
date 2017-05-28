@@ -21,12 +21,15 @@ export default class CallDetails extends React.Component {
 
   }
   formatDate = (date) => {
-    const newDate = date.getHours() + ':' + date.getMinutes() + ' - ' + date.getDate()
+    const newDate = (date.getHours()<10? '0'+date.getHours() : date.getHours())  + ':' + 
+(date.getMinutes()<10? '0'+date.getMinutes() : date.getMinutes())
+ + ' - ' + date.getDate()
     + '/' + date.getMonth() + '/' + date.getFullYear()
     return newDate;
   }
 
   parseSeconds = (time) => {
+	console.log("TIME IS", time)
     const minutes = Math.floor(time/60);
     const seconds = Math.floor(time%60);
     if (isNaN(time)) {return 'NA' }
@@ -47,22 +50,37 @@ export default class CallDetails extends React.Component {
     const realId = id[1].slice(-3);
     return realId
   }
+ getServiceDuration = (arrived, dispatched) => {
+	if( (dispatched-arrived)>0  ){
+	return this.parseSeconds( ((dispatched-arrived)/1000) )
+
+} else {
+	dispatched.setDate(dispatched.getDate()+1)
+	return this.parseSeconds( (dispatched-arrived)/1000 )
+}
+}
 
   getRecordingPath = () => {
-    return fs.readdirSync('/calldir/0003/').forEach(file => {
-    const fileId = this.getRecordingId(file);
+try {
+return fs.readdirSync(`/calldir/${this.props.call.poste}/`).forEach(file => {
+const fileId = this.getRecordingId(file);
 
-    const uniqueid = this.props.call.uniqueid;
-    const parsedId = String(Math.floor(Number(uniqueid)));
-    const callAsteriskId = parsedId ? parsedId.slice(-3) : 0;
-    if (fileId == callAsteriskId ) {
-      console.log("I found it EUREKKA!");
-      console.log(file);
-      this.setState({file: file});
-    }
+const uniqueid = this.props.call.uniqueid;
+const parsedId = String(Math.floor(Number(uniqueid)));
+const callAsteriskId = parsedId ? parsedId.slice(-3) : 0;
+if (fileId == callAsteriskId ) {
+  console.log("I found it EUREKKA!");
+  console.log(file);
+  this.setState({file: file});
+}
 })
+
+} catch (e) {
+	console.log("ERORR IN FILE", e)
+
+}
   }
-  componentWillMount(){
+  componentDidMount(){
     this.getRecordingPath()
   }
 
@@ -77,7 +95,7 @@ export default class CallDetails extends React.Component {
     }
 
     const { id, duration, status, origin, poste, callStart,
-      comments, type, dispatched, arrived, callDuration } = this.props.call;
+      comments, type, dispatched, arrived, callDuration, callerId } = this.props.call;
 
 
 
@@ -88,6 +106,7 @@ export default class CallDetails extends React.Component {
           <div className="col-md-2">
             <p><Text>Estado: </Text>{status}</p>
             <p><Text>Poste: </Text>{poste}</p>
+            <p><Text>CallerId: </Text>{callerId}</p>
             <p><Text>Origen: </Text>{origin}</p>
             <p><Text>ID</Text>: {id} </p>
           </div>
@@ -112,13 +131,13 @@ export default class CallDetails extends React.Component {
           <div className="col-md-2">
             <div style={{}}><Text>Duracion Llamada: </Text>{this.parseSeconds(callDuration)}</div>
             <div style={{}}><Text>Duracion Atencion: </Text>{this.parseSeconds(duration)}</div>
-            <div style={{}}><Text>Duracion Servicio: </Text>{this.parseSeconds( (arrived - dispatched)/1000 )}</div>
+            <div style={{}}><Text>Duracion Servicio: </Text>{this.getServiceDuration(dispatched, arrived)}</div>
           </div>
 
         </div>
         <div className="row" style= { {textAlign: 'center', marginTop: '20px', bottom: '0'}}>
           <ReactAudioPlayer
-            src={"/calldir/0003/"+this.state.file}
+            src={`/calldir/${this.props.call.poste}/${this.state.file}`}
             controls
             />
         </div>

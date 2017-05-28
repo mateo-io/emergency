@@ -133,7 +133,6 @@ export default function calls(state = initialState, action) {
       return state.map(call =>
         call.id === action.id ?
           { ...call, dispatched: action.date,
-            duration: (Date.now()-call.callStart)/1000,
           status: 'DESPACHADO'  } :
           call
       )
@@ -150,7 +149,9 @@ export default function calls(state = initialState, action) {
         console.log("ACTION: ", action)
       return state.map(call =>
         call.id === action.id ?
-          { ...call, arrived: action.date  } :
+          { ...call,
+            duration: (Date.now()-call.callStart)/1000,
+	 arrived: action.date  } :
           call
       )
 
@@ -174,6 +175,7 @@ export default function calls(state = initialState, action) {
           { ...call,
             uniqueid: payload.uniqueid,
             callDuration: payload.duration,
+ callerId: payload.clid,
             poste: payload.src
           } :
           call
@@ -182,7 +184,7 @@ export default function calls(state = initialState, action) {
     case COMPLETE_CALL:
       return state.map(call =>
         call.id === action.id ?
-          { ...call, open: false, duration:(new Date()-call.callStart)/1000,
+          { ...call, open: false,
            status: 'FINALIZADO'}
            :
           call

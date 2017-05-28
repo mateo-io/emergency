@@ -15,8 +15,8 @@ var app = express();
 var io = require('socket.io').listen(9000);
 
 var pg = require ('pg');
-//var con_string = 'tcp://asterisk:seblap1234@localhost/asterisk';
-var con_string = 'tcp://asterisk:helloasterisk250@localhost/asterisk';
+var con_string = 'tcp://asterisk:seblap1234@localhost/asterisk';
+//var con_string = 'tcp://asterisk:helloasterisk250@localhost/asterisk';
 
 
 var pg_client = new pg.Client(con_string);

@@ -1,3 +1,8 @@
+fecha hora - poste - duracion llamada - inicio servicio - fin servicio - reproducir
+
+
+A
+
 #TCP CONNECITON
 
 
