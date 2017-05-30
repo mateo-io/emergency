@@ -19,18 +19,19 @@ import * as constants from 'constants/Colors';
 
 export default class CallTable extends React.Component {
 
-getRecordingPath = (callerId) => {
+getRecordingPath = (poste, uniqueid) => {
   try {
-    return fs.readdirSync(`/calldir/${callerId}/`).forEach(file => {
+    return fs.readdirSync(`/calldir/${poste}/`).forEach(file => {
       const fileId = this.getRecordingId(file);
 
-      const uniqueid = this.props.call.uniqueid;
       const parsedId = String(Math.floor(Number(uniqueid)));
+
       const callAsteriskId = parsedId ? parsedId.slice(-3) : 0;
       if (fileId == callAsteriskId ) {
         console.log("I found it EUREKKA!");
         console.log(file);
         this.setState({file: file});
+	return
       }
     })
 
@@ -41,9 +42,11 @@ getRecordingPath = (callerId) => {
 }
 
   getRecordingId = (uniqueid) => {
+    console.log("Get recording id called for id: ", uniqueid)
     if (uniqueid==undefined) {console.log("SHITE"); return 0};
     const id = uniqueid.split('-');
     const realId = id[1].slice(-3);
+   console.log("getRecordingId will return ", realId);
     return realId
   }
 
@@ -112,7 +115,7 @@ getRecordingPath = (callerId) => {
                     <TableRowColumn>
                     <ReactAudioPlayer
                     style={ {width: '50px'} }
-                    src={`/calldir/${call.poste}/${this.getRecordingPath(call.callerId)}`}
+                    src={`/calldir/${call.poste}/${(call.poste, call.uniqueid)}`}
                     controls
                     />
                     </TableRowColumn>
