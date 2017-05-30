@@ -8,8 +8,11 @@ import SvgIcon from 'material-ui/SvgIcon';
 import PoliceIcon from 'assets/police.js';
 import OtherIcon from 'assets/other.js';
 import TruckIcon from 'assets/truck.js';
+import Arrow from 'assets/arrow.js';
 import AmbulanceIcon from 'material-ui/svg-icons/maps/local-hospital';
+import FontIcon from 'material-ui/FontIcon';
 
+import NavigationArrowDropDownCircle from 'material-ui/svg-icons/navigation/arrow-drop-down-circle';
 
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
@@ -33,6 +36,8 @@ class EmergencySelector extends React.Component {
 
   state = {
     selectedIndex: this.getSelectedIndex(this.props.type),
+    dispatched: false,
+    arrived: false,
     alert: false
   };
 
@@ -48,21 +53,22 @@ class EmergencySelector extends React.Component {
     this.props.editType(this.props.callId, servicesIndex[index] )
   }
 
-  updateDispatched = (evt, date) => {
-    this.props.serviceDispatched(this.props.callId, date)
+  updateDispatched = () => {
+    this.setState({
+      dispatched: true
+    })
+    this.props.serviceDispatched(this.props.callId, new Date())
   }
 
-  updateArrived = (evt, date) => {
-	console.log("Dispatched: ", this.props.dispatched)
-	console.log("Arrived: ", date)
-    if ( (this.props.dispatched-date) > 0) {
-
-      console.log('alert true bitch')
-      this.state.alert = true;
+  updateArrived = () => {
+    if(this.state.dispatched){
+      this.setState({
+        arrived: true
+      })
+      this.props.serviceArrived(this.props.callId, new Date())
     } else {
-      this.state.alert = false;
+      alert("Primero debe despachar el servicio.")
     }
-    this.props.serviceArrived(this.props.callId, date)
   }
 
   render() {
@@ -122,34 +128,20 @@ class EmergencySelector extends React.Component {
             />
           </BottomNavigation>
         </div>
-        {this.state.alert ? <div style={ {
-          display: 'inline',
-          top: '-20px',
-          position: 'relative',
-          backgroundColor: 'red'
-          }}>Hora de llegada menor a despacho</div>: ''}
         <div className="type__time__selector">
           Despacho
-          <TimePicker
-            key={1}
-            value={this.props.dispatched}
-            style={ {display: 'inline', padding: "0px 30px"} }
-            format="24hr"
-            hintText="Hora de despacho"
-            autoOk={true}
-            onChange={this.updateDispatched.bind(this)}
-          />
+    <NavigationArrowDropDownCircle
+    style={ {height: '50px', width: '50px'}}
+    color={this.state.dispatched && 'yellow'}
+    onClick={this.updateDispatched}
+    />
           Llegada
-          <TimePicker
-            key={2}
-            disabled={this.props.dispatched==undefined}
-            value={this.props.arrived}
-            style={ {display: 'inline', padding: '0px 30px'} }
-            format="24hr"
-            hintText="Hora de llegada"
-            autoOk={true}
-            onChange={this.updateArrived.bind(this)}
-          />
+    <NavigationArrowDropDownCircle
+    style={ {height: '50px', width: '50px'}}
+    disable={true}
+    color={this.state.arrived && 'green'}
+    onClick={this.updateArrived}
+    />
         </div>
       </PaperBox>
     );

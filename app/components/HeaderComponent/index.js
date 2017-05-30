@@ -32,7 +32,7 @@ export default class HeaderComponent extends React.Component {
         this.props.actions.addPhoneInfo(id, data);
       }.bind(this))
     }
-    
+
     componentDidMount(){
       this.props.searchActions.fetchCalls();
     }
@@ -44,21 +44,22 @@ export default class HeaderComponent extends React.Component {
       return(
         <Navbar>
           <HeaderLink to="/">
-            SERVICIOS ABIERTOS: {activeCalls.length}
+            {activeCalls.length} - LLAMADAS ACTIVAS
+          </HeaderLink>
+
+          <HeaderLink to="/table">
+            LISTA DE LLAMADAS
           </HeaderLink>
 
           <HeaderLink to="/filters">
             FILTROS
           </HeaderLink>
 
-          <HeaderLink to="/map">
-            MAPA
-          </HeaderLink>
 
           <HeaderLink to="#">
-            MATEO MEJIA
+            PROMETALICOS
           </HeaderLink>
-          <a href="#" onClick={ actions.addCall}>ADD CALL</a>
+          <a href="#" onClick={ actions.addCall}>Nueva llamada</a>
         </Navbar>
       )
     }

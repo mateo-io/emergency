@@ -166,10 +166,10 @@ app.put('/api/calls/:call_id', (req, res, next) => {
 });
 
 //DELETE
-app.delete('/api/calls/:todo_id', (req, res, next) => {
+app.delete('/api/calls/:call_id', (req, res, next) => {
   const results = [];
   // Grab data from the URL parameters
-  const id = req.params.todo_id;
+  const id = req.params.call_id;
   // Get a Postgres client from the connection pool
   pg.connect(con_string, (err, client, done) => {
     // Handle connection errors

@@ -24,6 +24,7 @@ export default () => (
       )}/>
         <Route path="/dashboard" component={HomePage} />
         <Route path="/filters" component={Search} />
+        <Route path="/table" component={Search} />
       </Switch>
     </App>
   </Router>

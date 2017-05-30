@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { SearchActions, CallActions } from 'actions';
 import CallList from 'components/CallList';
+import CallTable from 'components/CallTable'
 
 // ALL TODO  THIS IS A COPY!!!!!!!!
 
@@ -55,7 +56,22 @@ class Search extends React.Component {
 
 render(){
 
- const {calls, visibilityFilter, searchActions, callActions} = this.props;
+ const {calls, visibilityFilter, searchActions, callActions, match} = this.props;
+  console.log("THISSSSS MATCH", match)
+  if(match.url=='/table') {
+    console.log("TABLE IS TRUEEE!")
+
+  return(
+    <div>
+      <CallTable visibilityFilter={visibilityFilter} calls={calls}
+      callActions={callActions}
+      searchActions={searchActions} />
+    </div>
+  )
+  }
+  console.log(match.url==="/table")
+  console.log(match.url, typeof match.url)
+
   return(
     <div>
       <CallList visibilityFilter={visibilityFilter} calls={calls}

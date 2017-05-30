@@ -9,86 +9,7 @@ import { RECEIVE_CALLS} from 'constants/SearchActions'
 
 
 const initialState = [
-  {
-    id: 4,
-    callStart: new Date(Date.now()-158400000),
-    callEnd: new Date(Date.now()+3600),
-    callDuration: 12,
-    duration: 160,
-    status: "FINALIZADO",
-    open: false,
-    origin: "El arbolito",
-    poste: "003",
-    comments: ["Bomberos", "Tronco en llamas"],
-    type: "OTRO",
-    dispatched: new Date(),
-    arrived: new Date(Date.now()+3700000),
-    uniqueid: undefined
-  },
-  {
-    id: 3,
-    callStart: new Date(Date.now()-188400000),
-    callEnd: new Date(Date.now()+3600),
-    callDuration: 12,
-    duration: 100,
-    status: "FINALIZADO",
-    open: false,
-    origin: "Buenavista",
-    poste: "003",
-    comments: ["Carro necesita grua.", "Posible falla del motor"],
-    type: "GRUA",
-    dispatched: new Date(),
-    arrived: new Date(Date.now()+3700000),
-    uniqueid: undefined
-  },
-  {
-    id: 2,
-    callStart: new Date(Date.now()-88400000),
-    callEnd: new Date(Date.now()+3600),
-    callDuration: 12,
-    duration: 100,
-    status: "FINALIZADO",
-    open: false,
-    origin: "El tablazo",
-    poste: "003",
-    comments: ["Heridos por una tractomula"],
-    type: "OTRO",
-    dispatched: new Date(),
-    arrived: new Date(Date.now()+3700000),
-    uniqueid: undefined
-  },
-  {
-    id: 1,
-    callStart: new Date(0),
-    callEnd: new Date(Date.now()+4600000),
-    callDuration: 12,
-    duration: 25,
-    status: "FINALIZADO",
-    open: false,
-    origin: "Soledad",
-    poste: "21",
-    comments: [""],
-    type: "GRUA",
-    dispatched: new Date(),
-    arrived: undefined,
-    uniqueid: undefined
-  },
-  {
-    id: 0,
-    callDuration: 12,
-    duration: 23,
-    open: false,
-    callStart: new Date(),
-    callEnd: new Date(Date.now()+3800000),
-    status: "FINALIZADO",
-    origin: "Las nieves KM 12",
-    poste: "130",
-    comments: ["Ladrones hurtaron una moto en el parador Las Colinas"],
-    type: "POLICIA",
-    dispatched: new Date(),
-    arrived:  new Date(Date.now()+4800000),
-    uniqueid: 1494962212.27
-  },
+  {}
 ]
 
 export default function calls(state = initialState, action) {
@@ -102,11 +23,12 @@ export default function calls(state = initialState, action) {
           open: true,
           callStart: new Date(),
           callEnd: undefined,
-          status: "VIVO",
-          origin: "Km 12",
-          poste: "003",
+          status: "INICIADO",
+          callStatus: "VIVO",
+          origin: undefined,
+          poste: undefined,
           comments: [],
-          type: "",
+          type: undefined,
           dispatched: undefined,
           arrived:  undefined,
           uniqueid: undefined
@@ -151,6 +73,7 @@ export default function calls(state = initialState, action) {
         call.id === action.id ?
           { ...call,
             duration: (Date.now()-call.callStart)/1000,
+            status: 'FINALIZADO',
 	 arrived: action.date  } :
           call
       )
@@ -173,9 +96,10 @@ export default function calls(state = initialState, action) {
       return state.map(call =>
         call.id === action.id ?
           { ...call,
+            callStatus: 'COLGADA',
             uniqueid: payload.uniqueid,
             callDuration: payload.duration,
- callerId: payload.clid,
+            callerId: payload.clid,
             poste: payload.src
           } :
           call
@@ -184,8 +108,8 @@ export default function calls(state = initialState, action) {
     case COMPLETE_CALL:
       return state.map(call =>
         call.id === action.id ?
-          { ...call, open: false,
-           status: 'FINALIZADO'}
+          { ...call, open: false
+           }
            :
           call
       )

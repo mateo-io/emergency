@@ -33,7 +33,7 @@ export default class CallTabs extends React.Component {
     return (
       <div>
         <Tabs
-        inkBarStyle={ {background: constants.primary, height: "5px"} }
+        inkBarStyle={ {background: constants.primary, height: "8px"} }
         >
 
         {calls && calls.map( (call) => {
@@ -44,7 +44,7 @@ export default class CallTabs extends React.Component {
               color: constants.secondaryText }}
               key={call.id}
               icon={ iconsObject[call.type] }
-              label={call.origin}
+              label={(call.uniqueid ? '\u2713 ' : '') + call.status + ' ' + (call.origin ? call.origin : '')}
             />
             )
           })

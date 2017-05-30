@@ -21,7 +21,7 @@ export default class CallDetails extends React.Component {
 
   }
   formatDate = (date) => {
-    const newDate = (date.getHours()<10? '0'+date.getHours() : date.getHours())  + ':' + 
+    const newDate = (date.getHours()<10? '0'+date.getHours() : date.getHours())  + ':' +
 (date.getMinutes()<10? '0'+date.getMinutes() : date.getMinutes())
  + ' - ' + date.getDate()
     + '/' + date.getMonth() + '/' + date.getFullYear()
@@ -76,7 +76,7 @@ if (fileId == callAsteriskId ) {
 })
 
 } catch (e) {
-	console.log("ERORR IN FILE", e)
+	console.log("ERORR IN FILE")
 
 }
   }

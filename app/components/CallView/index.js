@@ -6,6 +6,7 @@ import EmergencySelector from './EmergencySelector';
 import Divider from 'material-ui/Divider';
 import CallComments from './CallComments';
 import RaisedButton from 'material-ui/RaisedButton';
+import AlertDialog from 'components/AlertDialog';
 
 
 export default class CallView extends React.Component {
@@ -58,24 +59,42 @@ export default class CallView extends React.Component {
     });
   }
 
-  completeCall = (evt) => {
-    this.props.actions.completeCall(this.props.call.id)
-    this.props.history.replace('/dashboard')
-    console.log("STATUS IS !!!", this.props.call.status)
-    console.log("CONDITION!!", this.props.status!=='REABIERTO')
-    if(this.props.call.status!=='REABIERTO'){
-      this.updateDB(this.props.call)
-    } else {
-      console.log("I'm updating")
-      this.updateCallDB(this.props.call)
+  cancelCall = (evt) => {
 
+  }
+
+  completeCall = (evt) => {
+    if(this.props.call.status == "FINALIZADO" && this.props.call.callStatus == "COLGADA"){
+      this.props.actions.completeCall(this.props.call.id)
+      this.props.history.replace('/')
+      if(this.props.call.status!=='REABIERTO'){
+        this.updateDB(this.props.call)
+      } else {
+        console.log("I'm updating")
+        this.updateCallDB(this.props.call)
+
+      }
+
+    } else {
+      alert('Llamada no finalizada');
     }
   }
 
+          /*
+          TODO: Cancelar llamada...servicio
+          <RaisedButton label="Cancelar Servicio"
+          backgroundColor={'red'}
+          labelColor={'#f5f5f5'}
+          style={ { display: 'block', width: '250px'} }
+          onClick={ this.cancelCall }
+          />
+          */
+
+
   render() {
     const { call, actions } = this.props;
-    const { id, callStart, status, origin, poste,
-      comments, type, dispatched, arrived, duration } = call;
+    const { id, callStart, callStatus, status, origin, poste,
+      comments, type, dispatched, arrived, duration, callerId } = call;
 
       console.log("Call is: ", call, "id", id)
       console.log("Actions are: ", actions)
@@ -84,11 +103,13 @@ export default class CallView extends React.Component {
       return (
         <div>
           <StatusBar
+          callStatus={callStatus}
           origin={origin}
           poste={poste}
           callStart={callStart}
           status={status}
           duration={duration}
+          callerId={callerId}
            />
 
 
@@ -106,8 +127,8 @@ export default class CallView extends React.Component {
             comments={comments}
             addComment={actions.addComment}
             />
-          <RaisedButton label="Cerrar Servicio"
-          backgroundColor={'red'}
+          <RaisedButton label="Finalizar Servicio"
+          backgroundColor={'green'}
           labelColor={'#f5f5f5'}
           style={ { display: 'block', width: '250px', margin: '12px auto'} }
           onClick={ this.completeCall}

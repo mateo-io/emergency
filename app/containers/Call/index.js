@@ -6,12 +6,28 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-  const Call = ({call, actions, history}) => (
-    <div>
-      <CallView history={history} call={call} actions={actions} />
-    </div>
-  )
+  class Call extends React.Component {
 
+    render(){
+      const {call, actions, history} = this.props;
+      let emptyCalls = call==undefined;
+
+      if (emptyCalls) {
+        return (
+          <div></div>
+        )
+      } else {
+      return(
+        <div>
+        <CallView history={history} call={call} actions={actions} />
+        </div>
+
+      )
+      }
+
+    }
+
+  }
   Call.propTypes = {
     call: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,

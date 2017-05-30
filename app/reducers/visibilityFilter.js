@@ -1,3 +1,5 @@
+import {SET_BOTH_DATES}  from 'constants/CallActions'
+
 const initialState = {
   type: 'MOSTRAR_TODOS',
   initialDate: new Date(0),
@@ -21,6 +23,16 @@ export default function visibilityFilter(state = initialState, action) {
         ...state,
         endDate: action.date
       }
+
+    case SET_BOTH_DATES:
+    console.log("SET BOTH DATES FIRED");
+      return {
+        ...state,
+        initialDate: action.initialDate,
+        endDate: action.endDate
+      }
+
+
     case 'SET_TODAY':
       return {
         ...state,

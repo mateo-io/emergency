@@ -27,6 +27,11 @@ export const setFinalDate = (date) => ({
   type: 'SET_FINAL_DATE',
   date
 })
+
+export const setBothDates = (initialDate, endDate) => ({
+  type: types.SET_BOTH_DATES,
+  initialDate, endDate
+})
 //CallComments
 export const addComment = (id, text) => ({type: types.ADD_COMMENT, id, text })
 
