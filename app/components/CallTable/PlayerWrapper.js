@@ -24,7 +24,6 @@ getRecordingPath = (poste, uniqueid) => {
       counter +=1;
       if (file==undefined) {return 0}
 
-      console.log("Got into fs")
 
       const fileId = this.getRecordingId(file);
       const parsedId = String(Math.floor(Number(uniqueid)));
@@ -41,11 +40,9 @@ getRecordingPath = (poste, uniqueid) => {
 }
 
   getRecordingId = (uniqueid) => {
-    console.log("Get recording id called for id: ", uniqueid)
     if (uniqueid==undefined) {console.log("Recording id undefined"); return };
     const id = uniqueid.split('-');
     const realId = id[1].slice(-3);
-   console.log("getRecordingId will return ", realId);
     return realId
   }
 

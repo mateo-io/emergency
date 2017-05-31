@@ -7,7 +7,7 @@ const initialState = {
   durationInitial: 0,
   durationEnd: undefined,
   callDurationInitial: 0,
-  callDurationEnd: 0
+  callDurationEnd: undefined
 }
 
 export default function visibilityFilter(state = initialState, action) {

@@ -59,7 +59,7 @@ const getCallsByCallDuration = (calls, startDate, endDate) => {
   if (startDate==undefined) {return calls}
   if (endDate == undefined) {
     return calls.filter( (call) => {
-      return startDate <= Number(call.callDuration)
+      return call.callDuration >= startDate
     })
 }
 
