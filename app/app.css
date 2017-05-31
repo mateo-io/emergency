@@ -5,3 +5,10 @@ html, body {
 	padding: 0;
 	border: 0;
 }
+
+@media (min-width: 768px) {
+	.col-sm-3 {
+		background: 'green';
+		width: 22%;
+	}
+}

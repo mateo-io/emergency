@@ -26,8 +26,11 @@ export default class HeaderComponent extends React.Component {
 
       socket.on('insert', function(data) {
         console.log("Data inserted into db");
-        console.log("PROPS: ", this.props)
-        const id = this.props.activeCalls[this.props.activeCalls.length-1].id
+        const liveCalls = this.props.activeCalls
+        .filter( (call) => {
+          return !call.uniqueid
+        })
+        const id = liveCalls[liveCalls.length-1].id
         console.log("Active call id is: ", id);
         this.props.actions.addPhoneInfo(id, data);
       }.bind(this))

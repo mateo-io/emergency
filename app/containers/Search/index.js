@@ -57,7 +57,6 @@ class Search extends React.Component {
 render(){
 
  const {calls, visibilityFilter, searchActions, callActions, match} = this.props;
-  console.log("THISSSSS MATCH", match)
   if(match.url=='/table') {
     console.log("TABLE IS TRUEEE!")
 

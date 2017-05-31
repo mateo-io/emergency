@@ -4,9 +4,8 @@ import Wrapper from './Wrapper';
 import FilterBar from 'components/FilterBar';
 import PaperBox from 'components/PaperBox';
 import moment from 'moment';
+import PlayerWrapper from './PlayerWrapper';
 
-import ReactAudioPlayer from 'react-audio-player';
-import fs from 'fs';
 
 import {
   TableRow,
@@ -16,44 +15,25 @@ import TableWrapper from './TableWrapper';
 
 import * as constants from 'constants/Colors';
 
+let counter = window.counter = 0;
 
 export default class CallTable extends React.Component {
 
-getRecordingPath = (poste, uniqueid) => {
-  try {
-    return fs.readdirSync(`/calldir/${poste}/`).forEach(file => {
-      const fileId = this.getRecordingId(file);
-
-      const parsedId = String(Math.floor(Number(uniqueid)));
-
-      const callAsteriskId = parsedId ? parsedId.slice(-3) : 0;
-      if (fileId == callAsteriskId ) {
-        console.log("I found it EUREKKA!");
-        console.log(file);
-        this.setState({file: file});
-	return
-      }
-    })
-
-  } catch (e) {
-    console.log("ERORR IN FILE")
-
-  }
-}
-
-  getRecordingId = (uniqueid) => {
-    console.log("Get recording id called for id: ", uniqueid)
-    if (uniqueid==undefined) {console.log("SHITE"); return 0};
-    const id = uniqueid.split('-');
-    const realId = id[1].slice(-3);
-   console.log("getRecordingId will return ", realId);
-    return realId
+  parseTime = (time) => {
+    if (isNaN(time)) {return 'NA'}
+    const hours = Math.floor(time/3600);
+    const minutes = Math.floor(time/60);
+    const seconds = Math.floor(time%60);
+    if (time < 60) {
+      return `${seconds}s`
+    } else if (time < 3600) {
+      return `${minutes}m ${seconds}s`
+    } else {
+      return `${hours}h ${minutes}m`
+    }
   }
 
 
-  componentWillMount(){
-    this.getRecordingPath()
-  }
 
   render() {
     const style = {minHeight: "200px",
@@ -97,12 +77,9 @@ getRecordingPath = (poste, uniqueid) => {
                     </TableRowColumn>
 
                     <TableRowColumn>
-                      {call.callDuration}
+                      {this.parseTime(call.callDuration)}
                     </TableRowColumn>
 
-                    <TableRowColumn>
-                      {call.duration}
-                    </TableRowColumn>
 
                     <TableRowColumn>
                       {moment(call.dispatched).format('HH:MM')}
@@ -113,11 +90,16 @@ getRecordingPath = (poste, uniqueid) => {
                     </TableRowColumn>
 
                     <TableRowColumn>
-                    <ReactAudioPlayer
-                    style={ {width: '50px'} }
-                    src={`/calldir/${call.poste}/${(call.poste, call.uniqueid)}`}
-                    controls
+                      {this.parseTime(call.duration)}
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+
+                    <PlayerWrapper
+                    poste={call.poste}
+                    uniqueid={call.uniqueid}
                     />
+
                     </TableRowColumn>
                   </TableRow>
             )}

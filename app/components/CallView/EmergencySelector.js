@@ -25,6 +25,7 @@ import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
  */
 class EmergencySelector extends React.Component {
   getSelectedIndex = (type) => {
+    console.log("getSelectedIndex ", type)
     const servicesIndex = {
       "AMBULANCIA" : 0,
       "GRUA" : 1,
@@ -54,26 +55,24 @@ class EmergencySelector extends React.Component {
   }
 
   updateDispatched = () => {
-    this.setState({
-      dispatched: true
-    })
+    if(this.props.dispatched) { return true }
     this.props.serviceDispatched(this.props.callId, new Date())
   }
 
   updateArrived = () => {
-    if(this.state.dispatched){
-      this.setState({
-        arrived: true
-      })
+    if(this.props.arrived) { return true }
+    if(this.props.dispatched){
       this.props.serviceArrived(this.props.callId, new Date())
     } else {
       alert("Primero debe despachar el servicio.")
     }
   }
 
+
   render() {
 
-    const { callId, type } = this.props;
+    console.log("This props", this.props)
+    let { callId, type } = this.props;
     var styles = {
       default_icon:{
         color: 'blue',
@@ -93,12 +92,13 @@ class EmergencySelector extends React.Component {
     styles.icon[1] = styles.default_icon;
     styles.icon[2] = styles.default_icon;
     styles.icon[3] = styles.default_icon;
-    styles.icon[this.state.selectedIndex] = Object.assign({},   styles.icon[this.state.selectedIndex], styles.active_icon);
+    styles.icon[this.getSelectedIndex(this.props.type)] = Object.assign({},   styles.icon[this.state.selectedIndex], styles.active_icon);
+    const divStyle = { position: 'relative', height: 'auto' }
 
     return (
-      <PaperBox style={ {minHeight: '220px'}} center blank zDepth={2}>
-        <div className="type__icons" style={ {height: '70%'} }>
-          <BottomNavigation selectedIndex={this.state.selectedIndex}>
+      <PaperBox style={ {minHeight: '220px', height: 'auto'}} center blank zDepth={2}>
+        <div className="type__icons" style={ divStyle }>
+          <BottomNavigation style={ divStyle } selectedIndex={this.getSelectedIndex(this.props.type)}>
             <BottomNavigationItem
               key={1}
               label="Ambulancia"
@@ -128,20 +128,30 @@ class EmergencySelector extends React.Component {
             />
           </BottomNavigation>
         </div>
-        <div className="type__time__selector">
-          Despacho
-    <NavigationArrowDropDownCircle
-    style={ {height: '50px', width: '50px'}}
-    color={this.state.dispatched && 'yellow'}
-    onClick={this.updateDispatched}
-    />
-          Llegada
-    <NavigationArrowDropDownCircle
-    style={ {height: '50px', width: '50px'}}
-    disable={true}
-    color={this.state.arrived && 'green'}
-    onClick={this.updateArrived}
-    />
+
+        <div style={divStyle} className="row">
+          <div className="col-md-4"></div>
+          <div className="col-md-4 type__time__selector">
+            <div className="col-md-4">
+              <h4>Despacho</h4>
+              <NavigationArrowDropDownCircle
+              style={ {height: '50px', width: '50px'}}
+              color={this.props.dispatched && '#e4d539'}
+              onClick={this.updateDispatched}
+              />
+            </div>
+
+            <div className="col-md-4">
+              <h4>Llegada</h4>
+              <NavigationArrowDropDownCircle
+              style={ {height: '50px', width: '50px'}}
+              disable={true}
+              color={this.props.arrived && 'green'}
+              onClick={this.updateArrived}
+              />
+            </div>
+          </div>
+          <div className="col-md-4"></div>
         </div>
       </PaperBox>
     );

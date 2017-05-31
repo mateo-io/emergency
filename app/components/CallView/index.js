@@ -96,8 +96,7 @@ export default class CallView extends React.Component {
     const { id, callStart, callStatus, status, origin, poste,
       comments, type, dispatched, arrived, duration, callerId } = call;
 
-      console.log("Call is: ", call, "id", id)
-      console.log("Actions are: ", actions)
+      console.log("CallView -> call is: ", call)
 
 
       return (

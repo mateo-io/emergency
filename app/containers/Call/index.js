@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 
 
   class Call extends React.Component {
-
     render(){
       const {call, actions, history} = this.props;
       let emptyCalls = call==undefined;
@@ -21,7 +20,6 @@ import PropTypes from 'prop-types';
         <div>
         <CallView history={history} call={call} actions={actions} />
         </div>
-
       )
       }
 

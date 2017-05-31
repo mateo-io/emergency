@@ -32,10 +32,10 @@ export default class TableWrapper extends Component {
             <TableHeaderColumn>Poste</TableHeaderColumn>
             <TableHeaderColumn>Tipo</TableHeaderColumn>
             <TableHeaderColumn style = { {width: '100px' } }>Fecha</TableHeaderColumn>
-            <TableHeaderColumn>Duracion</TableHeaderColumn>
-            <TableHeaderColumn>Duracion Servicio</TableHeaderColumn>
+            <TableHeaderColumn>Duracion llamada</TableHeaderColumn>
             <TableHeaderColumn>Inicio Servicio</TableHeaderColumn>
             <TableHeaderColumn>Fin Servicio</TableHeaderColumn>
+            <TableHeaderColumn>Duracion Servicio</TableHeaderColumn>
             <TableHeaderColumn></TableHeaderColumn>
           </TableRow>
         </TableHeader>
