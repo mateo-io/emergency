@@ -1,5 +1,13 @@
 import * as types from 'constants/SearchActions'
 
+export const setDurationFilter1 = () => ({ type: 'SET_DURATION_1'})
+export const setDurationFilter2 = () => ({ type: 'SET_DURATION_2'})
+export const setDurationAll = () => ({ type: 'SET_DURATION_ALL'})
+
+
+export const setCallDurationFilter1 = () => ({ type: 'SET_CALL_DURATION_1'})
+export const setCallDurationFilter2 = () => ({ type: 'SET_CALL_DURATION_2'})
+export const setCallDurationAll = () => ({ type: 'SET_CALL_DURATION_ALL'})
 export function receiveCalls(json) {
   return {
     type: 'RECEIVE_CALLS',

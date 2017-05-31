@@ -3,6 +3,7 @@ import FilterLink from 'containers/FilterLink';
 import { defaultRanges, DateRange } from 'react-date-range';
 import PopoverWrapper from './PopoverWrapper';
 import PaperBox from 'components/PaperBox';
+import FilterDropDown from './FilterDropDown';
 
 export default class FilterBar extends React.Component {
   constructor(props, context) {
@@ -41,12 +42,16 @@ export default class FilterBar extends React.Component {
     padding: '20px 10px 20px 10px',
   }
     return(
+      <div>
+
       <PaperBox blank small style={ style } >
         <FilterLink filter='MOSTRAR_TODOS'>TODOS</FilterLink>
         <FilterLink filter='MOSTRAR_AMBULANCIA'>AMBULANCIA</FilterLink>
         <FilterLink filter='MOSTRAR_GRUA'>GRUA</FilterLink>
         <FilterLink filter='MOSTRAR_POLICIA'>POLICIA</FilterLink>
         <FilterLink filter='MOSTRAR_OTRO'>OTRO</FilterLink>
+
+
 
         <PopoverWrapper
         startDate={this.state.predefined.startDate && this.state.predefined.startDate.format('DD/MM/YY') || ''}
@@ -77,6 +82,24 @@ export default class FilterBar extends React.Component {
         </PopoverWrapper>
 
       </PaperBox>
+      <PaperBox blank small>
+
+        <span>Duracion servicio</span>
+        <FilterDropDown
+        setDurationAll={this.props.searchActions.setDurationAll}
+        setDurationFilter1={this.props.searchActions.setDurationFilter1}
+        setDurationFilter2={this.props.searchActions.setDurationFilter2}
+        />
+
+        <span>Duracion llamada</span>
+        <FilterDropDown
+        setDurationAll={this.props.searchActions.setCallDurationAll}
+        setDurationFilter1={this.props.searchActions.setCallDurationFilter1}
+        setDurationFilter2={this.props.searchActions.setCallDurationFilter2}
+        />
+
+        </PaperBox>
+        </div>
 
     )
   }

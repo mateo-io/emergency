@@ -51,7 +51,7 @@ export default class CallTable extends React.Component {
     const { calls, searchActions, callActions, visibilityFilter } = this.props;
     return (
       <div>
-              <FilterBar callActions={callActions} />
+              <FilterBar searchActions={searchActions} callActions={callActions} />
 
               <h4 style={{margin: '20px'}}>{calls.length==1 ? '1 resultado' : calls.length + ' resultados'}</h4>
 

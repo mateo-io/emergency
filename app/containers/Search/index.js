@@ -13,7 +13,7 @@ const getClosedCalls = (calls) => {
 }
 
 const getCallsByDate = (calls, startDate, endDate) => {
-  if (typeof calls==undefined) {return}
+  if (calls==undefined) {return}
   return calls.filter( (call) =>
     startDate <= call.callStart && call.callStart <= endDate
   )
@@ -36,15 +36,60 @@ const getCallsByType = (calls, filter) => {
   }
 }
 
+const getCallsByDuration = (calls, startDate, endDate) => {
+  if (calls==undefined) { return }
+  if (startDate==undefined) {return calls}
+  if (endDate == undefined) {
+    return calls.filter( (call) => {
+      return startDate <= call.duration
+    })
+}
+
+console.log("By duration got here", startDate, endDate)
+
+return calls.filter( (call) => {
+  console.log(call.duration)
+  return startDate <= call.duration && call.duration <= endDate
+})
+}
+
+
+const getCallsByCallDuration = (calls, startDate, endDate) => {
+  if (calls==undefined) { return }
+  if (startDate==undefined) {return calls}
+  if (endDate == undefined) {
+    return calls.filter( (call) => {
+      return startDate <= Number(call.callDuration)
+    })
+}
+
+
+return calls.filter( (call) => {
+  console.log(call.callDuration)
+  return startDate <= call.callDuration && call.callDuration <= endDate
+})
+}
+
 const getVisibleCalls = (calls, filterObject) => {
+
   const closedCalls = getClosedCalls(calls);
   console.log("Closed", closedCalls.length)
+
   const typeMatches = getCallsByType(closedCalls, filterObject.type);
   console.log("type", typeMatches.length)
+
   const dateMatches = getCallsByDate(typeMatches, filterObject.initialDate, filterObject.endDate);
   console.log("date", dateMatches.length)
 
-  return dateMatches
+  const durationMatches = getCallsByDuration(dateMatches, filterObject.durationInitial, filterObject.durationEnd)
+  console.log("duration", durationMatches.length)
+
+  const callDurationMatches = getCallsByCallDuration(durationMatches, filterObject.callDurationInitial, filterObject.callDurationEnd)
+  console.log("callDuration", callDurationMatches.length)
+
+  //durationLengthMatches
+
+  return callDurationMatches
 }
 
 

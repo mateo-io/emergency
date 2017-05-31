@@ -19,9 +19,6 @@ export default class PlayerWrapper extends React.Component {
   }
 
 getRecordingPath = (poste, uniqueid) => {
-  console.log("-- getRecordingPath --");
-  console.log("Poste: ", poste);
-  console.log("Uniqueid ", uniqueid);
   try {
     return fs.readdirSync(`/calldir/${poste}/`).forEach(file => {
       counter +=1;
@@ -40,8 +37,6 @@ getRecordingPath = (poste, uniqueid) => {
     })
 
   } catch (e) {
-    console.log("ERROR IN FILESYSTEAM READ", e)
-
   }
 }
 

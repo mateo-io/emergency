@@ -3,7 +3,11 @@ import {SET_BOTH_DATES}  from 'constants/CallActions'
 const initialState = {
   type: 'MOSTRAR_TODOS',
   initialDate: new Date(0),
-  endDate: new Date(Date.now()+86400000)
+  endDate: new Date(Date.now()+86400000),
+  durationInitial: 0,
+  durationEnd: undefined,
+  callDurationInitial: 0,
+  callDurationEnd: 0
 }
 
 export default function visibilityFilter(state = initialState, action) {
@@ -30,6 +34,64 @@ export default function visibilityFilter(state = initialState, action) {
         ...state,
         initialDate: action.initialDate,
         endDate: action.endDate
+      }
+
+      case 'SET_DURATION_ALL':
+      return {
+        ...state,
+        durationInitial: 0,
+        durationEnd: undefined
+      }
+
+      case 'SET_DURATION_1':
+      console.log("Reducer duration 1 called")
+      return {
+        ...state,
+        durationInitial: 0,
+        durationEnd: 30
+      }
+
+      case 'SET_DURATION_2':
+      return {
+        ...state,
+        durationInitial: 0,
+        durationEnd: 60
+      }
+
+      case 'SET_DURATION_3':
+      return {
+        ...state,
+        durationInitial: 60,
+        durationEnd: undefined
+      }
+
+
+      case 'SET_CALL_DURATION_ALL':
+      return {
+        ...state,
+        callDurationInitial: 0,
+        callDurationEnd: undefined
+      }
+
+      case 'SET_CALL_DURATION_1':
+      return {
+        ...state,
+        callDurationInitial: 0,
+        callDurationEnd: 30
+      }
+
+      case 'SET_CALL_DURATION_2':
+      return {
+        ...state,
+        callDurationInitial: 0,
+        callDurationEnd: 60
+      }
+
+      case 'SET_CALL_DURATION_3':
+      return {
+        ...state,
+        callDurationInitial: 60,
+        callDurationEnd: undefined
       }
 
 
