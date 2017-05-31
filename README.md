@@ -1,3 +1,25 @@
+tiempo despacho - servicio
+poner poste manuelmente
+caller id asociarlo con NOMBRE .json
+comprobar numeros iguales y fusionarlos si ==
+
+
+>> ponerlos en los filtros
+
+mejorar las consultas mas rangos.
+poner comentarios en los filtros
+
+
+
+u.....
+ | {"id": 0, "open": false, "type": "GRUA", "poste": "003", "origin": "Km 12", "status": "DESPACHADO", "arrived": "2017-05-26T14:45:23.883Z", "comments": ["Esto se guarda en la base de datos"], "duration": 4.169, "callStart": "2017-05-26T20:37:18.968Z", "dispatched": "2017-05-26T13:43:21.269Z"}
+  1 | {"id": 1, "open": false, "type": "AMBULANCIA", "poste": "003", "origin": "Km 12", "status": "REABIERTO", "arrived": "2017-05-26T23:28:21.900Z", "comments": ["Esto es un comentario", "Fue reabierto. Hubo incidentes adicionales"], "duration": 141.456, "callStart": "2017-05-26T20:40:50.113Z", "dispatched": "2017-05-26T20:41:15.647Z"}
+  2 | {"id": 2, "open": false, "type": "AMBULANCIA", "poste": "003", "origin": "Km 12", "status": "REABIERTO", "arrived": "2017-05-26T05:05:06.783Z", "comments": ["Fue en el mismo dia"], "duration": 118.956, "callStart": "2017-05-26T20:55:04.378Z", "dispatched": "2017-05-27T04:31:05.369Z"}
+  3 | {"id": 3, "open": false, "type": "POLICIA", "poste": "003", "origin": "Km 12", "status": "REABIERTO", "arrived": "2017-05-26T13:41:32.764Z", "comments": ["Reabri. Cierro"], "duration": 184.382, "callStart": "2017-05-26T21:15:29.809Z", "dispatched": "2017-05-26T13:37:30.944Z"}
+  4 | {"id": 4, "open": false, "type": "AMBULANCIA", "poste": "gsmcall", "origin": "Km 12", "status": "REABIERTO", "arrived": "2017-05-26T12:44:13.410Z", "comments": ["Una ambulancia", "Urgente"], "duration": 10.318, "uniqueid": "1495834863.92", "callStart": "2017-05-26T21:41:04.554Z", "dispatched": "2017-05-26T11:32:09.993Z", "callDuration": 25}
+  5 | {"id": 5, "open": false, "type": "GRUA", "poste": "gsmcall", "origin": "Km 12", "status": "DESPACHADO", "arrived": "2017-05-27T01:44:56.998Z", "callerId": "\"3113679814\" <gsmcall>", "comments": ["Cuentame", "Callerid sale bien"], "duration": 7.488, "uniqueid": "1495835379.95", "callStart": "2017-05-26T21:49:51.372Z", "dispatched": "2017-05-27T00:36:53.007Z", "callDuration": 31}
+  6 | {"id": 6, "open": false, "type": "POLICIA", "poste": "gsmcall", "origin": "Km 12", "status": "DESPACHADO", "arrived": "2017-05-26T05:03:57.571Z", "callerId": "\"3113679814\" <gsmcall>", "comments": ["Es el mismo dia", "Policia"], "duration": 69.922, "uniqueid": "1495835740.98",
+
 fecha hora - poste - duracion llamada - inicio servicio - fin servicio - reproducir
 
 
