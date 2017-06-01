@@ -88,14 +88,26 @@ export default class FilterBar extends React.Component {
         <FilterDropDown
         setDurationAll={this.props.searchActions.setDurationAll}
         setDurationFilter1={this.props.searchActions.setDurationFilter1}
+        filter1Text={`Menor a 5 minutos`}
         setDurationFilter2={this.props.searchActions.setDurationFilter2}
+        filter2Text={`5-20 Minutos`}
+        setDurationFilter3={this.props.searchActions.setDurationFilter3}
+        filter3Text={`20-60 Minutos`}
+        setDurationFilter4={this.props.searchActions.setDurationFilter4}
+        filter4Text={`Mas de 60 Minutos`}
         />
 
         <span>Duracion llamada</span>
         <FilterDropDown
         setDurationAll={this.props.searchActions.setCallDurationAll}
         setDurationFilter1={this.props.searchActions.setCallDurationFilter1}
+        filter1Text={`Menor a 30s`}
         setDurationFilter2={this.props.searchActions.setCallDurationFilter2}
+        filter2Text={`Menor a 1min`}
+        setDurationFilter3={this.props.searchActions.setCallDurationFilter3}
+        filter3Text={`1-3 minutos`}
+        setDurationFilter4={this.props.searchActions.setCallDurationFilter4}
+        filter4Text={`Mayor a 3 minutos`}
         />
 
         </PaperBox>

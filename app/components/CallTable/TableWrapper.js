@@ -30,6 +30,7 @@ export default class TableWrapper extends Component {
           <TableRow>
             <TableHeaderColumn style={ {width: '20px'} }>ID</TableHeaderColumn>
             <TableHeaderColumn>Poste</TableHeaderColumn>
+            <TableHeaderColumn>Poste(M)</TableHeaderColumn>
             <TableHeaderColumn>Tipo</TableHeaderColumn>
             <TableHeaderColumn style = { {width: '100px' } }>Fecha</TableHeaderColumn>
             <TableHeaderColumn>Duracion llamada</TableHeaderColumn>

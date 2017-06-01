@@ -5,6 +5,7 @@ import FilterBar from 'components/FilterBar';
 import PaperBox from 'components/PaperBox';
 import moment from 'moment';
 import PlayerWrapper from './PlayerWrapper';
+import getPoste from 'helpers/getPoste';
 
 
 import {
@@ -65,7 +66,11 @@ export default class CallTable extends React.Component {
                     </TableRowColumn>
 
                     <TableRowColumn >
-                      {call.callerId}
+                      {getPoste(call.callerNumber)}
+                    </TableRowColumn>
+
+                    <TableRowColumn >
+                      {call.userPoste ? call.userPoste : 'NA'}
                     </TableRowColumn>
 
                     <TableRowColumn >
@@ -82,11 +87,11 @@ export default class CallTable extends React.Component {
 
 
                     <TableRowColumn>
-                      {moment(call.dispatched).format('HH:MM')}
+                      {moment(call.dispatched).format('HH:mm')}
                     </TableRowColumn>
 
                     <TableRowColumn>
-                      {moment(call.arrived).format('HH:MM')}
+                      {moment(call.arrived).format('HH:mm')}
                     </TableRowColumn>
 
                     <TableRowColumn>

@@ -7,7 +7,8 @@ const initialState = {
   durationInitial: 0,
   durationEnd: undefined,
   callDurationInitial: 0,
-  callDurationEnd: undefined
+  callDurationEnd: undefined,
+  numeroPoste: 'TODOS'
 }
 
 export default function visibilityFilter(state = initialState, action) {
@@ -17,6 +18,13 @@ export default function visibilityFilter(state = initialState, action) {
         ...state,
         type: action.filter
       }
+
+    case 'SET_POSTE_FILTER':
+      return {
+        ...state,
+        numeroPoste: action.filter
+      }
+
     case 'SET_INITIAL_DATE':
       return {
         ...state,
@@ -44,24 +52,30 @@ export default function visibilityFilter(state = initialState, action) {
       }
 
       case 'SET_DURATION_1':
-      console.log("Reducer duration 1 called")
       return {
         ...state,
         durationInitial: 0,
-        durationEnd: 30
+        durationEnd: 300
       }
 
       case 'SET_DURATION_2':
       return {
         ...state,
-        durationInitial: 0,
-        durationEnd: 60
+        durationInitial: 300,
+        durationEnd: 1200
       }
 
       case 'SET_DURATION_3':
       return {
         ...state,
-        durationInitial: 60,
+        durationInitial: 1200,
+        durationEnd: 3600
+      }
+
+      case 'SET_DURATION_4':
+      return {
+        ...state,
+        durationInitial: 3600,
         durationEnd: undefined
       }
 
@@ -91,9 +105,15 @@ export default function visibilityFilter(state = initialState, action) {
       return {
         ...state,
         callDurationInitial: 60,
-        callDurationEnd: undefined
+        callDurationEnd: 180
       }
 
+      case 'SET_CALL_DURATION_4':
+      return {
+        ...state,
+        callDurationInitial: 180,
+        callDurationEnd: undefined
+      }
 
     case 'SET_TODAY':
       return {

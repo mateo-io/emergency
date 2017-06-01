@@ -7,6 +7,7 @@ import Divider from 'material-ui/Divider';
 import CallComments from './CallComments';
 import RaisedButton from 'material-ui/RaisedButton';
 import AlertDialog from 'components/AlertDialog';
+import getPoste from 'helpers/getPoste';
 
 
 export default class CallView extends React.Component {
@@ -92,9 +93,14 @@ export default class CallView extends React.Component {
 
 
   render() {
+
     const { call, actions } = this.props;
     const { id, callStart, callStatus, status, origin, poste,
-      comments, type, dispatched, arrived, duration, callerId } = call;
+      comments, type, callerNumber, dispatched, arrived, duration, callerId } = call;
+
+    const posteInputChange = (evt) => {
+      actions.addUserPoste(id, evt.target.value);
+    }
 
       console.log("CallView -> call is: ", call)
 
@@ -102,10 +108,14 @@ export default class CallView extends React.Component {
       return (
         <div>
           <StatusBar
+          posteInputChange={posteInputChange}
           callStatus={callStatus}
           origin={origin}
           poste={poste}
           callStart={callStart}
+          callerNumber={getPoste(callerNumber)}
+          dispatched={dispatched}
+          arrived={arrived}
           status={status}
           duration={duration}
           callerId={callerId}

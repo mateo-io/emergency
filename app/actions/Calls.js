@@ -1,5 +1,6 @@
 import * as types from '../constants/CallActions'
 
+export const addUserPoste = (id, number) => ({ type: 'ADD_USER_POSTE', id, number })
 export const addCall = text => ({ type: types.ADD_CALL, text })
 export const deleteCall = id => ({ type: types.DELETE_CALL, id })
 export const editType = (id, text) => ({ type: types.EDIT_TYPE, id, text })
@@ -15,6 +16,11 @@ export const addPhoneInfo = (id, data) => ({ type: types.ADD_PHONE_INFO, id, dat
 
 export const setVisibilityFilter = (filter) => ({
   type: 'SET_VISIBILITY_FILTER',
+  filter
+})
+
+export const setPosteFilter = (filter) => ({
+  type: 'SET_POSTE_FILTER',
   filter
 })
 

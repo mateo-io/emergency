@@ -70,6 +70,16 @@ return calls.filter( (call) => {
 })
 }
 
+const getCallsByPoste = (calls, poste) => {
+  if(poste=='ALL'){
+    return calls
+  } else {
+    return calls.filter( (call) => {
+      return call.numeroPoste===poste
+    })
+  }
+}
+
 const getVisibleCalls = (calls, filterObject) => {
 
   const closedCalls = getClosedCalls(calls);

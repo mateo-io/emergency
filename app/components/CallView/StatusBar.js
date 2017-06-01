@@ -4,6 +4,8 @@ import H3 from 'components/H3';
 import Clock from './Clock';
 import Text from 'components/Text';
 import PaperBox from 'components/PaperBox';
+import moment from 'moment';
+import TextField from 'material-ui/TextField';
 
 const style = {
   "VIVO" : {borderColor: "red"},
@@ -16,14 +18,18 @@ const style = {
 };
 
 
-const StatusBar = ({origin, callStatus, callerId, poste, status, callStart, duration}) => (
+const StatusBar = ({origin, posteInputChange, callStatus, dispatched, arrived, callerNumber, callerId, poste, status, callStart, duration}) => (
   <div>
     <div className="row">
       <div className="col-sm-3">
          <PaperBox center zDepth={2} >
            <div>
-                <H3>{callerId ? callerId : 'NA callerId'}</H3>
-                <H3>{poste ? poste : 'NA poste'}</H3>
+                <TextField
+                style={ {width: '120px', textAlign: 'center'} }
+                hintText={"Numero poste"}
+                onChange={posteInputChange}
+                />
+                <H3>{callerNumber}</H3>
                 <Text> Origen </Text>
             </div>
         </PaperBox>
@@ -39,6 +45,9 @@ const StatusBar = ({origin, callStatus, callerId, poste, status, callStart, dura
       <div className="col-sm-3">
          <PaperBox  center style={ style[status] } zDepth={2} >
         <H2>{status}</H2>
+
+        <p>{status=='DESPACHADO' ? moment(dispatched).format('HH:mm') : ''} </p>
+        <p>{status=='FINALIZADO' ? moment(arrived).format('HH:mm') : ''} </p>
         <Text>Estado Servicio</Text>
         </PaperBox>
       </div>

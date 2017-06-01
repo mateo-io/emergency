@@ -100,8 +100,19 @@ export default function calls(state = initialState, action) {
             uniqueid: payload.uniqueid,
             callDuration: payload.duration,
             callerId: payload.clid,
+            callerNumber: payload.clid.match(/^\d+|\d+\b|\d+(?=\w)/g),
             poste: payload.src
           } :
+          call
+      )
+
+    case 'ADD_USER_POSTE':
+    console.log("USER POSTE REDUCERRRR")
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, userPoste: action.number
+           }
+           :
           call
       )
 
