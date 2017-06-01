@@ -78,7 +78,7 @@ export default class CallTable extends React.Component {
                     </TableRowColumn>
 
                     <TableRowColumn style={ {width: '100px'} }>
-                      {moment(call.callStart).format('DD-MM-YY HH:MM')}
+                      {moment(call.callStart).format('DD-MM-YY HH:mm')}
                     </TableRowColumn>
 
                     <TableRowColumn>
