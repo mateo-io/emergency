@@ -5,6 +5,7 @@ export const addCall = text => ({ type: types.ADD_CALL, text })
 export const deleteCall = id => ({ type: types.DELETE_CALL, id })
 export const editType = (id, text) => ({ type: types.EDIT_TYPE, id, text })
 export const updateDuration = (id, value) => ({ type: types.UPDATE_DURATION, id, value })
+export const updateAudio = (id, text) => ({type: 'UPDATE_AUDIO', id, text})
 
 export const updateDispatched = (id, date) => ({ type: types.UPDATE_DISPATCHED, id, date })
 export const updateArrived = (id, date) => ({ type: types.UPDATE_ARRIVED, id, date })
