@@ -16,7 +16,6 @@ import TableWrapper from './TableWrapper';
 
 import * as constants from 'constants/Colors';
 
-let counter = window.counter = 0;
 
 export default class CallTable extends React.Component {
 
@@ -102,7 +101,12 @@ export default class CallTable extends React.Component {
 
                     <PlayerWrapper
                     poste={call.poste}
-                    uniqueid={call.uniqueid}
+                    audioPath={call.audioPath}
+                    callId={call.id}
+                    callStart={call.callStart}
+                    updateAudio={callActions.updateAudio}
+                    call={call}
+                    updateCall={this.handleUpdate}
                     />
 
                     </TableRowColumn>

@@ -145,7 +145,6 @@ class EmergencySelector extends React.Component {
               <h4>Llegada</h4>
               <NavigationArrowDropDownCircle
               style={ {height: '50px', width: '50px'}}
-              disable={true}
               color={this.props.arrived && 'green'}
               onClick={this.updateArrived}
               />

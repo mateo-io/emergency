@@ -41,8 +41,14 @@ export default function calls(state = initialState, action) {
         call.id !== action.id
       )
 
+      case 'UPDATE_AUDIO':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, audioPath: action.text  } :
+          call
+      )
+
     case EDIT_TYPE:
-        console.log("ACTION: ", action)
       return state.map(call =>
         call.id === action.id ?
           { ...call, type: action.text  } :
@@ -51,7 +57,6 @@ export default function calls(state = initialState, action) {
 
 
     case UPDATE_DISPATCHED:
-        console.log("ACTION: ", action)
       return state.map(call =>
         call.id === action.id ?
           { ...call, dispatched: action.date,
@@ -59,7 +64,6 @@ export default function calls(state = initialState, action) {
           call
       )
     case UPDATE_DURATION:
-        console.log("ACTION: ", action)
       return state.map(call =>
         call.id === action.id ?
         (!call.duration ?
@@ -68,13 +72,12 @@ export default function calls(state = initialState, action) {
       )
 
     case UPDATE_ARRIVED:
-        console.log("ACTION: ", action)
       return state.map(call =>
         call.id === action.id ?
           { ...call,
             duration: (Date.now()-call.callStart)/1000,
             status: 'FINALIZADO',
-	 arrived: action.date  } :
+          	arrived: action.date  } :
           call
       )
 
