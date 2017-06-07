@@ -6,6 +6,7 @@ import Text from 'components/Text';
 import PaperBox from 'components/PaperBox';
 import moment from 'moment';
 import TextField from 'material-ui/TextField';
+import MiniClock from './MiniClock';
 
 const style = {
   "VIVO" : {borderColor: "red"},
@@ -46,7 +47,10 @@ const StatusBar = ({origin, posteInputChange, callStatus, dispatched, arrived, c
          <PaperBox  center style={ style[status] } zDepth={2} >
         <H2>{status}</H2>
 
-        <p>{status=='DESPACHADO' ? moment(dispatched).format('HH:mm') : ''} </p>
+        <p>{status=='DESPACHADO' ?
+        <div>{moment(dispatched).format('HH:mm')} (<MiniClock callStart={dispatched}/>)</div>:
+         ''} </p>
+
         <p>{status=='FINALIZADO' ? moment(arrived).format('HH:mm') : ''} </p>
         <Text>Estado Servicio</Text>
         </PaperBox>
