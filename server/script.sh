@@ -5,7 +5,12 @@ do
 ( 
  read string;
  if [[ $string == *"Ringing"* ]]; then
-  echo "IM THE BEST"
+  echo "$string"
+  curl localhost:3000/addcall
+fi
+
+ if [[ $string == *"Session Progress"* ]]; then
+  echo "$string"
   curl localhost:3000/addcall
 fi
 )

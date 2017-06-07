@@ -1,3 +1,16 @@
+POPUP CON COMENTARIOS
+CANCELAR LLAMADA
+
+Data is  Message {
+  name: 'notification',
+  length: 396,
+  processId: 1218,
+  channel: 'addedrecord',
+  payload: '{"calldate":"2017-06-07 11:16:58","clid":"\\"phonexternal\\" <1001>","identifier":765,"src":"1001","dst":"3116356569","context":"","channel":"SIP/1001-00000024","dstchannel":"SIP/gsmcall-00000025","lastapp":"Dial","lastdata":"SIP/3116356569@gsmcall,40","duration":53,"billsec":53,"disposition":"ANSWERED","amaflags":3,"accountcode":"","uniqueid":"1496852218.54","userfield":""}' }
+
+CALLDATE DEL SERVR
+calldate":"2017-06-07 11:16:58"
+
 tiempo despacho - servicio
 poner poste manuelmente
 caller id asociarlo con NOMBRE .json

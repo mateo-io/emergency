@@ -19,7 +19,7 @@ const style = {
 };
 
 
-const StatusBar = ({origin, posteInputChange, callStatus, dispatched, arrived, callerNumber, callerId, poste, status, callStart, duration}) => (
+const StatusBar = ({origin, posteInputChange, callDuration, callStatus, dispatched, arrived, callerNumber, callerId, poste, status, callStart, duration}) => (
   <div>
     <div className="row">
       <div className="col-sm-3">
@@ -39,6 +39,7 @@ const StatusBar = ({origin, posteInputChange, callStatus, dispatched, arrived, c
       <div className="col-sm-3">
          <PaperBox  center style={ style[callStatus] } zDepth={2} >
         <H2>{callStatus}</H2>
+	<p>{callDuration ? Math.floor(callDuration)+'s' : ''}</p>
         <Text>Estado Llamada</Text>
         </PaperBox>
       </div>
