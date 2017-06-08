@@ -8,6 +8,7 @@ import PlayerWrapper from './PlayerWrapper';
 import getPoste from 'helpers/getPoste';
 import ReactHover from 'react-hover';
 import {blueGrey100} from 'material-ui/styles/colors';
+import Icons from 'components/Icons';
 
 
 import {
@@ -89,10 +90,23 @@ const optionsCursorTrueWithMargin = {
                     </TableRowColumn>
 
                     <TableRowColumn>
+                      <PlayerWrapper
+                      poste={call.poste}
+                      audioPath={call.audioPath}
+                      callId={call.id}
+                      callStart={call.callStart}
+                      updateAudio={callActions.updateAudio}
+                      call={call}
+                      updateCall={this.handleUpdate}
+                      />
+                    </TableRowColumn>
+
+
+                    <TableRowColumn>
                         <ReactHover
                           options={optionsCursorTrueWithMargin}>
                           <ReactHover.Trigger>
-                            <p> comentarios </p>
+                            <p> {call.comments[0]}... </p>
                           </ReactHover.Trigger>
                           <ReactHover.Hover>
                             <div style={ {background: blueGrey100,padding: '15px'}}>
@@ -115,14 +129,13 @@ const optionsCursorTrueWithMargin = {
                       {moment(call.callStart).format('DD-MM-YY HH:mm')}
                     </TableRowColumn>
 
-                    <TableRowColumn >
-                      {call.type}
-                    </TableRowColumn>
-
                     <TableRowColumn>
                       {this.parseTime(call.callDuration)}
                     </TableRowColumn>
 
+                    <TableRowColumn >
+                      {<Icons type={call.type} />}
+                    </TableRowColumn>
 
                     <TableRowColumn>
                       {moment(call.dispatched).format('HH:mm')}
@@ -136,19 +149,6 @@ const optionsCursorTrueWithMargin = {
                       {this.parseTime( (call.arrived-call.dispatched)/1000)}
                     </TableRowColumn>
 
-                    <TableRowColumn>
-
-                    <PlayerWrapper
-                    poste={call.poste}
-                    audioPath={call.audioPath}
-                    callId={call.id}
-                    callStart={call.callStart}
-                    updateAudio={callActions.updateAudio}
-                    call={call}
-                    updateCall={this.handleUpdate}
-                    />
-
-                    </TableRowColumn>
                   </TableRow>
             )}
         )}

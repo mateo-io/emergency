@@ -3,6 +3,7 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import PropTypes from 'prop-types';
 import StatusBar from './StatusBar';
 import EmergencySelector from './EmergencySelector';
+//import EmergencySelector from './SmallEmergency';
 import Divider from 'material-ui/Divider';
 import CallComments from './CallComments';
 import RaisedButton from 'material-ui/RaisedButton';
