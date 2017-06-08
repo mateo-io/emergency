@@ -26,7 +26,7 @@ const StatusBar = ({origin, posteInputChange, callDuration, callStatus, dispatch
          <PaperBox center zDepth={2} >
            <div>
                 <TextField
-                style={ {width: '120px', textAlign: 'center'} }
+                style={ {width: '120px', textAlign: 'right'} }
                 hintText={"Numero poste"}
                 onChange={posteInputChange}
                 />
@@ -39,30 +39,24 @@ const StatusBar = ({origin, posteInputChange, callDuration, callStatus, dispatch
       <div className="col-sm-3">
          <PaperBox  center style={ style[callStatus] } zDepth={2} >
         <H2>{callStatus}</H2>
-	<p>{callDuration ? Math.floor(callDuration)+'s' : ''}</p>
-        <Text>Estado Llamada</Text>
+        <MiniClock duration={callDuration} callStart={callStart}/>
+        <Text >Estado Llamada</Text>
         </PaperBox>
       </div>
 
-      <div className="col-sm-3">
+      <div className="col-sm-6">
          <PaperBox  center style={ style[status] } zDepth={2} >
         <H2>{status}</H2>
 
         <p>{status=='DESPACHADO' ?
-        <div>{moment(dispatched).format('HH:mm')} (<MiniClock callStart={dispatched}/>)</div>:
+        <div>{moment(dispatched).format('HH:mm')} (<MiniClock inline callStart={dispatched}/>)</div>:
          ''} </p>
 
-        <p>{status=='FINALIZADO' ? moment(arrived).format('HH:mm') : ''} </p>
-        <Text>Estado Servicio</Text>
+        <p>{status=='FINALIZADO' ? <div>{moment(arrived).format('HH:mm')} (<MiniClock callStart={0} inline duration={(arrived-dispatched)/1000}/>)</div> : ''}</p>
+        <Text plain>Estado Servicio</Text>
         </PaperBox>
       </div>
 
-      <div className="col-sm-3">
-         <PaperBox center style={style} zDepth={2} >
-        <Clock callStart={callStart} duration={duration} />
-        <Text> Duración</Text>
-        </PaperBox>
-      </div>
 
     </div>
   </div>

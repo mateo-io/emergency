@@ -26,9 +26,9 @@ export default class MiniClock extends React.Component {
 
   parseSeconds = (time) => {
     if (time > 60) {
-      return `${Math.floor(time/60)} m ${Math.floor(time%60)} s`
+      return `${Math.floor(time/60)}m ${Math.floor(time%60)}s`
     } else
-      return Math.floor(time) + ' s'
+      return Math.floor(time) + 's'
   }
   render() {
     const style = {display: 'inline-block'}
@@ -54,7 +54,12 @@ export default class MiniClock extends React.Component {
         //Get duration as props and increase it by 1 each second
 //{this.parseSeconds(this.state.duration)}
     return (
-          <h6 style={style}>{timeDiff.hours ? timeDiff.hours : ''}{timeDiff.minutes}:{timeDiff.seconds}</h6>
+        <div style={this.props.inline && style}>
+        {this.props.duration>0 ?
+          <h6>{this.parseSeconds(this.props.duration)}</h6> :
+          <h6>{timeDiff.hours ? timeDiff.hours : ''}{timeDiff.minutes}:{timeDiff.seconds}</h6>
+        }
+        </div>
     );
   }
 }

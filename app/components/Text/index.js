@@ -8,7 +8,7 @@ line-height: 1px;
 font-size: 16px;
 font-weight: 400;
 position: relative;
-bottom: -20px;
+bottom: ${(props) => props.plain ? ''  : '-20px'};
 `
 
 

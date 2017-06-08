@@ -82,40 +82,41 @@ const optionsCursorTrueWithMargin = {
           {calls.map((call, i) => {
             return (
                   <TableRow key={i} selected={this.isSelected(i)}>
+
+
                     <TableRowColumn style={ {width: '20px'} }>
                       {call.id}
                     </TableRowColumn>
 
                     <TableRowColumn>
-        <ReactHover
-          options={optionsCursorTrueWithMargin}>
-          <ReactHover.Trigger>
-            <p> comentarios </p>
-          </ReactHover.Trigger>
-          <ReactHover.Hover>
-            <div style={ {background: blueGrey100,padding: '15px'}}>
-            { call.comments.map( (comment, i) => {
-              return <p style={{color: 'black', fontSize: '14px'}}>{i+1}. {comment}</p>
-            })}
-            </div>
-          </ReactHover.Hover>
-        </ReactHover>
+                        <ReactHover
+                          options={optionsCursorTrueWithMargin}>
+                          <ReactHover.Trigger>
+                            <p> comentarios </p>
+                          </ReactHover.Trigger>
+                          <ReactHover.Hover>
+                            <div style={ {background: blueGrey100,padding: '15px'}}>
+                            { call.comments.map( (comment, i) => {
+                              return <p style={{color: 'black', fontSize: '14px'}}>{i+1}. {comment}</p>
+                            })}
+                            </div>
+                          </ReactHover.Hover>
+                        </ReactHover>
                     </TableRowColumn>
 
-                    <TableRowColumn style={ {width: '20px'} }>
+                    <TableRowColumn style={ {width: '60px'} }>
                       {getPoste(call.callerNumber)}
+                      ({call.userPoste ? call.userPoste : 'NA'})
                     </TableRowColumn>
 
-                    <TableRowColumn style={ {width: '20px'} }>
-                      {call.userPoste ? call.userPoste : 'NA'}
+
+
+                    <TableRowColumn style={ {width: '100px'} }>
+                      {moment(call.callStart).format('DD-MM-YY HH:mm')}
                     </TableRowColumn>
 
                     <TableRowColumn >
                       {call.type}
-                    </TableRowColumn>
-
-                    <TableRowColumn style={ {width: '100px'} }>
-                      {moment(call.callStart).format('DD-MM-YY HH:mm')}
                     </TableRowColumn>
 
                     <TableRowColumn>
@@ -132,7 +133,7 @@ const optionsCursorTrueWithMargin = {
                     </TableRowColumn>
 
                     <TableRowColumn>
-                      {this.parseTime(call.duration)}
+                      {this.parseTime( (call.arrived-call.dispatched)/1000)}
                     </TableRowColumn>
 
                     <TableRowColumn>

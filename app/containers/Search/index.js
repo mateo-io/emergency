@@ -29,6 +29,8 @@ const getCallsByType = (calls, filter) => {
       return calls.filter(t => t.type==='POLICIA')
     case 'MOSTRAR_GRUA':
       return calls.filter(t => t.type==='GRUA')
+    case 'MOSTRAR_BOMBEROS':
+      return calls.filter(t => t.type==='BOMBEROS')
     case 'MOSTRAR_OTRO':
       return calls.filter(t => t.type==='OTRO')
     default:

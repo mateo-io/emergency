@@ -49,7 +49,7 @@ export default class CallView extends React.Component {
   render() {
 
     const { call, actions } = this.props;
-    const { id, callStart, callStatus, status, origin, poste,
+    const { id, callStart, callDuration, callStatus, status, origin, poste,
       comments, type, callerNumber, dispatched, arrived, duration, callerId } = call;
 
     const posteInputChange = (evt) => {
@@ -63,6 +63,7 @@ export default class CallView extends React.Component {
         <div>
           <StatusBar
           posteInputChange={posteInputChange}
+          callDuration={callDuration}
           callStatus={callStatus}
           origin={origin}
           poste={poste}
