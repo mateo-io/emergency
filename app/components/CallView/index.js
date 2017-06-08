@@ -3,7 +3,7 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import PropTypes from 'prop-types';
 import StatusBar from './StatusBar';
 import EmergencySelector from './EmergencySelector';
-//import EmergencySelector from './SmallEmergency';
+import SmallEmergency from './SmallEmergency';
 import Divider from 'material-ui/Divider';
 import CallComments from './CallComments';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -20,20 +20,29 @@ export default class CallView extends React.Component {
   }
 
   completeCall = (evt) => {
-    if(this.props.call.status == "FINALIZADO" && this.props.call.callStatus == "COLGADA"){
+    if(this.props.call.dispatched && !this.props.call.arrived) { alert('Servicio 1 no completado'); return}
+    if(this.props.call.dispatched2 && !this.props.call.arrived2) { alert('Servicio 2 no completado'); return}
+    if(this.props.call.dispatched3 && !this.props.call.arrived3) { alert('Servicio 3 no completado'); return}
+    if(this.props.call.dispatched4 && !this.props.call.arrived4) { alert('Servicio 4 no completado'); return}
+
+    if(this.props.call.callStatus!=="COLGADA") { alert(`Llamada en estado: ${this.props.call.callStatus} `); return}
+
+    if(this.props.call.dispatched && this.props.call.type) {
       this.props.actions.completeCall(this.props.call.id)
       this.props.history.replace('/')
+
       if(this.props.call.status!=='REABIERTO'){
         updateDB(this.props.call)
       } else {
         console.log("I'm updating")
-          updateCallDB(this.props.call)
+        updateCallDB(this.props.call)
 
       }
 
     } else {
-      alert('Llamada no finalizada');
+      alert("No se puede guardar : Error")
     }
+
   }
 
           /*
@@ -50,7 +59,7 @@ export default class CallView extends React.Component {
   render() {
 
     const { call, actions } = this.props;
-    const { id, callStart, callDuration, callStatus, status, origin, poste,
+    const { id, callStart, services, callDuration, callStatus, status, origin, poste,
       comments, type, callerNumber, dispatched, arrived, duration, callerId } = call;
 
     const posteInputChange = (evt) => {
@@ -70,15 +79,58 @@ export default class CallView extends React.Component {
           poste={poste}
           callStart={callStart}
           callerNumber={getPoste(callerNumber)}
-          dispatched={dispatched}
-          arrived={arrived}
           status={status}
+          services={services}
           duration={duration}
           callerId={callerId}
+          type1={type}
+          type2={this.props.call.type2}
+          type3={this.props.call.type3}
+          type4={this.props.call.type4}
+          dispatched1={dispatched}
+          dispatched2={this.props.call.dispatched2}
+          dispatched3={this.props.call.dispatched3}
+          dispatched4={this.props.call.dispatched4}
+          arrived1={arrived}
+          arrived2={this.props.call.arrived2}
+          arrived3={this.props.call.arrived3}
+          arrived4={this.props.call.arrived4}
            />
 
 
+          {services ?
+          <SmallEmergency
+          addService={actions.addService}
+          services={services}
+          callId={id}
+          type={type}
+          type2={this.props.call.type2}
+          type3={this.props.call.type3}
+          type4={this.props.call.type4}
+          dispatched1={dispatched}
+          dispatched2={this.props.call.dispatched2}
+          dispatched3={this.props.call.dispatched3}
+          dispatched4={this.props.call.dispatched4}
+          arrived1={arrived}
+          arrived2={this.props.call.arrived2}
+          arrived3={this.props.call.arrived3}
+          arrived4={this.props.call.arrived4}
+          serviceDispatched={actions.updateDispatched}
+          serviceDispatched2={actions.updateDispatched2}
+          serviceDispatched3={actions.updateDispatched3}
+          serviceDispatched4={actions.updateDispatched4}
+          serviceArrived={actions.updateArrived}
+          serviceArrived2={actions.updateArrived2}
+          serviceArrived3={actions.updateArrived3}
+          serviceArrived4={actions.updateArrived4}
+          editType={actions.editType}
+          editType2={actions.editType2}
+          editType3={actions.editType3}
+          editType4={actions.editType4}
+          />
+          :
           <EmergencySelector
+          addService={actions.addService}
           callId={id}
           type={type}
           dispatched={dispatched}
@@ -86,6 +138,8 @@ export default class CallView extends React.Component {
           serviceDispatched={actions.updateDispatched}
           serviceArrived={actions.updateArrived}
           editType={actions.editType} />
+          }
+
 
           <CallComments
             callId={id}

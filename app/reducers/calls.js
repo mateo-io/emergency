@@ -41,6 +41,16 @@ export default function calls(state = initialState, action) {
         call.id !== action.id
       )
 
+      case 'ADD_SERVICE':
+      console.log("ADD SERVICE DUDE");
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call,
+            services: call.services + 1 || 2,
+          } :
+          call
+      )
+
       case 'UPDATE_AUDIO':
       return state.map(call =>
         call.id === action.id ?
@@ -55,7 +65,28 @@ export default function calls(state = initialState, action) {
           call
       )
 
+    case 'EDIT_TYPE2':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, type2: action.text  } :
+          call
+      )
 
+
+    case 'EDIT_TYPE3':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, type3: action.text  } :
+          call
+      )
+
+    case 'EDIT_TYPE4':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, type4: action.text  } :
+          call
+      )
+      
     case UPDATE_DISPATCHED:
       return state.map(call =>
         call.id === action.id ?
@@ -63,6 +94,31 @@ export default function calls(state = initialState, action) {
           status: 'DESPACHADO'  } :
           call
       )
+
+    case 'UPDATE_DISPATCHED2':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, dispatched2: action.date
+          } :
+          call
+      )
+
+    case 'UPDATE_DISPATCHED3':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, dispatched3: action.date
+          } :
+          call
+      )
+
+    case 'UPDATE_DISPATCHED4':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, dispatched4: action.date
+           } :
+          call
+      )
+
     case UPDATE_DURATION:
       return state.map(call =>
         call.id === action.id ?
@@ -78,6 +134,33 @@ export default function calls(state = initialState, action) {
             duration: (Date.now()-call.callStart)/1000,
             status: 'FINALIZADO',
           	arrived: action.date  } :
+          call
+      )
+
+
+    case 'UPDATE_ARRIVED2':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call,
+            duration2: (Date.now()-call.callStart)/1000,
+          	arrived2: action.date  } :
+          call
+      )
+    case 'UPDATE_ARRIVED3':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call,
+            duration3: (Date.now()-call.callStart)/1000,
+          	arrived3: action.date  } :
+          call
+      )
+
+    case 'UPDATE_ARRIVED4':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call,
+            duration4: (Date.now()-call.callStart)/1000,
+          	arrived4: action.date  } :
           call
       )
 

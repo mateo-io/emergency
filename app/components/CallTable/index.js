@@ -72,18 +72,11 @@ const optionsCursorTrueWithMargin = {
 }
 
     const { calls, searchActions, callActions, visibilityFilter } = this.props;
-    return (
-      <div>
-              <FilterBar searchActions={searchActions} callActions={callActions} />
+    let itemsArray = [];
 
-              <h4 style={{margin: '20px'}}>{calls.length==1 ? '1 resultado' : calls.length + ' resultados'}</h4>
-
-              <PaperBox blank>
-              <TableWrapper handleRowSelection={this.handleRowSelection}>
-          {calls.map((call, i) => {
-            return (
+          calls.map((call, i) => {
+            itemsArray.push (
                   <TableRow key={i} selected={this.isSelected(i)}>
-
 
                     <TableRowColumn style={ {width: '20px'} }>
                       {call.id}
@@ -150,8 +143,173 @@ const optionsCursorTrueWithMargin = {
                     </TableRowColumn>
 
                   </TableRow>
-            )}
-        )}
+            )
+            if(call.arrived2) {
+              itemsArray.push(
+                  <TableRow key={i+98212} selected={this.isSelected(i)}>
+
+                    <TableRowColumn style={ {width: '20px'} }>
+                      {call.id}
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                    -
+                    </TableRowColumn>
+
+
+                    <TableRowColumn>
+                    -
+                    </TableRowColumn>
+
+                    <TableRowColumn style={ {width: '60px'} }>
+                    -
+                    </TableRowColumn>
+
+
+
+                    <TableRowColumn style={ {width: '100px'} }>
+                    -
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                    -
+                    </TableRowColumn>
+
+                    <TableRowColumn >
+                      {<Icons type={call.type2} />}
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                      {moment(call.dispatched2).format('HH:mm')}
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                      {moment(call.arrived2).format('HH:mm')}
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                      {this.parseTime( (call.arrived2-call.dispatched2)/1000)}
+                    </TableRowColumn>
+
+                  </TableRow>
+              )
+            }
+
+            if(call.arrived3) {
+              itemsArray.push(
+                  <TableRow key={i+92112} selected={this.isSelected(i)}>
+
+                    <TableRowColumn style={ {width: '20px'} }>
+                      {call.id}
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                    -
+                    </TableRowColumn>
+
+
+                    <TableRowColumn>
+                    -
+                    </TableRowColumn>
+
+                    <TableRowColumn style={ {width: '60px'} }>
+                    -
+                    </TableRowColumn>
+
+
+
+                    <TableRowColumn style={ {width: '100px'} }>
+                    -
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                    -
+                    </TableRowColumn>
+
+                    <TableRowColumn >
+                      {<Icons type={call.type3} />}
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                      {moment(call.dispatched3).format('HH:mm')}
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                      {moment(call.arrived3).format('HH:mm')}
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                      {this.parseTime( (call.arrived3-call.dispatched3)/1000)}
+                    </TableRowColumn>
+
+                  </TableRow>
+              )
+            }
+
+            if(call.arrived4) {
+              itemsArray.push(
+                  <TableRow key={i+4215212} selected={this.isSelected(i)}>
+
+                    <TableRowColumn style={ {width: '20px'} }>
+                      {call.id}
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                    -
+                    </TableRowColumn>
+
+
+                    <TableRowColumn>
+                    -
+                    </TableRowColumn>
+
+                    <TableRowColumn style={ {width: '60px'} }>
+                    -
+                    </TableRowColumn>
+
+
+
+                    <TableRowColumn style={ {width: '100px'} }>
+                    -
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                    -
+                    </TableRowColumn>
+
+                    <TableRowColumn >
+                      {<Icons type={call.type4} />}
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                      {moment(call.dispatched4).format('HH:mm')}
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                      {moment(call.arrived4).format('HH:mm')}
+                    </TableRowColumn>
+
+                    <TableRowColumn>
+                      {this.parseTime( (call.arrived4-call.dispatched4)/1000)}
+                    </TableRowColumn>
+
+                  </TableRow>
+              )
+            }
+
+
+          }
+        )
+
+    return (
+      <div>
+              <FilterBar searchActions={searchActions} callActions={callActions} />
+
+              <h4 style={{margin: '20px'}}>{calls.length==1 ? '1 resultado' : calls.length + ' resultados'}</h4>
+
+              <PaperBox blank>
+              <TableWrapper handleRowSelection={this.handleRowSelection}>
+                {itemsArray}
               </TableWrapper>
               </PaperBox>
       </div>

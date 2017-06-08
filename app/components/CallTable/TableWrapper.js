@@ -13,7 +13,7 @@ export default class TableWrapper extends Component {
   render() {
     return (
       <Table
-     multiSelectable={true}
+      selectable={false}
      onRowSelection={this.props.handleRowSelection}>
         <TableHeader>
           <TableRow>

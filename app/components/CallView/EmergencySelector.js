@@ -57,7 +57,8 @@ class EmergencySelector extends React.Component {
     this.props.editType(this.props.callId, servicesIndex[index] )
   }
 
-  updateDispatched = () => {
+  updateDispatched = (evt) => {
+    console.log("EVENT!", event)
     if(this.props.dispatched) { return true }
     this.props.serviceDispatched(this.props.callId, new Date())
   }
@@ -69,6 +70,10 @@ class EmergencySelector extends React.Component {
     } else {
       alert("Primero debe despachar el servicio.")
     }
+  }
+
+  handleAddService = () => {
+    this.props.addService(this.props.callId)
   }
 
 
@@ -103,6 +108,12 @@ class EmergencySelector extends React.Component {
     return (
       <PaperBox style={ {minHeight: '220px', height: 'auto'}} center blank zDepth={2}>
         <div className="type__icons" style={ divStyle }>
+
+      <div style={{position: 'absolute', right: '10%', top: '50%', zIndex: '3'}}>
+      <button style={ {height: '50px', width: '50px'} } onClick={this.handleAddService}>+</button>
+      <h5>Añadir servicio</h5>
+      </div>
+
           <BottomNavigation style={ divStyle } selectedIndex={this.getSelectedIndex(this.props.type)}>
             <BottomNavigationItem
               key={1}

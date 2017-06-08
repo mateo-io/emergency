@@ -8,13 +8,15 @@ import AmbulanceIcon from 'material-ui/svg-icons/maps/local-hospital';
 
 import {green500, red500, blue500} from 'material-ui/styles/colors';
 
-const iconsStyle = { verticalAlign: 'middle' }
+const iconsStyle = { verticalAlign: 'middle', display: 'inline-block' }
+const divStyle = {display: 'inline-block'}
 const iconsObject = {
-  "AMBULANCIA" : <div><AmbulanceIcon style={iconsStyle} color={red500} /></div>,
-  "GRUA" : <div><SvgIcon style={iconsStyle}color={'yellow'}><TruckIcon /></SvgIcon></div>,
-  "POLICIA" : <div><SvgIcon style={iconsStyle} color={green500}><PoliceIcon  /></SvgIcon></div>,
-  "BOMBEROS" : <div><SvgIcon style={iconsStyle} color={red500}><BomberoIcon  /></SvgIcon></div>,
-  "OTRO" : <div><SvgIcon style={iconsStyle} color={blue500}><OtherIcon  /></SvgIcon></div>
+  "AMBULANCIA" : <div style={divStyle}><AmbulanceIcon style={iconsStyle} color={red500} /></div>,
+  "GRUA" : <div style={divStyle}><SvgIcon style={iconsStyle}color={'yellow'}><TruckIcon /></SvgIcon></div>,
+  "POLICIA" : <div style={divStyle}><SvgIcon style={iconsStyle} color={green500}><PoliceIcon  /></SvgIcon></div>,
+  "BOMBEROS" : <div style={divStyle}><SvgIcon style={iconsStyle} color={red500}><BomberoIcon  /></SvgIcon></div>,
+  "OTRO" : <div style={divStyle}><SvgIcon style={iconsStyle} color={blue500}><OtherIcon  /></SvgIcon></div>,
+  undefined : <div style={divStyle}> tipo - </div>
 }
 
 const Icons = ({type}) => (
