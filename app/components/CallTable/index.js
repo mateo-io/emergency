@@ -6,6 +6,8 @@ import PaperBox from 'components/PaperBox';
 import moment from 'moment';
 import PlayerWrapper from './PlayerWrapper';
 import getPoste from 'helpers/getPoste';
+import ReactHover from 'react-hover';
+import {blueGrey100} from 'material-ui/styles/colors';
 
 
 import {
@@ -18,6 +20,20 @@ import * as constants from 'constants/Colors';
 
 
 export default class CallTable extends React.Component {
+
+    state = {
+      selected: [1],
+    };
+
+    isSelected = (index) => {
+      return this.state.selected.indexOf(index) !== -1;
+    };
+
+    handleRowSelection = (selectedRows) => {
+      this.setState({
+        selected: selectedRows,
+      });
+    };
 
   parseTime = (time) => {
     if (isNaN(time)) {return 'NA'}
@@ -36,6 +52,7 @@ export default class CallTable extends React.Component {
 
 
   render() {
+
     const style = {minHeight: "200px",
     height: 'auto',
     borderRadius: '10px',
@@ -47,6 +64,11 @@ export default class CallTable extends React.Component {
     fontSize: "16px",
     fontWeight: 700
   }
+const optionsCursorTrueWithMargin = {
+  followCursor: true,
+  shiftX: 20,
+  shiftY: 0
+}
 
     const { calls, searchActions, callActions, visibilityFilter } = this.props;
     return (
@@ -56,19 +78,35 @@ export default class CallTable extends React.Component {
               <h4 style={{margin: '20px'}}>{calls.length==1 ? '1 resultado' : calls.length + ' resultados'}</h4>
 
               <PaperBox blank>
-              <TableWrapper>
+              <TableWrapper handleRowSelection={this.handleRowSelection}>
           {calls.map((call, i) => {
             return (
-                  <TableRow key={i}>
+                  <TableRow key={i} selected={this.isSelected(i)}>
                     <TableRowColumn style={ {width: '20px'} }>
                       {call.id}
                     </TableRowColumn>
 
-                    <TableRowColumn >
+                    <TableRowColumn>
+        <ReactHover
+          options={optionsCursorTrueWithMargin}>
+          <ReactHover.Trigger>
+            <p> comentarios </p>
+          </ReactHover.Trigger>
+          <ReactHover.Hover>
+            <div style={ {background: blueGrey100,padding: '15px'}}>
+            { call.comments.map( (comment, i) => {
+              return <p style={{color: 'black', fontSize: '14px'}}>{i+1}. {comment}</p>
+            })}
+            </div>
+          </ReactHover.Hover>
+        </ReactHover>
+                    </TableRowColumn>
+
+                    <TableRowColumn style={ {width: '20px'} }>
                       {getPoste(call.callerNumber)}
                     </TableRowColumn>
 
-                    <TableRowColumn >
+                    <TableRowColumn style={ {width: '20px'} }>
                       {call.userPoste ? call.userPoste : 'NA'}
                     </TableRowColumn>
 

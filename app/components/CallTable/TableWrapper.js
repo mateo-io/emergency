@@ -9,28 +9,18 @@ import {
 } from 'material-ui/Table';
 
 export default class TableWrapper extends Component {
-  state = {
-    selected: [1],
-  };
-
-  isSelected = (index) => {
-    return this.state.selected.indexOf(index) !== -1;
-  };
-
-  handleRowSelection = (selectedRows) => {
-    this.setState({
-      selected: selectedRows,
-    });
-  };
 
   render() {
     return (
-      <Table onRowSelection={this.handleRowSelection}>
+      <Table
+     multiSelectable={true}
+     onRowSelection={this.props.handleRowSelection}>
         <TableHeader>
           <TableRow>
             <TableHeaderColumn style={ {width: '20px'} }>ID</TableHeaderColumn>
-            <TableHeaderColumn>Poste</TableHeaderColumn>
-            <TableHeaderColumn>Poste(M)</TableHeaderColumn>
+            <TableHeaderColumn>Comentarios</TableHeaderColumn>
+            <TableHeaderColumn style={ {width: '20px'} }>Poste</TableHeaderColumn>
+            <TableHeaderColumn style={ {width: '20px'} }>Poste(M)</TableHeaderColumn>
             <TableHeaderColumn>Tipo</TableHeaderColumn>
             <TableHeaderColumn style = { {width: '100px' } }>Fecha</TableHeaderColumn>
             <TableHeaderColumn>Duracion llamada</TableHeaderColumn>
