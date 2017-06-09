@@ -19,7 +19,7 @@ export default class PlayerWrapper extends React.Component {
   }
 
   componentWillMount(){
-    if(!this.props.audioPath){
+    if(false && !this.props.audioPath){
       getRecordingPath(this.props.callId, this.props.callStart, this.props.updateAudio, this.updateCallForGood)
     } else {
       console.log("Already has audioPath", this.props.audioPath)

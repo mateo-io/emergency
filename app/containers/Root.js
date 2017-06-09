@@ -11,7 +11,7 @@ injectTapEventPlugin();
 
 const muiTheme = getMuiTheme({
   palette: {
-    primary1Color: 'black',
+    primary1Color: 'blue',
   },
 });
 
@@ -24,7 +24,7 @@ export default function Root({ store, history }: RootType) {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <MuiThemeProvider muiTheme={muiTheme}>
+        <MuiThemeProvider>
           <Routes />
         </MuiThemeProvider>
       </ConnectedRouter>

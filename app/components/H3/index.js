@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 import * as constants from 'constants/Colors';
 
-const H2 = styled.h4`
+const H3 = styled.h6`
 color: ${constants.primaryText};
-display: inline;
+display: inline-block;
 line-height: 1px;
-font-weight: 600;
-font-size: 18px;
+font-weight: 500;
+font-size: 16px;
 `
 
 
-export default H2
+export default H3

@@ -24,7 +24,12 @@ export default class CallTable extends React.Component {
 
     state = {
       selected: [1],
+      showPlayer: false
     };
+
+    showPlayer = () => {
+      this.setState({showPlayer: true})
+    }
 
     isSelected = (index) => {
       return this.state.selected.indexOf(index) !== -1;
@@ -83,6 +88,7 @@ const optionsCursorTrueWithMargin = {
                     </TableRowColumn>
 
                     <TableRowColumn>
+                      {this.state.showPlayer ?
                       <PlayerWrapper
                       poste={call.poste}
                       audioPath={call.audioPath}
@@ -92,6 +98,9 @@ const optionsCursorTrueWithMargin = {
                       call={call}
                       updateCall={this.handleUpdate}
                       />
+                      :
+                      <button onClick={this.showPlayer}>cargar</button>
+                      }
                     </TableRowColumn>
 
 
@@ -112,7 +121,7 @@ const optionsCursorTrueWithMargin = {
                     </TableRowColumn>
 
                     <TableRowColumn style={ {width: '60px'} }>
-                      {getPoste(call.callerNumber)}
+                      {getPoste(call.callerNumber).poste}
                       ({call.userPoste ? call.userPoste : 'NA'})
                     </TableRowColumn>
 
@@ -146,7 +155,7 @@ const optionsCursorTrueWithMargin = {
             )
             if(call.arrived2) {
               itemsArray.push(
-                  <TableRow key={i+98212} selected={this.isSelected(i)}>
+                  <TableRow key={`${i}`+call.id+2} selected={this.isSelected(i)}>
 
                     <TableRowColumn style={ {width: '20px'} }>
                       {call.id}
@@ -197,7 +206,7 @@ const optionsCursorTrueWithMargin = {
 
             if(call.arrived3) {
               itemsArray.push(
-                  <TableRow key={i+92112} selected={this.isSelected(i)}>
+                  <TableRow key={`${i}`+call.id+3} selected={this.isSelected(i)}>
 
                     <TableRowColumn style={ {width: '20px'} }>
                       {call.id}
@@ -248,7 +257,7 @@ const optionsCursorTrueWithMargin = {
 
             if(call.arrived4) {
               itemsArray.push(
-                  <TableRow key={i+4215212} selected={this.isSelected(i)}>
+                  <TableRow key={`${i}`+call.id+4} selected={this.isSelected(i)}>
 
                     <TableRowColumn style={ {width: '20px'} }>
                       {call.id}
@@ -277,7 +286,7 @@ const optionsCursorTrueWithMargin = {
                     -
                     </TableRowColumn>
 
-                    <TableRowColumn >
+                    <TableRowColumn>
                       {<Icons type={call.type4} />}
                     </TableRowColumn>
 

@@ -15,6 +15,10 @@ import FontIcon from 'material-ui/FontIcon';
 
 import NavigationArrowDropDownCircle from 'material-ui/svg-icons/navigation/arrow-drop-down-circle';
 
+//BUTTON ADD
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 
@@ -109,10 +113,13 @@ class EmergencySelector extends React.Component {
       <PaperBox style={ {minHeight: '220px', height: 'auto'}} center blank zDepth={2}>
         <div className="type__icons" style={ divStyle }>
 
-      <div style={{position: 'absolute', right: '10%', top: '50%', zIndex: '3'}}>
-      <button style={ {height: '50px', width: '50px'} } onClick={this.handleAddService}>+</button>
-      <h5>Añadir servicio</h5>
-      </div>
+      <div style={{position: 'absolute', right: '8%', top: '50%', zIndex: '3'}}>
+
+    <FloatingActionButton onTouchTap={this.handleAddService} primary={true} style={{height: '50px', width: '50px'}}>
+      <ContentAdd />
+    </FloatingActionButton>
+    <h5>Añadir servicio</h5>
+    </div>
 
           <BottomNavigation style={ divStyle } selectedIndex={this.getSelectedIndex(this.props.type)}>
             <BottomNavigationItem

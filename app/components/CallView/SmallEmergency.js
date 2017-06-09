@@ -15,6 +15,10 @@ import FontIcon from 'material-ui/FontIcon';
 
 import NavigationArrowDropDownCircle from 'material-ui/svg-icons/navigation/arrow-drop-down-circle';
 
+//BUTTON ADD
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 
@@ -411,9 +415,12 @@ const  functionJson2 = (param) => {
       <PaperBox style={ {minHeight: '240px', height: 'auto'}} center blank zDepth={2}>
       {this.props.services < 4 ?
       <div style={{position: 'absolute', right: '10%', top: '40%', zIndex: '3'}}>
-      <button style={ {height: '50px', width: '50px'} } onClick={this.handleAddService}>+</button>
-      <h5>Añadir servicio</h5>
+
+    <FloatingActionButton onTouchTap={this.handleAddService} primary={true} style={{height: '50px', width: '50px'}}>
+      <ContentAdd />
+    </FloatingActionButton>
       </div>
+
       : ''
        }
       {scenes}

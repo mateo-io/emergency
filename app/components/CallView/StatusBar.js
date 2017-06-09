@@ -10,6 +10,9 @@ import MiniClock from './MiniClock';
 import Paper from 'material-ui/Paper';
 import Icons from 'components/Icons';
 
+//RADIO BUTTONS
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+
 const style = {
   "VIVO" : {borderColor: "red"},
   "COLGADA" : {borderColor: "green"},
@@ -84,21 +87,76 @@ export default class StatusBar extends React.Component {
     return(
   <div>
     <div className="row">
-      <div className="col-sm-3">
-         <PaperBox center zDepth={2} >
-           <div>
+      <div className="col-sm-5">
+
+
+         <PaperBox zDepth={2} >
+
+           <div className="row">
+            <div className="col-sm-3">
+
                 <TextField
-                style={ {width: '120px', textAlign: 'right'} }
-                hintText={"Numero poste"}
+                style={ {width: '40px', height: '40px', margin: '0 30px', display: 'inline-block'} }
+                hintStyle={{fontSize: '12px', size: '12px'}}
+                hintText={"# poste"}
                 onChange={posteInputChange}
                 />
-                <H3>{callerNumber}</H3>
-                <Text> Origen </Text>
+                |   {callerNumber.poste}
+                </div>
+
+                <div style={{textAlign:'center', height: '20px'}} className="col-sm-7">
+                {
+
+                  callerNumber.lugar1 ?
+               <div>
+                 {callerNumber.lugar1}-{callerNumber.lugar2}
+               </div>
+               :
+                <div>
+                 Tramo de carretera
+               </div>
+             }
+             </div>
+           </div>
+
+
+            <div className="row">
+              <div className="col-sm-5">
+                 <RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
+      <RadioButton
+        value="antes"
+        label="Antes"
+        style={ {display: 'inline-block'}}
+      />
+
+      <RadioButton
+        value="despues"
+        label="Despues"
+        style={{display: 'inline-block'}}
+      />
+      </RadioButtonGroup>
+              </div>
+
+            <div className="col-sm-5">
+                <TextField
+                style={ {width: '100px', height: '40px', marginLeft: '30px', display: 'inline-block'} }
+                hintStyle={{fontSize: '12px', size: '12px'}}
+                hintText={"000"}
+                onChange={posteInputChange}
+                />
+                <p>Distancia del poste</p>
+            </div>
+
+            </div>
+
+
+            <div style={{textAlign: 'center'}}>
+              <Text plain> Origen </Text>
             </div>
         </PaperBox>
       </div>
 
-      <div className="col-sm-3">
+      <div className="col-sm-2">
          <PaperBox  center style={ style[callStatus] } zDepth={2} >
         <H2>{callStatus}</H2>
         <MiniClock duration={callDuration} callStart={callStart}/>
@@ -106,7 +164,7 @@ export default class StatusBar extends React.Component {
         </PaperBox>
       </div>
 
-      <div className="col-sm-6">
+      <div className="col-sm-4">
          { services ?
          <PaperBox blank center style={ style[status] } zDepth={2} >
            {servicesArray}
