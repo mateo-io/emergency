@@ -16,7 +16,9 @@ export default class CallView extends React.Component {
 
 
   cancelCall = (evt) => {
-
+    if(this.props.call.callStatus=="COLGADA") { alert(`No se puede cancelar una llamada ya colgada`); return}
+      this.props.actions.completeCall(this.props.call.id)
+      this.props.history.replace('/')
   }
 
   completeCall = (evt) => {
@@ -25,7 +27,7 @@ export default class CallView extends React.Component {
     if(this.props.call.dispatched3 && !this.props.call.arrived3) { alert('Servicio 3 no completado'); return}
     if(this.props.call.dispatched4 && !this.props.call.arrived4) { alert('Servicio 4 no completado'); return}
 
-    if(this.props.call.callStatus!=="COLGADA") { alert(`Llamada en estado: ${this.props.call.callStatus} `); return}
+    if(this.props.call.callStatus!=="COLGADA") { alert(`Llamada sin colgar.`); return}
 
     if(this.props.call.dispatched && this.props.call.type) {
       this.props.actions.completeCall(this.props.call.id)
@@ -40,7 +42,7 @@ export default class CallView extends React.Component {
       }
 
     } else {
-      alert("No se puede guardar : Error")
+      alert("No se puede guardar: Especificar el tipo de servicio")
     }
 
   }
@@ -59,11 +61,24 @@ export default class CallView extends React.Component {
   render() {
 
     const { call, actions } = this.props;
-    const { id, callStart, services, callDuration, callStatus, status, origin, poste,
+    const { id, destino, callStart, services, callDuration, callStatus, status, origin, poste,
       comments, type, callerNumber, dispatched, arrived, duration, callerId } = call;
 
+
+      const handleAfterBefore = (evt) => {
+        actions.addAntesDespues(id, evt.target.value);
+      }
+
+      const updateDestino = (evt) => {
+        const destino = evt.target.getAttribute('value');
+        actions.updateDestino(id, destino);
+      }
     const posteInputChange = (evt) => {
       actions.addUserPoste(id, evt.target.value);
+    }
+
+    const posteDistanceInputChange = (evt) => {
+      actions.addUserPosteDistance(id, evt.target.value);
     }
 
       console.log("CallView -> call is: ", call)
@@ -73,6 +88,10 @@ export default class CallView extends React.Component {
         <div>
           <StatusBar
           posteInputChange={posteInputChange}
+          destino={destino}
+          updateDestino={updateDestino}
+          posteDistanceInputChange={posteDistanceInputChange}
+          handleAfterBefore={handleAfterBefore}
           callDuration={callDuration}
           callStatus={callStatus}
           origin={origin}
@@ -141,17 +160,39 @@ export default class CallView extends React.Component {
           }
 
 
-          <CallComments
-            callId={id}
-            comments={comments}
-            addComment={actions.addComment}
+          <div className="row">
+            <div className="col-md-7">
+              <CallComments
+                callId={id}
+                comments={comments}
+                addComment={actions.addComment}
+                />
+            </div>
+          <div className="col-md-4">
+            <div>
+            <RaisedButton label="Finalizar Servicio"
+            backgroundColor={'green'}
+            labelColor={'#f5f5f5'}
+            style={ {position: 'relative', left: '20%', width: '250px', height: '80px', margin: '12px 10px', top: '70px'} }
+            overlayStyle={ { display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            onClick={ this.completeCall}
             />
-          <RaisedButton label="Finalizar Servicio"
-          backgroundColor={'green'}
-          labelColor={'#f5f5f5'}
-          style={ { display: 'block', width: '250px', margin: '12px auto'} }
-          onClick={ this.completeCall}
-          />
+            </div>
+
+            <div>
+            { callStatus==='VIVO' ?
+            <RaisedButton label="Cancelar Servicio"
+            backgroundColor={'red'}
+            labelColor={'#000000'}
+            style={ {position: 'relative',left: '20%', width: '130px', height: '50px', borderRadius: '25px' , margin: '12px 10px', top: '80px'} }
+            overlayStyle={ { display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+            onClick={ this.cancelCall}
+            /> :
+            <div></div>
+          }
+            </div>
+          </div>
+        </div>
 
 
         </div>

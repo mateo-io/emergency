@@ -18,7 +18,7 @@ export default class TableWrapper extends Component {
         <TableHeader>
           <TableRow>
             <TableHeaderColumn style={ {width: '20px'} }>ID</TableHeaderColumn>
-            <TableHeaderColumn></TableHeaderColumn>
+            <TableHeaderColumn>Audio</TableHeaderColumn>
             <TableHeaderColumn>Comentarios</TableHeaderColumn>
             <TableHeaderColumn style={ {width: '60px'} }>Poste(M)</TableHeaderColumn>
             <TableHeaderColumn style = { {width: '100px' } }>Fecha</TableHeaderColumn>

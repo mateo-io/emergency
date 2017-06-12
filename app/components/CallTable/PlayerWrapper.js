@@ -18,13 +18,16 @@ export default class PlayerWrapper extends React.Component {
     , 2000)
   }
 
-  componentWillMount(){
-    if(false && !this.props.audioPath){
-      getRecordingPath(this.props.callId, this.props.callStart, this.props.updateAudio, this.updateCallForGood)
+  handleShow = () => {
+    console.log("HandleShow called")
+    if(this.props.audioPath){
+      console.log("it has audiopath", this.props.audioPath)
+      this.props.showPlayer(this.props.callId)
     } else {
-      console.log("Already has audioPath", this.props.audioPath)
+      getRecordingPath(this.props.callId, this.props.callStart, this.props.updateAudio, this.updateCallForGood)
     }
   }
+
 
 /*
 getRecordingPath = (poste, uniqueid) => {
@@ -60,12 +63,18 @@ getRecordingPath = (poste, uniqueid) => {
 
   render(){
     return(
+      <div>
+      {this.props.show ?
       <ReactAudioPlayer
       style={ {width: '110px'} }
       src={`${this.props.audioPath}.wav`}
       controls
       />
-    )
+      :
+      <button onClick={this.handleShow}>cargar</button>
+    }
+    </div>
+  )
   }
 
 }

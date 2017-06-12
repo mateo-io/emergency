@@ -2,12 +2,12 @@ import {SET_BOTH_DATES}  from 'constants/CallActions'
 
 const initialState = {
   type: 'MOSTRAR_TODOS',
-  initialDate: new Date(0),
+  initialDate: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),
   endDate: new Date(Date.now()+86400000),
   durationInitial: 0,
   durationEnd: undefined,
   callDurationInitial: 0,
-  callDurationEnd: undefined,
+  callDurationEnd: null,
   numeroPoste: 'TODOS'
 }
 
@@ -48,7 +48,7 @@ export default function visibilityFilter(state = initialState, action) {
       return {
         ...state,
         durationInitial: 0,
-        durationEnd: undefined
+        durationEnd: null
       }
 
       case 'SET_DURATION_1':
@@ -76,7 +76,7 @@ export default function visibilityFilter(state = initialState, action) {
       return {
         ...state,
         durationInitial: 3600,
-        durationEnd: undefined
+        durationEnd: null
       }
 
 
@@ -84,7 +84,7 @@ export default function visibilityFilter(state = initialState, action) {
       return {
         ...state,
         callDurationInitial: 0,
-        callDurationEnd: undefined
+        callDurationEnd: null
       }
 
       case 'SET_CALL_DURATION_1':
@@ -112,7 +112,7 @@ export default function visibilityFilter(state = initialState, action) {
       return {
         ...state,
         callDurationInitial: 180,
-        callDurationEnd: undefined
+        callDurationEnd: null
       }
 
     case 'SET_TODAY':

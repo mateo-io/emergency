@@ -24,24 +24,49 @@ const getCallsByType = (calls, filter) => {
     case 'MOSTRAR_TODOS':
       return calls
     case 'MOSTRAR_AMBULANCIA':
-      return calls.filter(t => t.type==='AMBULANCIA')
+      return calls.filter(t => {
+        return t.type==='AMBULANCIA' ||
+        t.type2==='AMBULANCIA' ||
+        t.type3==='AMBULANCIA' ||
+        t.type4==='AMBULANCIA'
+      })
     case 'MOSTRAR_POLICIA':
-      return calls.filter(t => t.type==='POLICIA')
+      return calls.filter(t => {
+        return t.type==='POLICIA' ||
+        t.type2==='POLICIA' ||
+        t.type3==='POLICIA' ||
+        t.type4==='POLICIA'
+      })
     case 'MOSTRAR_GRUA':
-      return calls.filter(t => t.type==='GRUA')
+      return calls.filter(t => {
+        return t.type==='GRUA' ||
+        t.type2==='GRUA' ||
+        t.type3==='GRUA' ||
+        t.type4==='GRUA'
+      })
     case 'MOSTRAR_BOMBEROS':
-      return calls.filter(t => t.type==='BOMBEROS')
+      return calls.filter(t => {
+        return t.type==='BOMBEROS' ||
+        t.type2==='BOMBEROS' ||
+        t.type3==='BOMBEROS' ||
+        t.type4==='BOMBEROS'
+      })
     case 'MOSTRAR_OTRO':
-      return calls.filter(t => t.type==='OTRO')
+      return calls.filter(t => {
+        return t.type==='OTRO' ||
+        t.type2==='OTRO' ||
+        t.type3==='OTRO' ||
+        t.type4==='OTRO'
+      })
     default:
       throw new Error('Unknown filter: ' + filter)
   }
 }
 
 const getCallsByDuration = (calls, startDate, endDate) => {
-  if (calls==undefined) { return }
-  if (startDate==undefined) {return calls}
-  if (endDate == undefined) {
+  if (calls==null) { return }
+  if (startDate==null) {return calls}
+  if (endDate == null) {
     return calls.filter( (call) => {
       return startDate <= call.duration
     })

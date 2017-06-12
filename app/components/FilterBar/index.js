@@ -39,7 +39,7 @@ export default class FilterBar extends React.Component {
     const format = 'dddd, D MMMM YYYY';
     const style = {
     margin: '20px 10px',
-    padding: '20px 10px 20px 10px',
+    padding: '20px 10px 15px 10px',
   }
     return(
       <div>

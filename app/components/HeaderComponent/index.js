@@ -11,13 +11,24 @@ const socket = io.connect('http://localhost:9000')
 
 export default class HeaderComponent extends React.Component {
 
+
     constructor(props) {
       super(props);
+      this.state = {
+        connected: false,
+        fetchFailed: false
+      }
 
       socket.on('connected', function(data) {
         console.log("ready for data");
         socket.emit('ready for data', {});
-      });
+        this.setState({connected: true})
+      }.bind(this));
+
+      socket.on('disconnect', function() {
+        this.setState({connected: false})
+        alert('Se ha desconectado de la red');
+      }.bind(this))
 
       socket.on('update', function(data) {
         console.log("Call added dude")
@@ -36,8 +47,23 @@ export default class HeaderComponent extends React.Component {
       }.bind(this))
     }
 
+    reconnect = () => {
+        this.props.searchActions.fetchCalls()
+        .then( () => {
+          this.setState({fetchFailed: false, connected: true})
+        }).catch( (e) => {
+        this.setState({fetchFailed: true, connected: false})
+        })
+    }
+
+
     componentDidMount(){
-      this.props.searchActions.fetchCalls();
+      try {
+        this.props.searchActions.fetchCalls()
+        this.setState({fetchFailed: false})
+      } catch(e) {
+        this.setState({fetchFailed: true})
+      }
     }
 
 
@@ -54,15 +80,17 @@ export default class HeaderComponent extends React.Component {
             LISTA DE LLAMADAS
           </HeaderLink>
 
-          <HeaderLink to="/filters">
-            FILTROS
-          </HeaderLink>
-
 
           <HeaderLink to="#">
             PROMETALICOS
           </HeaderLink>
-          <a href="#" onClick={ actions.addCall}>Nueva llamada</a>
+
+          <button href="#" onClick={ actions.addCall}>Nueva llamada</button>
+
+          { this.state.connected ?
+            <span></span> :
+          <button onClick={this.reconnect} style={{marginLeft: '10px', background: 'yellow', color: 'black', padding: '10px'}}>Reconectar</button>
+          }
         </Navbar>
       )
     }

@@ -1,6 +1,7 @@
 import React from "react";
 import H2 from 'components/H2';
 import H3 from 'components/H3';
+import Title from 'components/Title';
 import Clock from './Clock';
 import Text from 'components/Text';
 import PaperBox from 'components/PaperBox';
@@ -14,7 +15,7 @@ import Icons from 'components/Icons';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 const style = {
-  "VIVO" : {borderColor: "red"},
+  "VIVO" : {borderColor: "blue"},
   "COLGADA" : {borderColor: "green"},
 
   "INICIADO" : {borderColor: "blue"},
@@ -27,7 +28,10 @@ const style = {
 export default class StatusBar extends React.Component {
 
   render(){
-    const {origin, services, posteInputChange, callDuration, callStatus, dispatched1, type1, arrived1, callerNumber, callerId, poste, status, callStart, duration} = this.props;
+
+    const {destino, updateDestino, handleAfterBefore, posteDistanceInputChange, origin, services,
+      posteInputChange, callDuration, callStatus, dispatched1, type1, arrived1,
+       callerNumber, callerId, poste, status, callStart, duration} = this.props;
     let servicesArray = [];
 
     const servicesJson = {
@@ -93,66 +97,93 @@ export default class StatusBar extends React.Component {
          <PaperBox zDepth={2} >
 
            <div className="row">
-            <div className="col-sm-3">
+            <div className="col-sm-4">
 
                 <TextField
-                style={ {width: '40px', height: '40px', margin: '0 30px', display: 'inline-block'} }
+                style={ {width: '40px', height: '40px', margin: '0 15px', display: 'inline-block'} }
                 hintStyle={{fontSize: '12px', size: '12px'}}
                 hintText={"# poste"}
                 onChange={posteInputChange}
                 />
-                |   {callerNumber.poste}
+                <span style={{fontSize:'20px', display: 'inline-block'}}>|   {callerNumber.poste}</span>
                 </div>
 
-                <div style={{textAlign:'center', height: '20px'}} className="col-sm-7">
+                <div style={{textAlign:'center', height: '20px'}} className="col-sm-6">
+
+                <Text small plain>Tramo</Text>
                 {
 
                   callerNumber.lugar1 ?
                <div>
-                 {callerNumber.lugar1}-{callerNumber.lugar2}
+                 <span value={callerNumber.lugar1} onClick={updateDestino}>
+                 {callerNumber.lugar1===destino ?
+                     <H3>{callerNumber.lugar1}</H3>
+                     : callerNumber.lugar1}
+                 </span>
+                  {destino===callerNumber.lugar1 ? ' <--- ' : ''}
+                  {destino===callerNumber.lugar2 ? ' ---> ' : ''}
+                  {destino==undefined && '<-->'}
+
+                 <span value={callerNumber.lugar2} onClick={updateDestino}>
+                 {callerNumber.lugar2===destino ?
+                     <H3>{callerNumber.lugar2}</H3>
+                     : callerNumber.lugar2}
+                 </span>
                </div>
                :
                 <div>
-                 Tramo de carretera
                </div>
              }
-             </div>
+                </div>
+
+
            </div>
 
 
-            <div className="row">
-              <div className="col-sm-5">
-                 <RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
-      <RadioButton
-        value="antes"
-        label="Antes"
-        style={ {display: 'inline-block'}}
-      />
+           <div className="row" style={{marginTop: '20px'}}>
+               <div className="col-sm-3">
+               <RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
+                 <RadioButton
+                 value="antes"
+                 label="Antes"
+                 onClick={handleAfterBefore}
+                 style={ {display: 'inline-block'}}
+                 />
 
-      <RadioButton
-        value="despues"
-        label="Despues"
-        style={{display: 'inline-block'}}
-      />
-      </RadioButtonGroup>
-              </div>
+                 <RadioButton
+                 value="despues"
+                 label="Despues"
+                 onClick={handleAfterBefore}
+                 style={{display: 'inline-block'}}
+                 />
+               </RadioButtonGroup>
+           </div>
 
-            <div className="col-sm-5">
+            <div className="col-sm-3">
                 <TextField
-                style={ {width: '100px', height: '40px', marginLeft: '30px', display: 'inline-block'} }
+                style={ {width: '100px', height: '40px', marginLeft: '10px', display: 'inline-block'} }
                 hintStyle={{fontSize: '12px', size: '12px'}}
-                hintText={"000"}
-                onChange={posteInputChange}
+                hintText={"ej. 300 mt"}
+                onChange={posteDistanceInputChange}
                 />
-                <p>Distancia del poste</p>
+                <Text block small plain>Distancia del poste</Text>
             </div>
+
+                <div style={{textAlign:'center', height: '20px'}} className="col-sm-4">
+
+                <Text small plain>Concesión vial</Text>
+                {
+                  callerNumber.concesion ?
+                  <div>
+                  {callerNumber.concesion}
+                  </div>
+                  :<div></div>
+                }
+             </div>
 
             </div>
 
 
-            <div style={{textAlign: 'center'}}>
-              <Text plain> Origen </Text>
-            </div>
         </PaperBox>
       </div>
 
@@ -160,7 +191,7 @@ export default class StatusBar extends React.Component {
          <PaperBox  center style={ style[callStatus] } zDepth={2} >
         <H2>{callStatus}</H2>
         <MiniClock duration={callDuration} callStart={callStart}/>
-        <Text >Estado Llamada</Text>
+        <Text>Estado Llamada</Text>
         </PaperBox>
       </div>
 
@@ -170,7 +201,7 @@ export default class StatusBar extends React.Component {
            {servicesArray}
         </PaperBox>
         :
-         <PaperBox center zDepth={2} >
+         <PaperBox center style={ style[status] } zDepth={2} >
         <H2>{status}</H2>
 
         <p>{status=='DESPACHADO' ?

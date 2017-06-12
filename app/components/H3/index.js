@@ -5,7 +5,7 @@ const H3 = styled.h6`
 color: ${constants.primaryText};
 display: inline-block;
 line-height: 1px;
-font-weight: 500;
+font-weight: 700;
 font-size: 16px;
 `
 

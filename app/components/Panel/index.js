@@ -4,7 +4,7 @@ import PaperBox from 'components/PaperBox';
 import * as constants from 'constants/Colors'
 
 const Panel = ({title, children}) => (
-  <PaperBox blank zDepth={2} style={ {minHeight: "250px", height: 'auto'}}>
+  <PaperBox blank zDepth={2} style={ {minHeight: "250px", height: 'auto', padding: 0}}>
     <div style={ {background: constants.primary, padding: "10px 0"} }>
       <Title>{title}</Title>
     </div>

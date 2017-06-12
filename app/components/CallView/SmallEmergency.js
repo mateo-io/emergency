@@ -345,7 +345,7 @@ const  functionJson2 = (param) => {
               <h5>Despacho</h5>
               <NavigationArrowDropDownCircle
               style={ {height: '40px', width: '40px'}}
-              color={dispatchedIndex(i) && '#e4d539'}
+              color={dispatchedIndex(i) ? '#e4d539' : 'grey'}
               onClick={dispatchedFunction}
               />
             </div>
@@ -354,7 +354,7 @@ const  functionJson2 = (param) => {
               <h5>Llegada</h5>
               <NavigationArrowDropDownCircle
               style={ {height: '40px', width: '40px'}}
-              color={arrivedIndex(i) && 'green'}
+              color={arrivedIndex(i) ? 'green' : 'grey'}
               onClick={arrivedFunction}
               />
             </div>

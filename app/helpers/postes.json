@@ -2,11 +2,13 @@
   "3134639813" : {
     "poste":"13",
     "lugar1":"Manizales",
-    "lugar2": "Bogotá"
+    "lugar2": "Chinchiná",
+    "concesion":"Autopistas del Café"
   },
   "3113679814" : {
     "poste":"19",
     "lugar1":"Barranquilla",
-    "lugar2":"Cartagena"
+    "lugar2":"Cartagena",
+    "concesion":"Vías del Pacifico"
   }
 }

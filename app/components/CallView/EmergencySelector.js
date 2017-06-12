@@ -115,7 +115,7 @@ class EmergencySelector extends React.Component {
 
       <div style={{position: 'absolute', right: '8%', top: '50%', zIndex: '3'}}>
 
-    <FloatingActionButton onTouchTap={this.handleAddService} primary={true} style={{height: '50px', width: '50px'}}>
+    <FloatingActionButton onTouchTap={this.handleAddService} style={{height: '50px', width: '50px', background: '#455A64'}}>
       <ContentAdd />
     </FloatingActionButton>
     <h5>Añadir servicio</h5>
@@ -170,7 +170,7 @@ class EmergencySelector extends React.Component {
               <h4>Despacho</h4>
               <NavigationArrowDropDownCircle
               style={ {height: '50px', width: '50px'}}
-              color={this.props.dispatched && '#e4d539'}
+              color={this.props.dispatched ? '#e4d539' : 'grey'}
               onClick={this.updateDispatched}
               />
             </div>
@@ -179,7 +179,7 @@ class EmergencySelector extends React.Component {
               <h4>Llegada</h4>
               <NavigationArrowDropDownCircle
               style={ {height: '50px', width: '50px'}}
-              color={this.props.arrived && 'green'}
+              color={this.props.arrived ? 'green' : 'grey'}
               onClick={this.updateArrived}
               />
             </div>

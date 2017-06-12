@@ -86,7 +86,7 @@ export default function calls(state = initialState, action) {
           { ...call, type4: action.text  } :
           call
       )
-      
+
     case UPDATE_DISPATCHED:
       return state.map(call =>
         call.id === action.id ?
@@ -189,6 +189,34 @@ export default function calls(state = initialState, action) {
             callerNumber: payload.clid.match(/^\d+|\d+\b|\d+(?=\w)/g),
             poste: payload.src
           } :
+          call
+      )
+
+
+    case 'UPDATE_DESTINO':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, destino: action.text
+           }
+           :
+          call
+      )
+
+    case 'ADD_ANTES_DESPUES':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, accidenteRelativo: action.text==='antes' ? 'antes' : 'despues'
+           }
+           :
+          call
+      )
+
+    case 'ADD_USER_POSTE_DISTANCE':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, posteDistance: action.text
+           }
+           :
           call
       )
 

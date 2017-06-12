@@ -24,11 +24,11 @@ export default class CallTable extends React.Component {
 
     state = {
       selected: [1],
-      showPlayer: false
+      showIndex: []
     };
 
-    showPlayer = () => {
-      this.setState({showPlayer: true})
+    showPlayer = (id) => {
+      this.setState({showIndex: this.state.showIndex.concat([id])})
     }
 
     isSelected = (index) => {
@@ -88,19 +88,17 @@ const optionsCursorTrueWithMargin = {
                     </TableRowColumn>
 
                     <TableRowColumn>
-                      {this.state.showPlayer ?
                       <PlayerWrapper
                       poste={call.poste}
+                      show={this.state.showIndex.includes(call.id)}
                       audioPath={call.audioPath}
                       callId={call.id}
                       callStart={call.callStart}
                       updateAudio={callActions.updateAudio}
                       call={call}
                       updateCall={this.handleUpdate}
+                      showPlayer={this.showPlayer}
                       />
-                      :
-                      <button onClick={this.showPlayer}>cargar</button>
-                      }
                     </TableRowColumn>
 
 
@@ -108,21 +106,49 @@ const optionsCursorTrueWithMargin = {
                         <ReactHover
                           options={optionsCursorTrueWithMargin}>
                           <ReactHover.Trigger>
-                            <p> {call.comments[0]}... </p>
+                            <p> {call.comments[0] ? call.comments[0] : ''}... </p>
                           </ReactHover.Trigger>
                           <ReactHover.Hover>
                             <div style={ {background: blueGrey100,padding: '15px'}}>
-                            { call.comments.map( (comment, i) => {
-                              return <p style={{color: 'black', fontSize: '14px'}}>{i+1}. {comment}</p>
-                            })}
+                            { call.comments[0] ?
+                              call.comments.map( (comment, i) => {
+                              return <p key={i} style={{color: 'black', fontSize: '14px'}}>{i+1}. {comment}</p>
+                            })
+                            :
+                            <span>Sin comentarios.</span>
+                          }
                             </div>
                           </ReactHover.Hover>
                         </ReactHover>
                     </TableRowColumn>
 
+
                     <TableRowColumn style={ {width: '60px'} }>
-                      {getPoste(call.callerNumber).poste}
-                      ({call.userPoste ? call.userPoste : 'NA'})
+
+                        <ReactHover
+                          options={optionsCursorTrueWithMargin}>
+                          <ReactHover.Trigger>
+                          <div>
+                          {getPoste(call.callerNumber).poste}
+                          ({call.userPoste ? call.userPoste : 'NA'})
+                          </div>
+                          </ReactHover.Trigger>
+                          <ReactHover.Hover>
+                            <div style={ {background: blueGrey100, padding: '15px', lineHeight: '30px'}}>
+                            {
+                              <div>
+                                <p>Distancia al poste: <b>{call.posteDistance ? call.posteDistance : 'NA'}</b></p>
+                                <p>Antes/Despues: <b>{call.accidenteRelativo ? call.accidenteRelativo : 'NA'}</b></p>
+                                <p>Carretera:<b>{getPoste(call.callerNumber).lugar1}-{getPoste(call.callerNumber).lugar2}</b></p>
+                                <p>Dirigiendose: <b>{call.destino ? call.destino : 'NA'}</b></p>
+                              </div>
+                             }
+                            </div>
+                          </ReactHover.Hover>
+                        </ReactHover>
+
+
+
                     </TableRowColumn>
 
 
