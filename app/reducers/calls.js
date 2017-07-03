@@ -58,6 +58,14 @@ export default function calls(state = initialState, action) {
           call
       )
 
+      case 'UPDATE_CALL':
+      const field = action.field;
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, field: action.text  } :
+          call
+      )
+
     case EDIT_TYPE:
       return state.map(call =>
         call.id === action.id ?
