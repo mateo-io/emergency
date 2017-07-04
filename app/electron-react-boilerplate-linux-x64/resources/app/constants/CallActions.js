@@ -1,0 +1,18 @@
+export const ADD_CALL = 'ADD_CALL'
+export const DELETE_CALL = 'DELETE_CALL'
+export const EDIT_TYPE = 'EDIT_TYPE'
+
+export const UPDATE_DISPATCHED = 'UPDATE_DISPATCHED'
+export const UPDATE_ARRIVED = 'UPDATE_ARRIVED'
+
+export const COMPLETE_CALL = 'COMPLETE_CALL'
+export const ADD_PHONE_INFO = 'ADD_PHONE_INFO'
+export const UPDATE_DURATION = 'UPDATE_DURATION'
+
+export const COMPLETE_ALL = 'COMPLETE_ALL'
+export const CLEAR_COMPLETED = 'CLEAR_COMPLETED'
+export const OPEN_CALL = 'OPEN_CALL'
+export const SET_BOTH_DATES = 'SET_BOTH_DATES'
+
+//COMMENTS
+export const ADD_COMMENT = 'ADD_COMMENT'

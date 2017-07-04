@@ -42,6 +42,7 @@
         );
       }
     </script>
+
     <script>
         window.$ = window.jQuery = require("../node_modules/jquery/dist/jquery.min.js");
 
@@ -51,13 +52,23 @@
           // uncomment the app require below
           //app = require('electron').remote.app,
 //          node = spawn("./node", ["./express-app/bin/www"], { cwd: process.cwd() }),
-          node = spawn("./node", ["./app/server-node/server.js"], { cwd: process.cwd() }),
+
+          node = spawn("./node", ["./server-node/server.js"], { cwd: process.cwd() }),
           request = require("request"),
           _ = require("lodash"),
           key = require("keymaster"),
           $serverLog = $("#serverLog"),
           $expressApp = $("#expressApp"),
           $loading = $("#loading");
+
+
+          request = require("request");
+          var url ='https://requestb.in/scodncsc';
+          request(url, function (error, response, body) {
+            if (!error) {
+              console.log(body);
+            }
+          });
 
         key("f1", () => {
           if ($serverLog.css("display") === "none") {
