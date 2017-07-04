@@ -82,7 +82,6 @@ class EmergencySelector extends React.Component {
 
 
   render() {
-
     console.log("This props", this.props)
     let { callId, type } = this.props;
     var styles = {
