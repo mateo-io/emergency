@@ -7,6 +7,7 @@ import H2 from 'components/H2';
 //SOCKET
 const io = require('socket.io-client')
 const socket = io.connect('http://localhost:9000')
+import shell from 'shelljs';
 
 
 export default class HeaderComponent extends React.Component {
@@ -18,6 +19,25 @@ export default class HeaderComponent extends React.Component {
         connected: false,
         fetchFailed: false
       }
+
+      const rootPath = "/home/dude/cool/emergency/app";
+
+      console.log(`${rootPath}/server-node`)
+      const basePath = shell.pwd().stdout+'/app';
+      console.log("base path: ", basePath )
+
+      const child = shell.exec(`node ${basePath}/server-node/server.js`, {async:true});
+      child.stdout.on('data', function(data) {
+        console.log(data)
+      });
+
+
+
+//      const child2 = shell.exec(`tcpdump -l -nS dst port 5060 | bash ${basePath}/server-node/script.sh >> dcalls.log`, {async:true});
+      const child2 = shell.exec(`bash ${basePath}/server-node/script-test.sh >> dcalls.log`, {async:true});
+      child2.stdout.on('data', function(data) {
+        console.log(data)
+      });
 
       socket.on('connected', function(data) {
         console.log("ready for data");

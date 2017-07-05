@@ -208,6 +208,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
+    "shelljs": "^0.7.8",
     "socket.io-client": "^2.0.1",
     "source-map-support": "^0.4.14",
     "styled-components": "^1.4.5",
