@@ -39,6 +39,7 @@ export default class CallTabs extends React.Component {
         >
 
         {calls && calls.map( (call) => {
+          console.log("I'm inside calls map", call)
           return (
               <Tab
               containerElement={ <Link to={`/dashboard/call/${call.id}`} /> }
