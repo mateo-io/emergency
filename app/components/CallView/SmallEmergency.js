@@ -7,6 +7,7 @@ import TimePicker from 'material-ui/TimePicker';
 import SvgIcon from 'material-ui/SvgIcon';
 import PoliceIcon from 'assets/police.js';
 import OtherIcon from 'assets/other.js';
+import OtherIcon2 from 'assets/other2.js';
 import TruckIcon from 'assets/truck.js';
 import Arrow from 'assets/arrow.js';
 import BomberoIcon from 'assets/bombero';
@@ -40,15 +41,17 @@ class SmallEmergency extends React.Component {
       case 1:
       return this.props.type;
       break;
+
       case 2:
-      console.log("Type2")
-      break;
       return this.props.type2;
+      break;
 
       case 3:
       return this.props.type3;
+
       case 4:
       return this.props.type4;
+
       default:
 
     }
@@ -60,7 +63,8 @@ class SmallEmergency extends React.Component {
       "GRUA" : 1,
       "POLICIA" : 2,
       "BOMBEROS" : 3,
-      "OTRO" : 4
+      "CARROTALLER" : 4,
+      "OTRO" : 5
     }
     return servicesIndex[type]
   }
@@ -74,8 +78,9 @@ class SmallEmergency extends React.Component {
   };
 
   selectIndex = (key) => {
-    console.log("***********************")
-    console.log(key)
+    console.log("***********************");
+    console.log("Index: ", key);
+    console.log("SelectedIndex: ", this.state.selectedIndex)
     switch (key) {
       case 1:
         return this.state.selectedIndex;
@@ -85,6 +90,8 @@ class SmallEmergency extends React.Component {
         return this.state.selectedIndex3;
       case 4:
         return this.state.selectedIndex4;
+      case 5:
+        return this.state.selectedIndex5;
       default:
 
     }
@@ -98,7 +105,8 @@ class SmallEmergency extends React.Component {
       1 : "GRUA",
       2 : "POLICIA",
       3 : "BOMBEROS",
-      4 : "OTRO"
+      4 : "CARROTALLER",
+      5 : "OTRO"
     }
     switch (key) {
       case 1:
@@ -267,6 +275,7 @@ const  functionJson2 = (param) => {
               GRUA: '#e9e820',
               POLICIA: 'green',
               BOMBEROS: 'red',
+              CARROTALLER: 'blue',
               OTRO: 'blue'
             }
           }
@@ -280,6 +289,7 @@ const  functionJson2 = (param) => {
           styles.icon[2] = styles.default_icon;
           styles.icon[3] = styles.default_icon;
           styles.icon[4] = styles.default_icon;
+          styles.icon[5] = styles.default_icon;
 
           styles.icon[this.selectIndex(i)] = Object.assign({},   styles.icon[this.selectIndex(i)], styles.active_icon);
       scenes.push(<div key={i} className="type__icons col-sm-3" style={ divStyle }>
@@ -324,14 +334,24 @@ const  functionJson2 = (param) => {
             />
 
 
+
             <BottomNavigationItem
               key={5}
-              style={ {textAlign: '-webkit-center'} }
-              label="Otro"
-              icon={<SvgIcon color={styles.icon[4]['OTRO']} style={iconStyle}>
+              label="CarroTaller"
+              icon={<SvgIcon color={styles.icon[4]['CARROTALLER']} style={iconStyle}>
                 <OtherIcon />
               </SvgIcon>}
               onTouchTap={() => this.select(4, i)}
+            />
+
+            <BottomNavigationItem
+              key={6}
+              style={ {textAlign: '-webkit-center'} }
+              label="Otro"
+              icon={<SvgIcon color={styles.icon[5]['OTRO']} style={iconStyle}>
+                <OtherIcon2 />
+              </SvgIcon>}
+              onTouchTap={() => this.select(5, i)}
             />
 
             </div>

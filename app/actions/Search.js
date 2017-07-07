@@ -36,5 +36,8 @@ export function fetchCalls() {
         console.log("JSON", json)
         dispatch(receiveCalls(json))
     })
+    .catch( err => {
+      console.log("Error fetching calls");
+    })
   }
 }

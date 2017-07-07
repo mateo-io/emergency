@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
     render(){
       const {call, actions, history} = this.props;
       let emptyCalls = call==undefined;
+      console.log("Empty calls is: ", emptyCalls)
 
       if (emptyCalls) {
         return (

@@ -8,6 +8,7 @@ import * as constants from 'constants/Colors';
 import SvgIcon from 'material-ui/SvgIcon';
 import PoliceIcon from 'assets/police.js';
 import OtherIcon from 'assets/other.js';
+import OtherIcon2 from 'assets/other2.js';
 import TruckIcon from 'assets/truckBlack.js';
 import BomberoIcon from 'assets/bombero';
 import AmbulanceIcon from 'material-ui/svg-icons/maps/local-hospital';
@@ -27,7 +28,9 @@ export default class CallTabs extends React.Component {
       "GRUA" : <div><SvgIcon style={iconsStyle}color={'yellow'}><TruckIcon /></SvgIcon></div>,
       "POLICIA" : <div><SvgIcon style={iconsStyle} color={green500}><PoliceIcon  /></SvgIcon></div>,
       "BOMBEROS" : <div><SvgIcon style={iconsStyle} color={red500}><BomberoIcon  /></SvgIcon></div>,
-      "OTRO" : <div><SvgIcon style={iconsStyle} color={blue500}><OtherIcon  /></SvgIcon></div>
+      "CARROTALLER" : <div><SvgIcon style={iconsStyle} color={blue500}><OtherIcon  /></SvgIcon></div>,
+      "OTRO" : <div><SvgIcon style={iconsStyle} color={blue500}><OtherIcon2  /></SvgIcon></div>
+
     }
 
 
