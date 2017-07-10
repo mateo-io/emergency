@@ -6,6 +6,7 @@ import { Switch, Route, Redirect } from 'react-router';
 import HomePage from 'containers/HomePage';
 import Search from 'containers/Search';
 import Login from 'containers/Login';
+import NotFound from 'components/NotFound';
 
 import App from './containers/App';
 
@@ -18,17 +19,17 @@ export default () => (
 
       <Route exact path="/" render={() => (
         loggedIn ? (
-          <Redirect to="/dashboard"/>
+          <Redirect to="/login" />
         ) : (
-          <div>
-            Hello. I failed
-          </div>
+          <Redirect to="/dashboard" />
         )
       )}/>
-        <Route path="/dashboard" component={HomePage} />
-        <Route path="/login" component={Login} />
-        <Route path="/filters" component={Search} />
-        <Route path="/table" component={Search} />
+
+      <Route path="/dashboard" component={HomePage} />
+      <Route path="/table" component={Search} />
+
+      <Route path="/login" component={Login} />
+      <Route path="*" component={NotFound} />
       </Switch>
     </App>
   </Router>

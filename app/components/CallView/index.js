@@ -18,7 +18,7 @@ export default class CallView extends React.Component {
   cancelCall = (evt) => {
     if(this.props.call.callStatus=="COLGADA") { alert(`No se puede cancelar una llamada ya colgada`); return}
       this.props.actions.completeCall(this.props.call.id)
-      this.props.history.replace('/')
+      this.props.history.replace('/dashboard')
   }
 
   completeCall = (evt) => {

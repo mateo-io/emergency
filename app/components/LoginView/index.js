@@ -2,7 +2,7 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { Link } from 'react-router';
+import { Link, Redirect } from 'react-router';
 
 //CUSTOM
 import Wrapper from './Wrapper';
@@ -20,20 +20,13 @@ import Background from './Background';
 export default class LoginView extends React.Component {
   state = {
     open: false,
+    loggedIn: false,
     username: '',
     password: '',
     name: '',
     email: ''
   };
 
-  handleOpen = () => {
-    this.setState({open: true});
-  };
-
-  handleClose = () => {
-    this.setState({open: false});
-    this.props.router.push('/');
-  };
 
   onChangeUsername = (evt)  => {
     this.state.username = evt.target.value;
@@ -59,15 +52,18 @@ export default class LoginView extends React.Component {
       headers: configuration
 
     })
-    .then ( (res)=> {
-      if(res.status == 401) { console.log("didn't work"); return; }
-      console.log("Get user data worked!");
-      Promise.resolve(res.json())
-      .then( (value) => {
-        that.state.showName = true;
-        that.state.name = value.username;
-        that.state.email = value.email;
-        that.forceUpdate()
+    .then ((res)=> {
+      if(res.status == 500) { console.log("didn't work"); return; }
+      console.log("Res status: ", res.status)
+
+      return Promise.resolve(res.json())
+      .then((value) => {
+      console.log("Get user data worked!", value);
+      return this.props.actions.setUser(value);
+      })
+      .then(() => {
+        console.log("LoggedIn TRUE");
+        return this.setState({loggedIn: true});
       })
   })
     .catch ( (res)=> {console.log("ERROR!", res)} )
@@ -91,19 +87,16 @@ export default class LoginView extends React.Component {
       body: data
 
     })
-    .then ( (res)=> {
-      Promise.resolve(res.json()).then( (value) => {
+    .then ((res)=> {
+      return Promise.resolve(res.json()).then(value => {
         const token = value.token;
-        this.getUserData(token)
+        return this.getUserData(token);
       })
   })
-    .catch ( (res)=> {console.log("ERROR!", res)} )
+    .catch((res) => { console.log("ERROR!", res) })
 
 }
 
-  componentDidMount() {
-    this.handleOpen();
-  }
 
 
   render() {
@@ -111,6 +104,7 @@ export default class LoginView extends React.Component {
 
     return (
       <Background>
+      {this.state.loggedIn && <Redirect to="/dashboard" push />}
       <Wrapper>
 
           <div style={

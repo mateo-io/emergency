@@ -17,9 +17,9 @@ export default function calls(state = initialState, action) {
     case ADD_CALL:
       return [
         {
-          ...state.call,
           id: state.reduce((maxId, call) => Math.max(call.id, maxId), -1) + 1,
           duration: 0,
+          operador: action.user,
           open: true,
           callStart: new Date(),
           callEnd: undefined,
