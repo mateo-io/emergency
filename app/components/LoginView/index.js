@@ -47,7 +47,7 @@ export default class LoginView extends React.Component {
 
      const that = this;
 
-    fetch("http://localhost:8080/api/users/me", {
+    fetch("http://localhost:3000/api/users/me", {
       method: "GET",
       headers: configuration
 
@@ -81,42 +81,36 @@ export default class LoginView extends React.Component {
        "Access-Control-Allow-Origin":"*"
      })
 
-    fetch("http://localhost:8080/api/users/login", {
+    fetch("http://localhost:3000/api/users/login", {
       method: "POST",
       headers: configuration,
       body: data
 
     })
-    .then ((res)=> {
-      return Promise.resolve(res.json()).then(value => {
+    .then((res) => {
+      return Promise.resolve(res.json())
+      .then(value => {
         const token = value.token;
         return this.getUserData(token);
       })
-  })
+    })
     .catch((res) => { console.log("ERROR!", res) })
-
 }
 
-
-
   render() {
-
-
     return (
       <Background>
       {this.state.loggedIn && <Redirect to="/dashboard" push />}
       <Wrapper>
-
-          <div style={
-            {
-            width: '500px',
-            position: 'relative',
-            backgroundColor: 'white',
-            height: '400px',
-            margin: '0 auto',
-            top: '200px'
-          }
-          }>
+          <div style=
+            {{
+              width: '500px',
+              position: 'relative',
+              backgroundColor: 'white',
+              height: '400px',
+              margin: '0 auto',
+              top: '200px'
+            }}>
 
           <Title header  center text="LOGIN" />
           <Form onSubmit={this.onSubmitForm}>

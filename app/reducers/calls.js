@@ -9,7 +9,7 @@ import { RECEIVE_CALLS} from 'constants/SearchActions'
 
 
 const initialState = [
-  {}
+  {id: 100000}
 ]
 
 export default function calls(state = initialState, action) {
