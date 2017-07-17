@@ -8,18 +8,18 @@ import PropTypes from 'prop-types';
 
   class Call extends React.Component {
     render(){
-      const {call, actions, history} = this.props;
+      const {call, concesion, actions, history} = this.props;
       let emptyCalls = call==undefined;
       console.log("Empty calls is: ", emptyCalls)
 
       if (emptyCalls) {
         return (
-          <div></div>
+          <div>Llamada sin crear</div>
         )
       } else {
       return(
         <div>
-        <CallView history={history} call={call} actions={actions} />
+          <CallView history={history} concesion={concesion} call={call} actions={actions} />
         </div>
       )
       }
@@ -28,12 +28,14 @@ import PropTypes from 'prop-types';
 
   }
   Call.propTypes = {
+    concesion: PropTypes.object,
     call: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
   }
 
   const mapStateToProps = (state, ownProps) => ({
-    call: state.calls.filter( (call) => call.id==ownProps.match.params['id'])[0]
+    concesion: state.concesion,
+    call: state.calls.filter((call) => call.id==ownProps.match.params['id'])[0]
   })
 
   const mapDispatchToProps = dispatch => ({

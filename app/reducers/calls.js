@@ -9,7 +9,23 @@ import { RECEIVE_CALLS} from 'constants/SearchActions'
 
 
 const initialState = [
-  {}
+  {
+    id: 0,
+    duration: 0,
+    operador: 'Persona de Prueba',
+    open: true,
+    callStart: new Date(),
+    callEnd: undefined,
+    status: "INICIADO",
+    callStatus: "VIVO",
+    origin: undefined,
+    poste: undefined,
+    comments: [],
+    type: undefined,
+    dispatched: undefined,
+    arrived:  undefined,
+    uniqueid: undefined
+  },
 ]
 
 export default function calls(state = initialState, action) {
@@ -17,9 +33,9 @@ export default function calls(state = initialState, action) {
     case ADD_CALL:
       return [
         {
-          ...state.call,
           id: state.reduce((maxId, call) => Math.max(call.id, maxId), -1) + 1,
           duration: 0,
+          operador: action.user,
           open: true,
           callStart: new Date(),
           callEnd: undefined,
@@ -58,18 +74,37 @@ export default function calls(state = initialState, action) {
           call
       )
 
+      /*
       case 'UPDATE_CALL':
       const field = action.field;
       return state.map(call =>
         call.id === action.id ?
-          { ...call, field: action.text  } :
+        call[filed] = action.text
+          { ...call  } :
           call
       )
+      */
+
 
     case EDIT_TYPE:
       return state.map(call =>
         call.id === action.id ?
           { ...call, type: action.text  } :
+          call
+      )
+
+    case 'ADD_TRAMO':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, tramoId: action.tramoId, tramo: action.text  } :
+          call
+      )
+
+
+    case 'ADD_SEGMENTO':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call, segmentoId: action.segmentoId, segmento: action.text  } :
           call
       )
 

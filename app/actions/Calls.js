@@ -3,7 +3,7 @@ import * as types from '../constants/CallActions'
 export const addUserPoste = (id, number) => ({ type: 'ADD_USER_POSTE', id, number })
 export const addUserPosteDistance = (id, text) => ({ type: 'ADD_USER_POSTE_DISTANCE', id, text })
 export const addAntesDespues = (id, text) => ({ type: 'ADD_ANTES_DESPUES', id, text })
-export const addCall = text => ({ type: types.ADD_CALL, text })
+export const addCall = (user) => ({ type: types.ADD_CALL, user })
 export const deleteCall = id => ({ type: types.DELETE_CALL, id })
 export const updateDuration = (id, value) => ({ type: types.UPDATE_DURATION, id, value })
 export const updateAudio = (id, text) => ({type: 'UPDATE_AUDIO', id, text})
@@ -11,6 +11,8 @@ export const updateDestino = (id, text) => ({type: 'UPDATE_DESTINO', id, text})
 export const addService = (id, text) => ({type: 'ADD_SERVICE', id})
 export const removeService = (id, text) => ({type: 'REMOVE_SERVICE', id})
 
+export const addTramo = (id, tramoId, text) => ({ type: 'ADD_TRAMO', id, tramoId, text })
+export const addSegmento = (id, segmentoId, text) => ({ type: 'ADD_SEGMENTO', id, segmentoId, text })
 
 export const editType = (id, text) => ({ type: types.EDIT_TYPE, id, text })
 export const editType2 = (id, text) => ({ type: 'EDIT_TYPE2', id, text })
