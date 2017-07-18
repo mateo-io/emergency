@@ -36,6 +36,18 @@ export default class LoginView extends React.Component {
     this.state.password = evt.target.value;
   }
 
+  getConcesionData = (concesionId) => {
+    console.log("CONCESION GOT CALLED!!! ", concesionId);
+    fetch(`http://localhost:3000/api/concesions/tramos?id=${concesionId}`)
+    .then((data) => data.json() )
+    .then((payload) =>  {
+      console.log("PAYLOAD CONCESION!!!!!: ", payload);
+      this.props.actions.addConcesion(payload);
+    })
+  }
+    //REPLACE WITH ACTION TO ADD THIS TO USER
+
+
   getUserData = (token) => {
     console.log("token is ", token)
     const configuration = {
@@ -44,31 +56,24 @@ export default class LoginView extends React.Component {
        "Access-Control-Allow-Origin":"*",
        "Authorization": `Bearer ${token}`
      }
-
      const that = this;
 
-    fetch("http://localhost:3000/api/users/me", {
-      method: "GET",
-      headers: configuration
-
-    })
-    .then ((res)=> {
-      if(res.status == 500) { console.log("didn't work"); return; }
-      console.log("Res status: ", res.status)
-
-      return Promise.resolve(res.json())
-      .then((value) => {
-      console.log("Get user data worked!", value);
-      return this.props.actions.setUser(value);
-      })
-      .then(() => {
-        console.log("LoggedIn TRUE");
-        return this.setState({loggedIn: true});
-      })
-  })
-    .catch ( (res)=> {console.log("ERROR!", res)} )
-
-  }
+     fetch("http://localhost:3000/api/users/me", {
+       method: "GET",
+       headers: configuration
+     })
+     .then((res) => {
+       return Promise.resolve(res.json())
+       .then((value) => {
+         this.getConcesionData(value.concesionId);
+         if (token) {
+           this.setState({loggedIn: true});
+         }
+         return this.props.actions.setUser(value);
+       })
+     })
+     .catch ((res)=> {console.log("ERROR!", res)} )
+   }
 
   //Login to API
   onSubmitForm = () => {
@@ -100,17 +105,18 @@ export default class LoginView extends React.Component {
   render() {
     return (
       <Background>
-      {this.state.loggedIn && <Redirect to="/dashboard" push />}
+        {this.state.loggedIn && <Redirect to="/dashboard" push />}
       <Wrapper>
-          <div style=
-            {{
-              width: '500px',
-              position: 'relative',
-              backgroundColor: 'white',
-              height: '400px',
-              margin: '0 auto',
-              top: '200px'
-            }}>
+          <div style={
+            {
+            width: '500px',
+            position: 'relative',
+            backgroundColor: 'white',
+            height: '400px',
+            margin: '0 auto',
+            top: '200px'
+          }
+          }>
 
           <Title header  center text="LOGIN" />
           <Form onSubmit={this.onSubmitForm}>
@@ -118,8 +124,8 @@ export default class LoginView extends React.Component {
           <TextField
             floatingLabelFocusStyle= { {color: '#00BDA3'} }
             floatingLabelStyle= { {color: '#707070'} }
-            hintText="usuario"
-            floatingLabelText="USUARIO"
+            hintText="cedula"
+            floatingLabelText="CÉDULA"
             onChange={this.onChangeUsername}
             /><br />
 
@@ -139,7 +145,7 @@ export default class LoginView extends React.Component {
       <FlatButton
         backgroundColor={ 'green' }
         style={ {color: 'white', width: '150px', height: '50px', marginTop: '50px'} }
-        hoverColor={ 'red' }
+        hoverColor={ 'green' }
         label="ENTRAR"
         keyboardFocused={true}
         primary={true}
@@ -152,5 +158,4 @@ export default class LoginView extends React.Component {
       </Wrapper>
       </Background>
     );
-  }
-}
+  } }

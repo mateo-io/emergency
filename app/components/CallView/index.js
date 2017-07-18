@@ -60,7 +60,7 @@ export default class CallView extends React.Component {
 
   render() {
 
-    const { call, actions } = this.props;
+    const { call, actions, concesion } = this.props;
     const { id, destino, callStart, services, callDuration, callStatus, status, origin, poste,
       comments, type, callerNumber, dispatched, arrived, duration, callerId } = call;
 
@@ -87,6 +87,10 @@ export default class CallView extends React.Component {
       return (
         <div>
           <StatusBar
+          callId={id}
+          addSegmento={actions.addSegmento}
+          addTramo={actions.addTramo}
+          concesion={concesion}
           posteInputChange={posteInputChange}
           destino={destino}
           updateDestino={updateDestino}

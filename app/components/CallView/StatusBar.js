@@ -10,6 +10,7 @@ import TextField from 'material-ui/TextField';
 import MiniClock from './MiniClock';
 import Paper from 'material-ui/Paper';
 import Icons from 'components/Icons';
+import TramoSelector from './TramoSelector';
 
 //RADIO BUTTONS
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
@@ -29,7 +30,7 @@ export default class StatusBar extends React.Component {
 
   render(){
 
-    const {destino, updateDestino, handleAfterBefore, posteDistanceInputChange, origin, services,
+    const {callId, addTramo, addSegmento, destino, concesion, updateDestino, handleAfterBefore, posteDistanceInputChange, origin, services,
       posteInputChange, callDuration, callStatus, dispatched1, type1, arrived1,
        callerNumber, callerId, poste, status, callStart, duration} = this.props;
     let servicesArray = [];
@@ -111,8 +112,8 @@ export default class StatusBar extends React.Component {
                 <div style={{textAlign:'center', height: '20px'}} className="col-sm-6">
 
                 <Text small plain>Tramo</Text>
+                <TramoSelector callId={callId} concesion={concesion} addTramo={addTramo} addSegmento={addSegmento} />
                 {
-
                   callerNumber.lugar1 ?
                <div>
                  <span value={callerNumber.lugar1} onClick={updateDestino}>
@@ -169,16 +170,8 @@ export default class StatusBar extends React.Component {
                 <Text block small plain>Distancia del poste</Text>
             </div>
 
-                <div style={{textAlign:'center', height: '20px'}} className="col-sm-4">
-
-                <Text small plain>Concesión vial</Text>
-                {
-                  callerNumber.concesion ?
-                  <div>
-                  {callerNumber.concesion}
-                  </div>
-                  :<div></div>
-                }
+                <div style={{marginLeft: '-45px', textAlign:'center', height: '20px'}} className="col-sm-4">
+                <Text small plain>Segmento</Text>
              </div>
 
             </div>

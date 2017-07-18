@@ -1,8 +1,9 @@
 const initialState = {
-  username: null,
-  email: null,
-  id: null,
-  password: null
+  cedula: "1053834884",
+  nombre: "Mateo Mejia",
+  id: 1,
+  concesionId: 5,
+  password: 123456
 };
 
 export default function user(state = initialState, action) {

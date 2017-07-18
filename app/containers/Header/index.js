@@ -8,18 +8,26 @@ import HeaderComponent from 'components/HeaderComponent'
 
 
 
-const Header = ({activeCalls, user, actions, searchActions, userActions}) => (
-  <div>
-    <HeaderComponent
-    activeCalls={activeCalls}
-    actions={actions}
-    user={user}
-    userActions={userActions}
-    searchActions={searchActions} />
-  </div>
-)
+class Header extends React.Component {
 
-Header.propTypes = {
+  render() {
+    const {activeCalls, user, actions, searchActions, userActions, children} = this.props;
+
+    return (
+      <div>
+        <HeaderComponent
+          children={children}
+          activeCalls={activeCalls}
+          actions={actions}
+          user={user}
+          userActions={userActions}
+          searchActions={searchActions} />
+        </div>
+    )
+  }
+}
+
+ Header.propTypes = {
   activeCalls: PropTypes.array.isRequired,
   user: PropTypes.object,
   actions: PropTypes.object.isRequired

@@ -7,6 +7,7 @@ import TimePicker from 'material-ui/TimePicker';
 import SvgIcon from 'material-ui/SvgIcon';
 import PoliceIcon from 'assets/police.js';
 import OtherIcon from 'assets/other.js';
+import OtherIcon2 from 'assets/other2.js';
 import TruckIcon from 'assets/truck.js';
 import Arrow from 'assets/arrow.js';
 import BomberoIcon from 'assets/bombero';
@@ -36,7 +37,8 @@ class EmergencySelector extends React.Component {
       "GRUA" : 1,
       "POLICIA" : 2,
       "BOMBEROS" : 3,
-      "OTRO" : 4
+      "CARROTALLER" : 4,
+      "OTRO" : 5
     }
     return servicesIndex[type]
   }
@@ -55,14 +57,15 @@ class EmergencySelector extends React.Component {
       1 : "GRUA",
       2 : "POLICIA",
       3 : "BOMBEROS",
-      4 : "OTRO"
+      4 : "CARROTALLER",
+      5 : "OTRO"
     }
     this.setState({selectedIndex: index});
     this.props.editType(this.props.callId, servicesIndex[index] )
   }
 
   updateDispatched = (evt) => {
-    console.log("EVENT!", event)
+    console.log("EVENT!", event);
     if(this.props.dispatched) { return true }
     this.props.serviceDispatched(this.props.callId, new Date())
   }
@@ -95,6 +98,7 @@ class EmergencySelector extends React.Component {
         GRUA: '#e9e820',
         POLICIA: 'green',
         BOMBEROS: 'red',
+        CARROTALLER : 'blue',
         OTRO: 'blue'
       }
     }
@@ -105,6 +109,7 @@ class EmergencySelector extends React.Component {
     styles.icon[2] = styles.default_icon;
     styles.icon[3] = styles.default_icon;
     styles.icon[4] = styles.default_icon;
+    styles.icon[5] = styles.default_icon;
     styles.icon[this.getSelectedIndex(this.props.type)] = Object.assign({},   styles.icon[this.state.selectedIndex], styles.active_icon);
     const divStyle = { position: 'relative', height: 'auto' }
 
@@ -150,14 +155,21 @@ class EmergencySelector extends React.Component {
               onTouchTap={() => this.select(3)}
             />
 
-
             <BottomNavigationItem
               key={5}
-              label="Otro"
-              icon={<SvgIcon color={styles.icon[4]['OTRO']} style={ {height: '100px', width: '120px'}}>
+              label="CarroTaller"
+              icon={<SvgIcon color={styles.icon[4]['CARROTALLER']} style={ {height: '100px', width: '120px'}}>
                 <OtherIcon />
               </SvgIcon>}
               onTouchTap={() => this.select(4)}
+            />
+
+            <BottomNavigationItem
+              key={6}
+              label="Otro" icon={<SvgIcon color={styles.icon[5]['OTRO']} style={ {height: '100px', width: '120px'}}>
+                <OtherIcon2 />
+              </SvgIcon>}
+              onTouchTap={() => this.select(5)}
             />
           </BottomNavigation>
         </div>

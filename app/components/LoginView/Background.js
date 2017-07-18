@@ -1,6 +1,6 @@
 
 import styled from 'styled-components';
-import BackgroundImage from 'assets/loginBackground.jpg';
+import BackgroundImage from 'assets/login-improved.jpg';
 
 const Background = styled.div`
   position: relative;

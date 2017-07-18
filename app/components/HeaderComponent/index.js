@@ -57,9 +57,8 @@ export default class HeaderComponent extends React.Component {
 
   handleAddCall = () => {
       console.log("Handle add call");
-      this.props.actions.addCall(this.props.user.email);
+      this.props.actions.addCall(this.props.user.nombre);
   }
-
 
 
   componentDidMount(){
@@ -75,37 +74,42 @@ export default class HeaderComponent extends React.Component {
   render() {
     const { activeCalls, actions, user } = this.props;
 
-    if(user.email) {
+    if(user.cedula) {
     return(
-      <Navbar>
-      <HeaderLink to="/dashboard">
-      {activeCalls.length} - LLAMADAS ACTIVAS
-      </HeaderLink>
+      <div>
+        <div>
+        <Navbar>
+        <HeaderLink to="/dashboard">
+        {activeCalls.length} | Llamadas
+        </HeaderLink>
 
-      <HeaderLink to="/table">
-      LISTA DE LLAMADAS
-      </HeaderLink>
+        <HeaderLink to="/table">
+        Tabla
+        </HeaderLink>
+
+        <HeaderLink to="/tramos">
+        Tramos
+        </HeaderLink>
 
 
-      <HeaderLink to="/login">
-      LOGIN
-      </HeaderLink>
+        <HeaderLink to="/usuario">
+         {user.nombre}
+        </HeaderLink>
 
-      <HeaderLink to="/login" onClick={this.props.userActions.logout}>
-      LOGOUT
-      </HeaderLink>
+        <HeaderLink to="/login" onClick={this.props.userActions.logout}>
+        Cerrar Sesion
+        </HeaderLink>
 
-      <span style={{color: 'white'}}>
-      {user.email ? <span>{user.email}</span> : <span>'No user'</span>}
-      </span>
 
-      <button href="#" onClick={this.handleAddCall}>Nueva llamada</button>
+        <HeaderLink to="/dashboard" onClick={this.handleAddCall}>
+        Nueva Llamada
+        </HeaderLink>
 
-      { this.state.connected ?
-        <span></span> :
-        <button onClick={this.reconnect} style={{marginLeft: '10px', background: 'yellow', color: 'black', padding: '10px'}}>Reconectar</button>
-      }
-      </Navbar>
+        </Navbar>
+
+      </div>
+      {this.props.children}
+    </div>
     )
 
   } else {

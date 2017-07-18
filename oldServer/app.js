@@ -5,6 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var util = require('util');
+const passport = require('passport');
+var session = require('express-session');
+const flash = require('connect-flash');
+
 
 
 var index = require('./routes/index');
@@ -12,6 +16,8 @@ var users = require('./routes/users');
 
 var app = express();
 
+
+//REFACTOR
 var io = require('socket.io').listen(9000);
 
 var pg = require ('pg');
@@ -44,10 +50,12 @@ var newCall = function(io) {
 
     io.sockets.emit("update", {message: "HELLO"});
     console.log("I emitted update")
-    res.status(200).json({message: "Message sent!"});    
+    res.status(200).json({message: "Message sent!"});
   }
 };
 app.get('/addcall', newCall(io));
+//REFACTOR
+
 
 
 
@@ -65,6 +73,19 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret: "\x02\xf3\xf7r\t\x9f\xee\xbbu\xb1\xe1\x90\xfe'\xab\xa6L6\xdd\x8d[\xccO\xfe",
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+app.use(express.static(path.join(__dirname, '..', '..', 'client')));
+
+
+
 
 app.use('/', index);
 app.use('/users', users);

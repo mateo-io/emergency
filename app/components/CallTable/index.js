@@ -138,9 +138,8 @@ const optionsCursorTrueWithMargin = {
                             {
                               <div>
                                 <p>Distancia al poste: <b>{call.posteDistance ? call.posteDistance : 'NA'}</b></p>
-                                <p>Antes/Despues: <b>{call.accidenteRelativo ? call.accidenteRelativo : 'NA'}</b></p>
-                                <p>Carretera:<b>{getPoste(call.callerNumber).lugar1}-{getPoste(call.callerNumber).lugar2}</b></p>
-                                <p>Dirigiendose: <b>{call.destino ? call.destino : 'NA'}</b></p>
+                                <p>Tramo: {call.tramoId}</p>
+                                <p>Segmento: {call.segmentoId}</p>
                               </div>
                              }
                             </div>

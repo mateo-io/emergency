@@ -2,6 +2,7 @@ import React from 'react';
 import SvgIcon from 'material-ui/SvgIcon';
 import PoliceIcon from 'assets/police.js';
 import OtherIcon from 'assets/other.js';
+import OtherIcon2 from 'assets/other2.js';
 import TruckIcon from 'assets/truckBlack.js';
 import BomberoIcon from 'assets/bombero';
 import AmbulanceIcon from 'material-ui/svg-icons/maps/local-hospital';
@@ -15,7 +16,8 @@ const iconsObject = {
   "GRUA" : <div style={divStyle}><SvgIcon style={iconsStyle}color={'yellow'}><TruckIcon /></SvgIcon></div>,
   "POLICIA" : <div style={divStyle}><SvgIcon style={iconsStyle} color={green500}><PoliceIcon  /></SvgIcon></div>,
   "BOMBEROS" : <div style={divStyle}><SvgIcon style={iconsStyle} color={red500}><BomberoIcon  /></SvgIcon></div>,
-  "OTRO" : <div style={divStyle}><SvgIcon style={iconsStyle} color={blue500}><OtherIcon  /></SvgIcon></div>,
+  "CARROTALLER" : <div style={divStyle}><SvgIcon style={iconsStyle} color={blue500}><OtherIcon  /></SvgIcon></div>,
+  "OTRO" : <div style={divStyle}><SvgIcon style={iconsStyle} color={blue500}><OtherIcon2  /></SvgIcon></div>,
   undefined : <div style={divStyle}> tipo - </div>
 }
 
