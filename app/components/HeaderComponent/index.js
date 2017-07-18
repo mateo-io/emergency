@@ -17,9 +17,9 @@ export default class HeaderComponent extends React.Component {
       fetchFailed: false
     };
 
-
     socket.on('connected', (data) => {
       console.log("ready for data");
+      alert('Se ha conectado a la red');
       socket.emit('ready for data', {});
       this.setState({connected: true});
     });
@@ -36,15 +36,28 @@ export default class HeaderComponent extends React.Component {
 
     socket.on('insert', function(data) {
       console.log("Data inserted into db");
-      const liveCalls = this.props.activeCalls
-      .filter( (call) => {
-        return !call.uniqueid
-      })
-      const id = liveCalls[liveCalls.length-1].id
-      console.log("Active call id is: ", id);
-      this.props.actions.addPhoneInfo(id, data);
+      this.getActiveCalls()
+        .then( activeCalls => {
+
+          console.log("Active calls are: ", activeCalls);
+          let liveCalls = this.props.activeCalls
+            .filter( (call) => {
+              return !call.uniqueid
+            })
+          console.log("Live calls", liveCalls);
+          let id = liveCalls[liveCalls.length-1].id
+          console.log("Active call id is: ", id);
+          this.props.actions.addPhoneInfo(id, data);
+        })
     }.bind(this))
   }
+
+  getActiveCalls = () => {
+    return new Promise((resolve, reject) => {
+      this.props.searchActions.fetchCalls()
+      .then(calls => resolve(calls) )
+  })
+}
 
   reconnect = () => {
     this.props.searchActions.fetchCalls()
@@ -61,7 +74,7 @@ export default class HeaderComponent extends React.Component {
   }
 
 
-  componentDidMount(){
+  componentWillMount() {
     try {
       this.props.searchActions.fetchCalls()
       this.setState({fetchFailed: false})
@@ -73,6 +86,7 @@ export default class HeaderComponent extends React.Component {
 
   render() {
     const { activeCalls, actions, user } = this.props;
+    console.log('activeCalls down there: ', activeCalls);
 
     if(user.cedula) {
     return(

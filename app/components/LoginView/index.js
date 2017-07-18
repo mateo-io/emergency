@@ -67,7 +67,7 @@ export default class LoginView extends React.Component {
        .then((value) => {
          this.getConcesionData(value.concesionId);
          if (token) {
-           this.setState({loggedIn: true});
+           setTimeout(()=>this.setState({loggedIn: true}), 1500 );
          }
          return this.props.actions.setUser(value);
        })

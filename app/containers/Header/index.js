@@ -9,7 +9,9 @@ import HeaderComponent from 'components/HeaderComponent'
 
 
 class Header extends React.Component {
-
+  constructor(props){
+    super(props)
+  }
   render() {
     const {activeCalls, user, actions, searchActions, userActions, children} = this.props;
 
@@ -35,7 +37,7 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => ({
   user: state.user,
-  activeCalls: state.calls.filter( (call) => call.open)
+  activeCalls: state.calls.filter((call) => call.open )
 })
 
 const mapDispatchToProps = dispatch => ({

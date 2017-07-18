@@ -6,10 +6,11 @@ import Tramo from './Tramo';
 import * as constants from 'constants/Colors';
 import Title from 'components/Title';
 import RaisedButton from 'material-ui/RaisedButton';
+import newTramo from './newTramo/';
 
 const style = {
   button: {
-    margin: '10px'
+    marginLeft: '10px'
   },
   container: {
     margin: '20px'
@@ -52,9 +53,9 @@ constructor(props) {
         </div>
         <div className="tramos" style={style.container}>
           <h2 style={{display:'inline-block'}}>Tramos</h2>
-          <RaisedButton label="Nuevo Tramo" primary={true} style={style.button} />
+          <RaisedButton containerElement={<Link to="/tramos/new"/>} label="Nuevo Tramo" primary={true} style={style.button} />
         </div>
-        
+
         <Tabs
         inkBarStyle={ {background: 'black', height: "4px"} }
         >
@@ -74,6 +75,7 @@ constructor(props) {
           })
         } </Tabs>
         <Route path={`/tramos/:id`} component={this.renderTramo} />
+        <Route path="/tramos/new" component={newTramo} />
         </div>
       )
     }

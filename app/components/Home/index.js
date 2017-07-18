@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import H1 from 'components/H1';
 import CallTabs from 'components/CallTabs';
 
