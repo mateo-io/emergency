@@ -187,7 +187,7 @@ export default class CallView extends React.Component {
             { callStatus==='VIVO' ?
             <RaisedButton label="Cancelar Servicio"
             backgroundColor={'red'}
-            labelColor={'#000000'}
+            labelColor={'#f5f5f5'}
             style={ {position: 'relative',left: '20%', width: '130px', height: '50px', borderRadius: '25px' , margin: '12px 10px', top: '80px'} }
             overlayStyle={ { display: 'flex', alignItems: 'center', justifyContent: 'center'}}
             onClick={ this.cancelCall}

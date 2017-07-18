@@ -1,6 +1,7 @@
-const initialState = {
+const initialState={}
+const initialState2 = {
   cedula: "1053834884",
-  nombre: "Mateo Mejia",
+  name: "Mateo Mejia",
   id: 1,
   concesionId: 5,
   password: 123456
