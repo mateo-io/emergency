@@ -2,7 +2,7 @@ import React from 'react';
 import Segmento from 'components/Segmento';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import newSegment from './newSegment/';
 
 
@@ -40,7 +40,7 @@ export default class Tramo extends React.Component {
     return(
       <div style={style.paper}>
         <h2 style={style.header}>Segmentos</h2>
-        <RaisedButton  containerElement={<Link to="/segment/new"/>} label="Nuevo Segmento" secondary={true} style={style.button} />
+        <RaisedButton  containerElement={<Link to="/tramos/segment/new"/>} label="Nuevo Segmento" secondary={true} style={style.button} />
         <div className="segmentos">
           {segmentos && segmentos.map((segmento) => {
             const { id, name, prInicial, prFinal } = segmento;
@@ -50,7 +50,7 @@ export default class Tramo extends React.Component {
 
           })}
       </div>
-      <Route path="/segment/new" component={newSegment} />
+      <Route path="/tramos/segment/new" component={newSegment} />
     </div>
     )
 
