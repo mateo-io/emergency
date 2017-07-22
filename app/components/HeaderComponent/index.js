@@ -107,7 +107,7 @@ export default class HeaderComponent extends React.Component {
 
 
         <HeaderLink to="/usuario">
-         {user.nombre}
+         {user.name}
         </HeaderLink>
 
         <HeaderLink to="/login" onClick={this.props.userActions.logout}>

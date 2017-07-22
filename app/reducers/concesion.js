@@ -13,6 +13,19 @@ export default function concesion(state = initialState, action) {
         ...action.concesion
       };
 
+    case 'ADD_TRAMO':
+      return {
+        ...state,
+        Tramos: [...state.Tramos, action.tramo]
+      };
+
+    case 'ADD_SEGMENTO':
+      return {
+        ...state,
+        Segmentos: [...state.Segmentos, action.segmento]
+      };
+
+
     case 'ADD_SEGMENTS':
       return {
         ...state,

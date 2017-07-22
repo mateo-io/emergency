@@ -13,25 +13,32 @@ import Input from './Input';
 
 
 
-/**
- * A modal dialog can only be closed by selecting one of the actions.
+/** * A modal dialog can only be closed by selecting one of the actions.
  */
-export default class newTramo extends React.Component {
-  state = {
-    open: false,
-    name: '',
-  };
+export default class NewTramo extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      open: false,
+      name: '',
+    };
+  }
+  componentDidMount(){
+    this.handleOpen();
+    console.log("New Tramo mounted", this.state.open)
+  }
 
   handleOpen = () => {
+    console.log("HELLOOOOOOOOOOOOOOOOO", this.props)
     this.setState({open: true});
   };
 
   handleClose = () => {
     this.setState({open: false});
-    this.props.router.push('/');
   };
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
    const target = event.target;
    const value = target.type === 'checkbox' ? target.checked : target.value;
    const name = target.name;
@@ -43,28 +50,35 @@ export default class newTramo extends React.Component {
 
   //Login to API
   onSubmitForm = () => {
-    const data = JSON.stringify({ "username":this.state.username,
-        "password":this.state.password
-      });
+    const data = JSON.stringify(
+      {"name":this.state.name,
+      "concesionId":this.props.concesionId
+     }
+    );
     const configuration = new Headers({
        "Accept":"application/json",
        "Content-Type": "application/json",
        "Access-Control-Allow-Origin":"*"
      })
 
-    fetch("http://localhost/api/users/login", {
+    fetch("http://localhost:3000/api/tramo", {
       method: "POST",
       headers: configuration,
       body: data
-
     })
-    .then ( (res)=> {
-      Promise.resolve(res.json()).then( (value) => {
+      .then(res => res.json())
+      .then((value) => {
+        console.log("Tramo created", value);
+        console.log("Data sent: ", data);
+        this.props.addTramo(value);
+        this.handleClose();
+        return 'Tramo created';
         //ACTION TO CREATE A TRAMO
       })
-  })
-    .catch ( (res)=> {console.log("ERROR!", res)} )
-
+    .catch((res) => {
+      console.log("Values sent", data);
+      console.log("ERROR!", res);
+    })
 }
 
   componentDidMount() {
@@ -106,7 +120,8 @@ export default class newTramo extends React.Component {
             floatingLabelStyle= { {color: '#707070'} }
             hintText="nombre"
             floatingLabelText="NOMBRE"
-            onChange={this.onChangeUsername}
+            name="name"
+            onChange={this.handleInputChange}
             /><br />
           </Form>
 

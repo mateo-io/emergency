@@ -3,7 +3,7 @@ import Segmento from 'components/Segmento';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link, Route } from 'react-router-dom';
-import newSegment from './newSegment/';
+import NewSegment from './NewSegment/';
 
 
 const style = {
@@ -21,8 +21,8 @@ const style = {
 }
 
 export default class Tramo extends React.Component {
-  constructor(){
-    super()
+  constructor(props) {
+    super(props)
   }
   componentWillMount() {
     return;
@@ -32,15 +32,24 @@ export default class Tramo extends React.Component {
       .then( res => console.log("Segmentos from ", tramoId, " son ", res))
       .catch( err => console.log('Error fetching segments'))
   }
+    renderNewSegmento = (props) => {
+    return (
+      <NewSegment
+        addSegmento={this.props.addSegmento}
+        {...props}
+      />
+    )
+  }
 
 
   render() {
     let { segmentos } = this.props;
+    const tramoId = this.props.match.params['id'];
     console.log("Tramo props", this.props);
     return(
       <div style={style.paper}>
         <h2 style={style.header}>Segmentos</h2>
-        <RaisedButton  containerElement={<Link to="/tramos/segment/new"/>} label="Nuevo Segmento" secondary={true} style={style.button} />
+        <RaisedButton  containerElement={<Link to={`/tramos/newSegment/${tramoId}`} />} label="Nuevo Segmento" secondary={true} style={style.button} />
         <div className="segmentos">
           {segmentos && segmentos.map((segmento) => {
             const { id, name, prInicial, prFinal } = segmento;
@@ -50,7 +59,7 @@ export default class Tramo extends React.Component {
 
           })}
       </div>
-      <Route path="/tramos/segment/new" component={newSegment} />
+      <Route path={`/tramos/newSegment/:id`} component={this.renderNewSegmento} />
     </div>
     )
 

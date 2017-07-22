@@ -8,8 +8,8 @@ const style = {
     padding: '10px',
     textAlign: 'center',
     margin: '10px',
-    height: '130px',
-    width: '130px'
+    height: '150px',
+    width: '150px'
   }
 
 }

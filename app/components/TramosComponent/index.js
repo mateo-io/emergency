@@ -1,13 +1,12 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import PropTypes from 'prop-types';
-import { Link, Route, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types'; import { Link, Route, Redirect } from 'react-router-dom';
 import Tramo from './Tramo';
 import * as constants from 'constants/Colors';
 import Title from 'components/Title';
 import RaisedButton from 'material-ui/RaisedButton';
-import newTramo from './newTramo/';
-import newSegment from './newSegment/';
+import NewTramo from './NewTramo/';
+import NewSegment from './NewSegment/';
 
 const style = {
   button: {
@@ -40,10 +39,24 @@ constructor(props) {
     return (
       <Tramo
         segmentos={this.props.concesion.Segmentos}
+        addSegmento={this.props.actions.addSegmento}
         {...props}
       />
     )
   }
+
+    renderNewTramo = (props) => {
+    return (
+      <NewTramo
+        concesionId={this.props.concesion.id}
+        addTramo={this.props.actions.addTramo}
+        {...props}
+      />
+    )
+  }
+
+
+
   render() {
     const { concesion, actions } = this.props;
     const { Tramos, Segmentos } = concesion;
@@ -75,9 +88,8 @@ constructor(props) {
             )
           })
         } </Tabs>
-        <Route path="/tramos/segment/new" component={newSegment} />
         <Route path={`/tramos/:id`} component={this.renderTramo} />
-        <Route path="/tramos/new" component={newTramo} />
+        <Route path="/tramos/new" component={this.renderNewTramo} />
         </div>
       )
     }

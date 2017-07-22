@@ -16,7 +16,7 @@ import Input from './Input';
 /**
  * A modal dialog can only be closed by selecting one of the actions.
  */
-export default class newSegment extends React.Component {
+export default class NewSegment extends React.Component {
   state = {
     open: false,
     name: '',
@@ -28,10 +28,10 @@ export default class newSegment extends React.Component {
 
   handleClose = () => {
     this.setState({open: false});
-    this.props.router.push('/');
+    this.history.goBack();
   };
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
    const target = event.target;
    const value = target.type === 'checkbox' ? target.checked : target.value;
    const name = target.name;
@@ -41,33 +41,43 @@ export default class newSegment extends React.Component {
    });
  }
 
-  //Login to API
   onSubmitForm = () => {
-    const data = JSON.stringify({ "username":this.state.username,
-        "password":this.state.password
-      });
+    const tramoId = this.props.match.params['id'];
+    const data = JSON.stringify(
+      {"name":this.state.name,
+      "tramoId":tramoId,
+      "prInicial":this.state.prInicial,
+      "prFinal":this.state.prFinal
+     }
+    );
     const configuration = new Headers({
        "Accept":"application/json",
        "Content-Type": "application/json",
        "Access-Control-Allow-Origin":"*"
      })
 
-    fetch("http://localhost/api/users/login", {
+    fetch("http://localhost:3000/api/segmento", {
       method: "POST",
       headers: configuration,
       body: data
-
     })
-    .then ( (res)=> {
-      Promise.resolve(res.json()).then( (value) => {
+      .then(res => res.json())
+      .then((value) => {
+        console.log("Segmento created", value);
+        console.log("Data sent: ", data);
+        this.props.addSegmento(value);
+        this.handleClose();
+        return 'Segmento created';
         //ACTION TO CREATE A TRAMO
       })
-  })
-    .catch ( (res)=> {console.log("ERROR!", res)} )
-
+    .catch((res) => {
+      console.log("Values sent", data);
+      console.log("ERROR!", res);
+    })
 }
-
   componentDidMount() {
+    console.log("NewSegment rendered.");
+    console.log("Values of match.", this.props.tramoId);
     this.handleOpen();
   }
 
@@ -106,7 +116,8 @@ export default class newSegment extends React.Component {
             floatingLabelStyle= { {color: '#707070'} }
             hintText="nombre"
             floatingLabelText="NOMBRE"
-            onChange={this.onChangeUsername}
+            name="name"
+            onChange={this.handleInputChange}
             /><br />
 
 
@@ -115,7 +126,8 @@ export default class newSegment extends React.Component {
             floatingLabelStyle= { {color: '#707070'} }
             hintText="PR INICIAL"
             floatingLabelText="PR INICIAL"
-            onChange={this.onChangeUsername}
+            name="prInicial"
+            onChange={this.handleInputChange}
             /><br />
 
 
@@ -124,7 +136,8 @@ export default class newSegment extends React.Component {
             floatingLabelStyle= { {color: '#707070'} }
             hintText="PR FINAL"
             floatingLabelText="PR FINAL"
-            onChange={this.onChangeUsername}
+            name="prFinal"
+            onChange={this.handleInputChange}
             /><br />
           </Form>
 
