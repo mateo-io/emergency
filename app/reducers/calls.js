@@ -93,7 +93,7 @@ export default function calls(state = initialState, action) {
           call
       )
 
-    case 'ADD_TRAMO':
+    case 'ADD_TRAMO_CALL':
       return state.map(call =>
         call.id === action.id ?
           { ...call, tramoId: action.tramoId, tramo: action.text  } :
@@ -101,7 +101,7 @@ export default function calls(state = initialState, action) {
       )
 
 
-    case 'ADD_SEGMENTO':
+    case 'ADD_SEGMENTO_CALL':
       return state.map(call =>
         call.id === action.id ?
           { ...call, segmentoId: action.segmentoId, segmento: action.text  } :

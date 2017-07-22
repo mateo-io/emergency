@@ -138,8 +138,8 @@ const optionsCursorTrueWithMargin = {
                             {
                               <div>
                                 <p>Distancia al poste: <b>{call.posteDistance ? call.posteDistance : 'NA'}</b></p>
-                                <p>Tramo: {call.tramoId}</p>
-                                <p>Segmento: {call.segmentoId}</p>
+                                <p>Tramo: {call.tramoId} - {call.tramo}</p>
+                                <p>Segmento: {call.segmentoId} - {call.segmento}</p>
                               </div>
                              }
                             </div>

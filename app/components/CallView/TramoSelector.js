@@ -35,13 +35,18 @@ export default class TramoSelector extends React.Component {
 
   handleChange = (event, index, value) => {
     this.handleAddSegments(value);
-    this.props.addTramo(this.props.callId, value, event.target.name);
+    const tramoName = event.target.textContent;
+    console.log("TRAMO NAME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", tramoName)
+    this.props.addTramo(this.props.callId, value, tramoName);
     this.setState({value: value}) };
 
   handleChange2 = (event, index, value) => {
-    console.log("EVENTTTTTT", event.target.value)
-    this.props.addSegmento(this.props.callId, value, 'hola');
-    this.setState({value2: value}) };
+    const segmentoName = event.target.textContent;
+    console.log("SEGMENTO NAME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", segmentoName)
+
+    this.props.addSegmento(this.props.callId, value, segmentoName);
+    this.setState({ value2: value });
+  };
 
   render() {
     const { concesion } = this.props;
@@ -57,7 +62,7 @@ export default class TramoSelector extends React.Component {
 
     this.state.Segmentos && this.state.Segmentos.map((segmento) => {
         const { id, name, prInicial, prFinal } = segmento;
-        SegmentosArray.push(<MenuItem key={id} value={id} name={name} primaryText={`${prInicial}-${prFinal} | ${segmento.name}`} />)
+        SegmentosArray.push(<MenuItem key={id} value={id} name={name} primaryText={`${prInicial}-${prFinal} | ${name}`} />)
     })
     return(
       <div>

@@ -11,8 +11,8 @@ export const updateDestino = (id, text) => ({type: 'UPDATE_DESTINO', id, text})
 export const addService = (id, text) => ({type: 'ADD_SERVICE', id})
 export const removeService = (id, text) => ({type: 'REMOVE_SERVICE', id})
 
-export const addTramo = (id, tramoId, text) => ({ type: 'ADD_TRAMO', id, tramoId, text })
-export const addSegmento = (id, segmentoId, text) => ({ type: 'ADD_SEGMENTO', id, segmentoId, text })
+export const addTramo = (id, tramoId, text) => ({ type: 'ADD_TRAMO_CALL', id, tramoId, text })
+export const addSegmento = (id, segmentoId, text) => ({ type: 'ADD_SEGMENTO_CALL', id, segmentoId, text })
 
 export const editType = (id, text) => ({ type: types.EDIT_TYPE, id, text })
 export const editType2 = (id, text) => ({ type: 'EDIT_TYPE2', id, text })
