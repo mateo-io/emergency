@@ -18,7 +18,12 @@ export default class CallView extends React.Component {
   cancelCall = (evt) => {
     if(this.props.call.callStatus=="COLGADA") { alert(`No se puede cancelar una llamada ya colgada`); return}
       this.props.actions.completeCall(this.props.call.id)
-      this.props.history.replace('/dashboard')
+      if(this.props.call.id>0){
+        this.props.history.push('/dashboard')
+        //this.props.history.replace(`/dashboard/call/${call.id-1}`)
+      } else {
+        this.props.history.replace('/dashboard/')
+      }
   }
 
   completeCall = (evt) => {
@@ -194,7 +199,16 @@ export default class CallView extends React.Component {
             /> :
             <div></div>
           }
+            <div>
+              <RaisedButton label="Llamada Informativa"
+              backgroundColor={'blue'}
+              labelColor={'#f5f5f5'}
+              style={ {position: 'relative',left: '20%', width: '130px', height: '50px', borderRadius: '25px' , margin: '12px 10px', top: '80px'} }
+              overlayStyle={ { display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+              onClick={ this.cancelCall}
+              />
             </div>
+          </div>
           </div>
         </div>
 

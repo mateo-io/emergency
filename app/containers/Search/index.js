@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { SearchActions, CallActions } from 'actions';
 import CallList from 'components/CallList';
-import CallTable from 'components/CallTable'
+import CallTable from 'components/CallTable';
+import Statistics from 'components/Statistics';
 
 // ALL TODO  THIS IS A COPY!!!!!!!!
 
@@ -15,51 +16,51 @@ const getClosedCalls = (calls) => {
 const getCallsByDate = (calls, startDate, endDate) => {
   if (calls==undefined) {return}
   return calls.filter( (call) =>
-    startDate <= call.callStart && call.callStart <= endDate
-  )
+  startDate <= call.callStart && call.callStart <= endDate
+)
 }
 
 const getCallsByType = (calls, filter) => {
   switch (filter) {
     case 'MOSTRAR_TODOS':
-      return calls
+    return calls
     case 'MOSTRAR_AMBULANCIA':
-      return calls.filter(t => {
-        return t.type==='AMBULANCIA' ||
-        t.type2==='AMBULANCIA' ||
-        t.type3==='AMBULANCIA' ||
-        t.type4==='AMBULANCIA'
-      })
+    return calls.filter(t => {
+      return t.type==='AMBULANCIA' ||
+      t.type2==='AMBULANCIA' ||
+      t.type3==='AMBULANCIA' ||
+      t.type4==='AMBULANCIA'
+    })
     case 'MOSTRAR_POLICIA':
-      return calls.filter(t => {
-        return t.type==='POLICIA' ||
-        t.type2==='POLICIA' ||
-        t.type3==='POLICIA' ||
-        t.type4==='POLICIA'
-      })
+    return calls.filter(t => {
+      return t.type==='POLICIA' ||
+      t.type2==='POLICIA' ||
+      t.type3==='POLICIA' ||
+      t.type4==='POLICIA'
+    })
     case 'MOSTRAR_GRUA':
-      return calls.filter(t => {
-        return t.type==='GRUA' ||
-        t.type2==='GRUA' ||
-        t.type3==='GRUA' ||
-        t.type4==='GRUA'
-      })
+    return calls.filter(t => {
+      return t.type==='GRUA' ||
+      t.type2==='GRUA' ||
+      t.type3==='GRUA' ||
+      t.type4==='GRUA'
+    })
     case 'MOSTRAR_BOMBEROS':
-      return calls.filter(t => {
-        return t.type==='BOMBEROS' ||
-        t.type2==='BOMBEROS' ||
-        t.type3==='BOMBEROS' ||
-        t.type4==='BOMBEROS'
-      })
+    return calls.filter(t => {
+      return t.type==='BOMBEROS' ||
+      t.type2==='BOMBEROS' ||
+      t.type3==='BOMBEROS' ||
+      t.type4==='BOMBEROS'
+    })
     case 'MOSTRAR_OTRO':
-      return calls.filter(t => {
-        return t.type==='OTRO' ||
-        t.type2==='OTRO' ||
-        t.type3==='OTRO' ||
-        t.type4==='OTRO'
-      })
+    return calls.filter(t => {
+      return t.type==='OTRO' ||
+      t.type2==='OTRO' ||
+      t.type3==='OTRO' ||
+      t.type4==='OTRO'
+    })
     default:
-      throw new Error('Unknown filter: ' + filter)
+    throw new Error('Unknown filter: ' + filter)
   }
 }
 
@@ -70,14 +71,14 @@ const getCallsByDuration = (calls, startDate, endDate) => {
     return calls.filter( (call) => {
       return startDate <= call.duration
     })
-}
+  }
 
-console.log("By duration got here", startDate, endDate)
+  console.log("By duration got here", startDate, endDate)
 
-return calls.filter( (call) => {
-  console.log(call.duration)
-  return startDate <= call.duration && call.duration <= endDate
-})
+  return calls.filter( (call) => {
+    console.log(call.duration)
+    return startDate <= call.duration && call.duration <= endDate
+  })
 }
 
 
@@ -88,13 +89,13 @@ const getCallsByCallDuration = (calls, startDate, endDate) => {
     return calls.filter( (call) => {
       return call.callDuration >= startDate
     })
-}
+  }
 
 
-return calls.filter( (call) => {
-  console.log(call.callDuration)
-  return startDate <= call.callDuration && call.callDuration <= endDate
-})
+  return calls.filter( (call) => {
+    console.log(call.callDuration)
+    return startDate <= call.callDuration && call.callDuration <= endDate
+  })
 }
 
 const getCallsByPoste = (calls, poste) => {
@@ -136,33 +137,46 @@ class Search extends React.Component {
   //calls: state.calls.filter( (call) => call.open==false)
 
 
-render(){
+  render(){
 
- const {calls, visibilityFilter, searchActions, callActions, match} = this.props;
-  if(match.url=='/table') {
-    console.log("TABLE IS TRUEEE!")
+    const {calls, visibilityFilter, searchActions, callActions, match} = this.props;
+    if(match.url=='/table') {
+      console.log("TABLE IS TRUEEE!")
 
-  return(
-    <div>
-      <CallTable visibilityFilter={visibilityFilter} calls={calls}
-      callActions={callActions}
-      searchActions={searchActions} />
-    </div>
-  )
+      return(
+        <div>
+        <CallTable visibilityFilter={visibilityFilter} calls={calls}
+        callActions={callActions}
+        searchActions={searchActions} />
+        </div>
+      )
+    }
+    console.log(match.url==="/table")
+    console.log(match.url, typeof match.url)
+
+    if(match.url==="/statistics"){
+      return(
+        <div>
+        <Statistics
+        visibilityFilter={visibilityFilter}
+        calls={calls}
+        callActions={callActions}
+        searchActions={searchActions} 
+        />
+        </div>
+      )
+
+    } else {
+      return(
+        <div>
+        <CallList visibilityFilter={visibilityFilter} calls={calls}
+        callActions={callActions}
+        searchActions={searchActions} />
+        </div>
+      )
+    }
   }
-  console.log(match.url==="/table")
-  console.log(match.url, typeof match.url)
-
-  return(
-    <div>
-      <CallList visibilityFilter={visibilityFilter} calls={calls}
-      callActions={callActions}
-      searchActions={searchActions} />
-    </div>
-  )
-}
-
-}
+  }
 
 const mapStateToProps = (state) => ({
   calls: getVisibleCalls(state.calls, state.visibilityFilter),
@@ -170,8 +184,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    callActions: bindActionCreators(CallActions, dispatch),
-    searchActions: bindActionCreators(SearchActions, dispatch)
+  callActions: bindActionCreators(CallActions, dispatch),
+  searchActions: bindActionCreators(SearchActions, dispatch)
 })
 
 Search.propTypes = {

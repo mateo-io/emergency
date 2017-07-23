@@ -11,6 +11,7 @@ import Tramos from 'containers/Tramos';
 import NotFound from 'components/NotFound';
 import EnsureLoggedIn from 'containers/EnsureLoggedIn';
 
+
 import App from './containers/App';
 import Header from './containers/Header';
 
@@ -29,6 +30,7 @@ export default () => (
       <EnsureLoggedIn>
       <Header>
         <Route path="/dashboard" component={HomePage} />
+        <Route path="/statistics" component={Search} />
         <Route path="/table" component={Search} />
         <Route path="/tramos" component={Tramos} />
         <Route path="/usuario" component={User} />

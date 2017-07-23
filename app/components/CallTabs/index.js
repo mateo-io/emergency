@@ -55,11 +55,6 @@ export default class CallTabs extends React.Component {
           })
         } </Tabs>
         <Route path={`/dashboard/call/:id`} component={Call}/>
-        { calls[0] ?
-          <Redirect from="/dashboard" exact to={`/dashboard/call/${calls[0].id}`} />
-          : <div style={ {textAlign: 'center'} }>
-            <h1>No hay llamadas activas</h1>
-          </div>}
         </div>
       )
     }

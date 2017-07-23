@@ -105,15 +105,21 @@ export default class HeaderComponent extends React.Component {
         Tramos
         </HeaderLink>
 
+        <HeaderLink to="/statistics">
+        Estadísticas
+        </HeaderLink>
 
         <HeaderLink to="/usuario">
          {user.name}
         </HeaderLink>
 
         <HeaderLink to="/login" onClick={this.props.userActions.logout}>
-        Cerrar Sesion
+          Cerrar Sesion
         </HeaderLink>
 
+        <span>
+          |
+        </span>
 
         <HeaderLink to="/dashboard" onClick={this.handleAddCall}>
         Nueva Llamada
