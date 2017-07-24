@@ -1,5 +1,5 @@
-const initialState2 = {}
-const initialState = {
+const initialState = {}
+const initialState2 = {
   cedula: "1053834884",
   name: "Mateo Mejia",
   id: 1,
@@ -9,7 +9,7 @@ const initialState = {
 
 export default function user(state = initialState, action) {
   switch (action.type) {
-    
+
     case 'LOGIN':
       return {
         ...state,

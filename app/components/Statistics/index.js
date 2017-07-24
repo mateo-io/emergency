@@ -38,6 +38,7 @@ export default class Statistics extends React.Component {
       "POLICIA" : 0,
       "CARROTALLER" : 0,
       "BOMBEROS" : 0,
+      "BLOQUEOS" : 0,
       "OTRO" : 0
     };
 
@@ -73,8 +74,12 @@ export default class Statistics extends React.Component {
       "POLICIA" : {
         borderColor: 'blue'
       },
+      "BLOQUEOS" : {
+        borderColor: 'red'
+      },
       "row" : {
         paddingTop: '30px',
+        paddingLeft: '30%',
         margin: '0 auto',
         textAlign: 'center'
       }
@@ -93,7 +98,6 @@ export default class Statistics extends React.Component {
 
           <div className="informacion_llamadas row" style={style.row}>
 
-            <div className="col-sm-1"></div>
 
             <div className="col-sm-3">
               <PaperBox center blank>
@@ -143,15 +147,17 @@ export default class Statistics extends React.Component {
               </PaperBox>
             </div>
 
+          </div>
+
+
+          <div className="row servicos_fila_2" style={style.row}>
+
             <div className="col-sm-3">
               <PaperBox style={style.OTRO}>
                 <H1 paddingTop>{servicesCount.OTRO}</H1>
                 <Text bottom>OTRO</Text>
               </PaperBox>
             </div>
-          </div>
-
-          <div className="row servicos_fila_2" style={style.row}>
 
             <div className="col-sm-3">
               <PaperBox style={style.CARROTALLER}>
@@ -162,28 +168,16 @@ export default class Statistics extends React.Component {
 
             <div className="col-sm-3">
               <PaperBox>
-                <H1 paddingTop>{servicesCount.CARROTALLER}</H1>
-                <Text bottom>POR HACER</Text>
+                <H1 paddingTop>{servicesCount.BLOQUEOS}</H1>
+                <Text bottom>BLOQUEOS</Text>
               </PaperBox>
             </div>
 
-
-            <div className="col-sm-3">
-              <PaperBox>
-                <H1 paddingTop>hola</H1>
-                <Text bottom>hola</Text>
-              </PaperBox>
-            </div>
-
-
-            <div className="col-sm-3">
-              <PaperBox>
-                <H1 paddingTop>HACER</H1>
-                <Text bottom>hola</Text>
-              </PaperBox>
-            </div>
 
           </div>
+
+
+
 
           <div className="row estadisticas_extras_servicios" style={style.row}>
             <div className="col-md-4">

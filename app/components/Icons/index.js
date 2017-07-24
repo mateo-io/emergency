@@ -6,8 +6,9 @@ import OtherIcon2 from 'assets/other2.js';
 import TruckIcon from 'assets/truckBlack.js';
 import BomberoIcon from 'assets/bombero';
 import AmbulanceIcon from 'material-ui/svg-icons/maps/local-hospital';
+import RoadBlockIcon from 'assets/roadBlock.js';
 
-import {green500, red500, blue500} from 'material-ui/styles/colors';
+import {green500, red500, blue400} from 'material-ui/styles/colors';
 
 const iconsStyle = { verticalAlign: 'middle', display: 'inline-block' }
 const divStyle = {display: 'inline-block'}
@@ -16,8 +17,9 @@ const iconsObject = {
   "GRUA" : <div style={divStyle}><SvgIcon style={iconsStyle}color={'yellow'}><TruckIcon /></SvgIcon></div>,
   "POLICIA" : <div style={divStyle}><SvgIcon style={iconsStyle} color={green500}><PoliceIcon  /></SvgIcon></div>,
   "BOMBEROS" : <div style={divStyle}><SvgIcon style={iconsStyle} color={red500}><BomberoIcon  /></SvgIcon></div>,
-  "CARROTALLER" : <div style={divStyle}><SvgIcon style={iconsStyle} color={blue500}><OtherIcon  /></SvgIcon></div>,
-  "OTRO" : <div style={divStyle}><SvgIcon style={iconsStyle} color={blue500}><OtherIcon2  /></SvgIcon></div>,
+  "CARROTALLER" : <div style={divStyle}><SvgIcon style={iconsStyle} color={blue400}><OtherIcon  /></SvgIcon></div>,
+  "BLOQUEOS" : <div style={divStyle}><SvgIcon style={iconsStyle} color={red500}><RoadBlockIcon  /></SvgIcon></div>,
+  "OTRO" : <div style={divStyle}><SvgIcon style={iconsStyle} color={blue400}><OtherIcon2  /></SvgIcon></div>,
   undefined : <div style={divStyle}> tipo - </div>
 }
 

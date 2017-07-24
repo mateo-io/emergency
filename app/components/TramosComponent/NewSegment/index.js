@@ -18,17 +18,13 @@ import Input from './Input';
  */
 export default class NewSegment extends React.Component {
   state = {
-    open: false,
     name: '',
   };
 
-  handleOpen = () => {
-    this.setState({open: true});
-  };
 
   handleClose = () => {
-    this.setState({open: false});
-    this.history.goBack();
+    let tramoId = this.props.match.params['id'];
+    this.props.history.push(`/tramos/${tramoId}`);
   };
 
   handleInputChange = (event) => {
@@ -75,11 +71,6 @@ export default class NewSegment extends React.Component {
       console.log("ERROR!", res);
     })
 }
-  componentDidMount() {
-    console.log("NewSegment rendered.");
-    console.log("Values of match.", this.props.tramoId);
-    this.handleOpen();
-  }
 
 
   render() {
@@ -100,7 +91,7 @@ export default class NewSegment extends React.Component {
         <Dialog
           actions={actions}
           modal={false}
-          open={this.state.open}
+          open={this.props.modal}
           onRequestClose={this.handleClose}
           actionsContainerStyle={ {textAlign: 'center'} }
           bodyStyle={ {height: 'auto'} }

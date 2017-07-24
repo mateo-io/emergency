@@ -24,14 +24,17 @@ export default class Tramo extends React.Component {
   constructor(props) {
     super(props)
   }
+
   componentWillMount() {
-    return;
     const tramoId = this.props.match.params['id'];
+    console.log("Tramo is is ", tramoId);
     fetch(`http://localhost:3000/api/tramos/segmentos?id=${tramoId}`)
       .then( res => res.json() )
       .then( res => console.log("Segmentos from ", tramoId, " son ", res))
       .catch( err => console.log('Error fetching segments'))
   }
+
+
     renderNewSegmento = (props) => {
     return (
       <NewSegment

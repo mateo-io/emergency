@@ -12,7 +12,8 @@ import OtherIcon2 from 'assets/other2.js';
 import TruckIcon from 'assets/truckBlack.js';
 import BomberoIcon from 'assets/bombero';
 import AmbulanceIcon from 'material-ui/svg-icons/maps/local-hospital';
-import {blue500, red500, green500} from 'material-ui/styles/colors';
+import RoadBlockIcon from 'assets/roadBlock.js';
+import {blue400, red500, green500} from 'material-ui/styles/colors';
 
 
 export default class CallTabs extends React.Component {
@@ -28,8 +29,9 @@ export default class CallTabs extends React.Component {
       "GRUA" : <div><SvgIcon style={iconsStyle}color={'yellow'}><TruckIcon /></SvgIcon></div>,
       "POLICIA" : <div><SvgIcon style={iconsStyle} color={green500}><PoliceIcon  /></SvgIcon></div>,
       "BOMBEROS" : <div><SvgIcon style={iconsStyle} color={red500}><BomberoIcon  /></SvgIcon></div>,
-      "CARROTALLER" : <div><SvgIcon style={iconsStyle} color={blue500}><OtherIcon  /></SvgIcon></div>,
-      "OTRO" : <div><SvgIcon style={iconsStyle} color={blue500}><OtherIcon2  /></SvgIcon></div>
+      "CARROTALLER" : <div><SvgIcon style={iconsStyle} color={blue400}><OtherIcon  /></SvgIcon></div>,
+      "BLOQUEOS" : <div><SvgIcon style={iconsStyle} color={red500}><RoadBlockIcon /></SvgIcon></div>,
+      "OTRO" : <div><SvgIcon style={iconsStyle} color={blue400}><OtherIcon2  /></SvgIcon></div>
 
     }
 

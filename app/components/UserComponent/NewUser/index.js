@@ -38,7 +38,8 @@ export default class NewUser extends React.Component {
 
   handleClose = () => {
     this.setState({open: false});
-    this.props.history.goBack();
+    console.log("HISTORY INSIDE NewUser", this.props.history)
+    this.props.history.push("/users");
   };
 
   handleDropdownChange = (event, index, value ) => {
@@ -94,10 +95,12 @@ export default class NewUser extends React.Component {
     console.log("ERROR!", res);
   })
 }
-componentDidMount() {
+
+componentWillMount() {
   console.log("NewUser Modal rendered.");
   this.handleOpen();
 }
+
 
 
 render() {

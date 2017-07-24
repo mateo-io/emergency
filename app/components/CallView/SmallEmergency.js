@@ -10,6 +10,7 @@ import OtherIcon from 'assets/other.js';
 import OtherIcon2 from 'assets/other2.js';
 import TruckIcon from 'assets/truck.js';
 import Arrow from 'assets/arrow.js';
+import RoadBlockIcon from 'assets/roadBlock.js';
 import BomberoIcon from 'assets/bombero';
 import AmbulanceIcon from 'material-ui/svg-icons/maps/local-hospital';
 import FontIcon from 'material-ui/FontIcon';
@@ -64,7 +65,8 @@ class SmallEmergency extends React.Component {
       "POLICIA" : 2,
       "BOMBEROS" : 3,
       "CARROTALLER" : 4,
-      "OTRO" : 5
+      "BLOQUEOS" : 5,
+      "OTRO" : 6
     }
     return servicesIndex[type]
   }
@@ -92,6 +94,8 @@ class SmallEmergency extends React.Component {
       return this.state.selectedIndex4;
       case 5:
       return this.state.selectedIndex5;
+      case 6:
+      return this.state.selectedIndex6;
       default:
 
     }
@@ -106,7 +110,8 @@ class SmallEmergency extends React.Component {
       2 : "POLICIA",
       3 : "BOMBEROS",
       4 : "CARROTALLER",
-      5 : "OTRO"
+      5 : "BLOQUEOS",
+      6 : "OTRO"
     }
     switch (key) {
       case 1:
@@ -275,6 +280,7 @@ class SmallEmergency extends React.Component {
           GRUA: '#e9e820',
           POLICIA: 'green',
           BOMBEROS: 'red',
+          BLOQUEOS: 'red',
           CARROTALLER: 'blue',
           OTRO: 'blue'
         }
@@ -290,6 +296,7 @@ class SmallEmergency extends React.Component {
       styles.icon[3] = styles.default_icon;
       styles.icon[4] = styles.default_icon;
       styles.icon[5] = styles.default_icon;
+      styles.icon[6] = styles.default_icon;
 
       styles.icon[this.selectIndex(i)] = Object.assign({},   styles.icon[this.selectIndex(i)], styles.active_icon);
       scenes.push(<div key={i} className="type__icons col-sm-3" style={ divStyle }>
@@ -347,11 +354,21 @@ class SmallEmergency extends React.Component {
       <BottomNavigationItem
       key={6}
       style={ {textAlign: '-webkit-center'} }
-      label="Otro"
-      icon={<SvgIcon color={styles.icon[5]['OTRO']} style={iconStyle}>
-      <OtherIcon2 />
+      label="Bloqueos"
+      icon={<SvgIcon color={styles.icon[5]['BLOQUEOS']} style={iconStyle}>
+      <RoadBlockIcon />
       </SvgIcon>}
       onTouchTap={() => this.select(5, i)}
+      />
+
+      <BottomNavigationItem
+      key={7}
+      style={ {textAlign: '-webkit-center'} }
+      label="Otro"
+      icon={<SvgIcon color={styles.icon[6]['OTRO']} style={iconStyle}>
+      <OtherIcon2 />
+      </SvgIcon>}
+      onTouchTap={() => this.select(6, i)}
       />
 
       </div>

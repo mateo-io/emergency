@@ -36,6 +36,7 @@ export default class NewTramo extends React.Component {
 
   handleClose = () => {
     this.setState({open: false});
+    this.props.history.push('/tramos');
   };
 
   handleInputChange = (event) => {

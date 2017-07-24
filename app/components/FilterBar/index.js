@@ -87,6 +87,7 @@ export default class FilterBar extends React.Component {
         <FilterLink filter='MOSTRAR_GRUA'>GRUA</FilterLink>
         <FilterLink filter='MOSTRAR_POLICIA'>POLICIA</FilterLink>
         <FilterLink filter='MOSTRAR_BOMBEROS'>BOMBEROS</FilterLink>
+        <FilterLink filter='MOSTRAR_BLOQUEOS'>BLOQUEOS</FilterLink>
         <FilterLink filter='MOSTRAR_OTRO'>OTRO</FilterLink>
 
 

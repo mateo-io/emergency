@@ -9,6 +9,7 @@ import PoliceIcon from 'assets/police.js';
 import OtherIcon from 'assets/other.js';
 import OtherIcon2 from 'assets/other2.js';
 import TruckIcon from 'assets/truck.js';
+import RoadBlockIcon from 'assets/roadBlock.js';
 import Arrow from 'assets/arrow.js';
 import BomberoIcon from 'assets/bombero';
 import AmbulanceIcon from 'material-ui/svg-icons/maps/local-hospital';
@@ -38,7 +39,8 @@ class EmergencySelector extends React.Component {
       "POLICIA" : 2,
       "BOMBEROS" : 3,
       "CARROTALLER" : 4,
-      "OTRO" : 5
+      "BLOQUEOS" : 5,
+      "OTRO" : 6
     }
     return servicesIndex[type]
   }
@@ -58,7 +60,8 @@ class EmergencySelector extends React.Component {
       2 : "POLICIA",
       3 : "BOMBEROS",
       4 : "CARROTALLER",
-      5 : "OTRO"
+      5 : "BLOQUEOS",
+      6 : "OTRO"
     }
     this.setState({selectedIndex: index});
     this.props.editType(this.props.callId, servicesIndex[index] )
@@ -99,6 +102,7 @@ class EmergencySelector extends React.Component {
         POLICIA: 'green',
         BOMBEROS: 'red',
         CARROTALLER : 'blue',
+        BLOQUEOS : 'red',
         OTRO: 'blue'
       }
     }
@@ -110,6 +114,7 @@ class EmergencySelector extends React.Component {
     styles.icon[3] = styles.default_icon;
     styles.icon[4] = styles.default_icon;
     styles.icon[5] = styles.default_icon;
+    styles.icon[6] = styles.default_icon;
     styles.icon[this.getSelectedIndex(this.props.type)] = Object.assign({},   styles.icon[this.state.selectedIndex], styles.active_icon);
     const divStyle = { position: 'relative', height: 'auto' }
 
@@ -117,13 +122,6 @@ class EmergencySelector extends React.Component {
       <PaperBox style={ {minHeight: '220px', height: 'auto'}} center blank zDepth={2}>
         <div className="type__icons" style={ divStyle }>
 
-      <div style={{position: 'absolute', right: '8%', top: '50%', zIndex: '3'}}>
-
-    <FloatingActionButton onTouchTap={this.handleAddService} style={{height: '50px', width: '50px', background: '#455A64'}}>
-      <ContentAdd />
-    </FloatingActionButton>
-    <h5>Añadir servicio</h5>
-    </div>
 
           <BottomNavigation style={ divStyle } selectedIndex={this.getSelectedIndex(this.props.type)}>
             <BottomNavigationItem
@@ -166,10 +164,17 @@ class EmergencySelector extends React.Component {
 
             <BottomNavigationItem
               key={6}
-              label="Otro" icon={<SvgIcon color={styles.icon[5]['OTRO']} style={ {height: '100px', width: '120px'}}>
-                <OtherIcon2 />
+              label="Bloqueos" icon={<SvgIcon color={styles.icon[5]['BLOQUEOS']} style={ {height: '100px', width: '120px'}}>
+                <RoadBlockIcon />
               </SvgIcon>}
               onTouchTap={() => this.select(5)}
+            />
+            <BottomNavigationItem
+              key={7}
+              label="Otro" icon={<SvgIcon color={styles.icon[6]['OTRO']} style={ {height: '100px', width: '120px'}}>
+                <OtherIcon2 />
+              </SvgIcon>}
+              onTouchTap={() => this.select(6)}
             />
           </BottomNavigation>
         </div>
@@ -195,7 +200,14 @@ class EmergencySelector extends React.Component {
               />
             </div>
           </div>
-          <div className="col-md-4"></div>
+          <div className="col-md-3">
+            <FloatingActionButton onTouchTap={this.handleAddService} style={{height: '50px', width: '55px', background: '#455A64'}}>
+            <ContentAdd />
+            </FloatingActionButton>
+
+      <h5>Añadir servicio</h5>
+          </div>
+
         </div>
       </PaperBox>
     );

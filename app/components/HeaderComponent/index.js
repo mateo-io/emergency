@@ -6,7 +6,7 @@ import Profile from './Profile';
 import H2 from 'components/H2';
 //SOCKET
 const io = require('socket.io-client')
-const socket = io.connect('http://localhost:9000')
+const socket = io.connect('http://localhost:9000',{transports: ['websocket'], upgrade: false})
 
 
 export default class HeaderComponent extends React.Component {

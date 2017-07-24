@@ -42,7 +42,8 @@ export default class CallTable extends React.Component {
     };
 
   parseTime = (time) => {
-    if (isNaN(time)) {return 'NA'}
+    const parseTime = Number(time);
+    if (isNaN(parseTime)) {return 'NA'}
     const hours = Math.floor(time/3600);
     const minutes = Math.floor(time/60);
     const seconds = Math.floor(time%60);
@@ -169,15 +170,27 @@ const optionsCursorTrueWithMargin = {
                     </TableRowColumn>
 
                     <TableRowColumn>
-                      {moment(call.dispatched).format('HH:mm')}
+                    {
+                      (call.type==='INFORMATIVA') ?
+                      <span></span> :
+                      moment(call.dispatched).format('HH:mm')
+                    }
                     </TableRowColumn>
 
                     <TableRowColumn>
-                      {moment(call.arrived).format('HH:mm')}
+                    {
+                      (call.type==='INFORMATIVA') ?
+                      <span></span> :
+                      moment(call.arrived).format('HH:mm')
+                    }
                     </TableRowColumn>
 
                     <TableRowColumn>
-                      {this.parseTime( (call.arrived-call.dispatched)/1000)}
+                    {
+                      (call.type==='INFORMATIVA') ?
+                      <span></span> :
+                      this.parseTime( (call.arrived-call.dispatched)/1000)
+                    }
                     </TableRowColumn>
 
                   </TableRow>
@@ -226,7 +239,7 @@ const optionsCursorTrueWithMargin = {
                     </TableRowColumn>
 
                     <TableRowColumn>
-                      {this.parseTime( (call.arrived2-call.dispatched2)/1000)}
+                      {this.parseTime( (new Date(call.arrived2)-new Date(call.dispatched2))/1000)}
                     </TableRowColumn>
 
                   </TableRow>
@@ -277,7 +290,7 @@ const optionsCursorTrueWithMargin = {
                     </TableRowColumn>
 
                     <TableRowColumn>
-                      {this.parseTime( (call.arrived3-call.dispatched3)/1000)}
+                      {this.parseTime( (new Date(call.arrived3)-new Date(call.dispatched3))/1000)}
                     </TableRowColumn>
 
                   </TableRow>
@@ -328,7 +341,7 @@ const optionsCursorTrueWithMargin = {
                     </TableRowColumn>
 
                     <TableRowColumn>
-                      {this.parseTime( (call.arrived4-call.dispatched4)/1000)}
+                      {this.parseTime( (new Date(call.arrived4)-new Date(call.dispatched4))/1000)}
                     </TableRowColumn>
 
                   </TableRow>

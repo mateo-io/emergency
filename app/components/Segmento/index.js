@@ -8,8 +8,8 @@ const style = {
     padding: '10px',
     textAlign: 'center',
     margin: '10px',
-    height: '150px',
-    width: '150px'
+    height: '180px',
+    width: '200px'
   }
 
 }
@@ -20,11 +20,11 @@ const Segmento = ({name, prInicial, prFinal}) => {
       <h4>{name}</h4>
 
       <div>
-        <Text small>PR INICIAL</Text><Text>{prInicial}</Text>
+        <Text small>PR INICIAL  </Text><Text>{prInicial}</Text>
       </div>
 
       <div>
-        <Text small>PR FINAL</Text><Text>{prFinal}</Text>
+        <Text small>PR FINAL  </Text><Text>{prFinal}</Text>
       </div>
     </Paper>
   )

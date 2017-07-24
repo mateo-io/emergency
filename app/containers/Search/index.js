@@ -59,6 +59,13 @@ const getCallsByType = (calls, filter) => {
       t.type3==='OTRO' ||
       t.type4==='OTRO'
     })
+    case 'MOSTRAR_BLOQUEOS':
+    return calls.filter(t => {
+      return t.type==='BLOQUEOS' ||
+      t.type2==='BLOQUEOS' ||
+      t.type3==='BLOQUEOS' ||
+      t.type4==='BLOQUEOS'
+    })
     default:
     throw new Error('Unknown filter: ' + filter)
   }

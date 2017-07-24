@@ -24,6 +24,8 @@ export default class UserNavbar extends React.Component {
     super(props);
   }
 
+
+
 renderNewUser = (props) => {
   return (
     <NewUser
@@ -38,7 +40,7 @@ renderNewUser = (props) => {
     const {actions} = this.props;
         return(
           <div style={style.container}>
-            <RaisedButton  containerElement={<Link to={`/users/new`} />} label="Nuevo Usuario" secondary={true} style={style.button} />
+            <RaisedButton containerElement={<Link to={`/users/new`} />} label="Nuevo Usuario" secondary={true} style={style.button} />
             <div style={style.header}>
               <H1>Usuarios</H1>
             </div>
