@@ -19,11 +19,21 @@ import Input from './Input';
 export default class NewSegment extends React.Component {
   state = {
     name: '',
+    open: false
   };
 
+  componentWillMount() {
+    this.handleOpen();
+  }
+
+  handleOpen = () => {
+    console.log("HELLOOOOOOOOOOOOOOOOO", this.props)
+    this.setState({open: true});
+  };
 
   handleClose = () => {
     let tramoId = this.props.match.params['id'];
+    this.setState({open: false});
     this.props.history.push(`/tramos/${tramoId}`);
   };
 
@@ -91,7 +101,7 @@ export default class NewSegment extends React.Component {
         <Dialog
           actions={actions}
           modal={false}
-          open={this.props.modal}
+          open={this.state.open}
           onRequestClose={this.handleClose}
           actionsContainerStyle={ {textAlign: 'center'} }
           bodyStyle={ {height: 'auto'} }

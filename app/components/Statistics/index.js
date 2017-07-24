@@ -79,7 +79,7 @@ export default class Statistics extends React.Component {
       },
       "row" : {
         paddingTop: '30px',
-        paddingLeft: '30%',
+        paddingLeft: '5%',
         margin: '0 auto',
         textAlign: 'center'
       }
@@ -99,14 +99,14 @@ export default class Statistics extends React.Component {
           <div className="informacion_llamadas row" style={style.row}>
 
 
-            <div className="col-sm-3">
+            <div className="col-sm-4">
               <PaperBox center blank>
                 <H1 paddingTop>{calls.length}</H1>
                 <Text bottom>LLAMADAS TOTALES</Text>
               </PaperBox>
             </div>
 
-            <div className="col-sm-3">
+            <div className="col-sm-4">
               <PaperBox blank>
                 <H1 paddingTop>{calls.length-informativaCount}</H1>
                 <Text bottom>LLAMADAS SERVICIOS</Text>
@@ -114,14 +114,18 @@ export default class Statistics extends React.Component {
             </div>
 
 
-            <div className="col-sm-3">
+            <div className="col-sm-4">
               <PaperBox blank>
                 <H1 paddingTop>{informativaCount}</H1>
                 <Text bottom>LLAMADAS INFORMATIVAS</Text>
               </PaperBox>
             </div>
 
-            <div className="col-sm-2"></div>
+          </div>
+
+
+          <div style={{textAlign: 'center'}}>
+            <h1>Llamadas por Servicio</h1>
           </div>
 
           <div className="row sericios_fila_1" style={style.row}>
@@ -144,6 +148,13 @@ export default class Statistics extends React.Component {
               <PaperBox style={style.BOMBEROS}>
                 <H1 paddingTop>{servicesCount.BOMBEROS}</H1>
                 <Text bottom>BOMBEROS</Text>
+              </PaperBox>
+            </div>
+
+            <div className="col-sm-3">
+              <PaperBox style={style.POLICIA}>
+                <H1 paddingTop>{servicesCount.POLICIA}</H1>
+                <Text bottom>POLICIA</Text>
               </PaperBox>
             </div>
 
@@ -177,18 +188,20 @@ export default class Statistics extends React.Component {
           </div>
 
 
-
-
           <div className="row estadisticas_extras_servicios" style={style.row}>
-            <div className="col-md-4">
+            <div className="col-sm-3"></div>
+
+            <div className="col-sm-5">
               <PaperBox>
                 <H1 paddingTop>{maxType}: {maxTypeValue}</H1>
                 <Text bottom>SERVICIO MÁS PEDIDO</Text>
               </PaperBox>
             </div>
 
-
+            <div className="col-sm-3"></div>
           </div>
+
+
       </Wrapper>
       </div>
     )

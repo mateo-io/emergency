@@ -1,8 +1,8 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "electron-react-boilerplate",
+  "name": "Software-Emergencia",
+  "productName": "software-emergencia-carreteras",
   "version": "1.0.0",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "description": "Software diseñado para manejar las llamadas de Emergencía y control de despacho de servicios. Análisis de datos. Trazabilidad de las llamadas",
   "main": "./main.js",
   "author": {
     "name": "C. T. Lin",
@@ -12,6 +12,13 @@
   "scripts": {
     "start": "./node ./start-script.js",
     "postinstall": "npm rebuild --runtime=electron --target=1.6.1 --disturl=https://atom.io/download/atom-shell --build-from-source"
+  },
+  "linux": {
+  "icon": "app/assets/logo.png",
+  "target": [
+    "deb",
+    "AppImage"
+  ]
   },
   "license": "MIT",
   "dependencies": {
