@@ -1,7 +1,7 @@
 {
   "name": "Software-Emergencia",
   "productName": "software-emergencia-carreteras",
-  "version": "1.0.0",
+  "version": "2.1.4",
   "description": "Software diseñado para manejar las llamadas de Emergencía y control de despacho de servicios. Análisis de datos. Trazabilidad de las llamadas",
   "main": "./main.js",
   "author": {
@@ -14,7 +14,7 @@
     "postinstall": "npm rebuild --runtime=electron --target=1.6.1 --disturl=https://atom.io/download/atom-shell --build-from-source"
   },
   "linux": {
-  "icon": "app/assets/logo.png",
+  "icon": "assets/logo.png",
   "target": [
     "deb",
     "AppImage"

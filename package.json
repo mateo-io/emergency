@@ -1,7 +1,7 @@
 {
   "name": "Emergency",
   "productName": "EmergencySystem",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "Highway emergency management software",
   "main": "main.js",
   "scripts": {
@@ -30,6 +30,7 @@
     "package-all": "npm run build && build -mwl",
     "cleanup": "mop -v"
   },
+
   "browserslist": "electron 1.4",
   "build": {
     "productName": "Emergency",
