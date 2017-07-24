@@ -1,6 +1,7 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import PropTypes from 'prop-types'; import { Link, Route, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link, Route, Redirect } from 'react-router-dom';
 import Tramo from './Tramo';
 import * as constants from 'constants/Colors';
 import Title from 'components/Title';

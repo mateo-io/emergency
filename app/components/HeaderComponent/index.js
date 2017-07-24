@@ -19,7 +19,6 @@ export default class HeaderComponent extends React.Component {
 
     socket.on('connected', (data) => {
       console.log("ready for data");
-      alert('Se ha conectado a la red');
       socket.emit('ready for data', {});
       this.setState({connected: true});
     });
@@ -112,6 +111,13 @@ export default class HeaderComponent extends React.Component {
         <HeaderLink to="/usuario">
          {user.name}
         </HeaderLink>
+
+        {user.isAdmin==="true" ?
+          (<HeaderLink to="/users">
+          Administrar
+          </HeaderLink>)
+          : ''
+        }
 
         <HeaderLink to="/login" onClick={this.props.userActions.logout}>
           Cerrar Sesion
