@@ -29,17 +29,22 @@ export default class Statistics extends React.Component {
     const { calls, searchActions, callActions } = this.props;
 
     // Get counter for different services
+    let informativaCount = 0;
+
+
     let servicesCount = {
       "AMBULANCIA" : 0,
       "GRUA" : 0,
       "POLICIA" : 0,
       "CARROTALLER" : 0,
       "BOMBEROS" : 0,
-      "OTRO" : 0,
-      "INFORMATIVA" : 0
+      "OTRO" : 0
     };
 
     calls.map((call) => {
+      if (call.type==='INFORMATIVA') {
+       informativaCount+=1;
+      }
       servicesCount[call.type] += 1;
       servicesCount[call.type2] += 1;
       servicesCount[call.type3] += 1;
@@ -49,6 +54,31 @@ export default class Statistics extends React.Component {
     const maxTypeObject = this.getMaxOfArray(servicesCount);
     const { maxType, maxTypeValue } = maxTypeObject;
 
+    const style = {
+      "AMBULANCIA" : {
+        borderColor: 'red'
+      },
+      "GRUA" : {
+        borderColor: 'yellow'
+      },
+      "BOMBEROS" : {
+        borderColor: 'red'
+      },
+      "OTRO" : {
+        borderColor: 'orange'
+      },
+      "CARROTALLER" : {
+        borderColor: 'gray'
+      },
+      "POLICIA" : {
+        borderColor: 'blue'
+      },
+      "row" : {
+        paddingTop: '30px',
+        margin: '0 auto',
+        textAlign: 'center'
+      }
+    }
 
 
     console.log(servicesCount);
@@ -61,83 +91,105 @@ export default class Statistics extends React.Component {
             <h1>Estadisticas</h1>
           </div>
 
-          <div className="informacion_llamadas row" style={{margin: '0 auto', padding: '30px'}}>
+          <div className="informacion_llamadas row" style={style.row}>
 
-            <div className="col-md-3">
+            <div className="col-sm-1"></div>
+
+            <div className="col-sm-3">
               <PaperBox center blank>
-                <H1>{calls.length}</H1>
-                <Text>Llamadas Totales</Text>
+                <H1 paddingTop>{calls.length}</H1>
+                <Text bottom>LLAMADAS TOTALES</Text>
               </PaperBox>
             </div>
 
-            <div className="col-md-3">
+            <div className="col-sm-3">
               <PaperBox blank>
-                <H1>{calls.length-servicesCount.INFORMATIVA}</H1>
-                <Text>Llamadas Servicios</Text>
+                <H1 paddingTop>{calls.length-informativaCount}</H1>
+                <Text bottom>LLAMADAS SERVICIOS</Text>
               </PaperBox>
             </div>
 
 
-            <div className="col-md-3">
+            <div className="col-sm-3">
               <PaperBox blank>
-                <H1>{servicesCount.INFORMATIVA}</H1>
-                <Text>Llamadas Informativas</Text>
+                <H1 paddingTop>{informativaCount}</H1>
+                <Text bottom>LLAMADAS INFORMATIVAS</Text>
+              </PaperBox>
+            </div>
+
+            <div className="col-sm-2"></div>
+          </div>
+
+          <div className="row sericios_fila_1" style={style.row}>
+
+            <div className="col-sm-3">
+              <PaperBox style={style.AMBULANCIA}>
+                <H1 paddingTop>{servicesCount.AMBULANCIA}</H1>
+                <Text bottom>AMBULANCIA</Text>
+              </PaperBox>
+            </div>
+
+            <div className="col-sm-3">
+              <PaperBox style={style.GRUA}>
+                <H1 paddingTop>{servicesCount.GRUA}</H1>
+                <Text bottom>GRUA</Text>
+              </PaperBox>
+            </div>
+
+            <div className="col-sm-3">
+              <PaperBox style={style.BOMBEROS}>
+                <H1 paddingTop>{servicesCount.BOMBEROS}</H1>
+                <Text bottom>BOMBEROS</Text>
+              </PaperBox>
+            </div>
+
+            <div className="col-sm-3">
+              <PaperBox style={style.OTRO}>
+                <H1 paddingTop>{servicesCount.OTRO}</H1>
+                <Text bottom>OTRO</Text>
+              </PaperBox>
+            </div>
+          </div>
+
+          <div className="row servicos_fila_2" style={style.row}>
+
+            <div className="col-sm-3">
+              <PaperBox style={style.CARROTALLER}>
+                <H1 paddingTop>{servicesCount.CARROTALLER}</H1>
+                <Text bottom>CARROTALLER</Text>
+              </PaperBox>
+            </div>
+
+            <div className="col-sm-3">
+              <PaperBox>
+                <H1 paddingTop>{servicesCount.CARROTALLER}</H1>
+                <Text bottom>POR HACER</Text>
+              </PaperBox>
+            </div>
+
+
+            <div className="col-sm-3">
+              <PaperBox>
+                <H1 paddingTop>hola</H1>
+                <Text bottom>hola</Text>
+              </PaperBox>
+            </div>
+
+
+            <div className="col-sm-3">
+              <PaperBox>
+                <H1 paddingTop>HACER</H1>
+                <Text bottom>hola</Text>
               </PaperBox>
             </div>
 
           </div>
 
-          <div className="row">
-
-            <div className="col-sm-3">
-              <PaperBox>
-                <h4>AMBULANCIA</h4>
-                <Text>{servicesCount.AMBULANCIA}</Text>
-              </PaperBox>
-            </div>
-
-            <div className="col-sm-3">
-              <PaperBox>
-                <h4>GRUA</h4>
-                <Text>{servicesCount.GRUA}</Text>
-              </PaperBox>
-            </div>
-            <div className="col-sm-3">
-              <PaperBox>
-                <h4>BOMBEROS</h4>
-                <Text>{servicesCount.BOMBEROS}</Text>
-              </PaperBox>
-            </div>
-            <div className="col-sm-3">
-              <PaperBox>
-                <h4>OTRO</h4>
-                <Text>{servicesCount.OTRO}</Text>
-              </PaperBox>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-md-3">
-              <PaperBox>
-                <h4>CARROTALLER</h4>
-                <Text>{servicesCount.CARROTALLER}</Text>
-              </PaperBox>
-            </div>
-
-            <div className="col-md-3">
-              <PaperBox>
-                <h4>POR COMPLETAR</h4>
-                <Text>{servicesCount.AMBULANCIA}</Text>
-              </PaperBox>
-            </div>
-
-          </div>
-
-          <div className="row">
+          <div className="row estadisticas_extras_servicios" style={style.row}>
             <div className="col-md-4">
               <PaperBox>
-                <h4>Servicio mas pedido</h4>
-                {maxType} : {maxTypeValue}
+                <H1 paddingTop>{maxType}: {maxTypeValue}</H1>
+                <Text bottom>SERVICIO MÁS PEDIDO</Text>
               </PaperBox>
             </div>
 

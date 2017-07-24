@@ -278,9 +278,7 @@ export default function calls(state = initialState, action) {
       return state.map(call =>
         call.id === action.id ?
           { ...call,
-            open: false,
-            llamadaInformativa: true,
-            type: 'INFORMATIVA'
+            open: false, llamadaInformativa: true, type: 'INFORMATIVA', uniqueid: Math.floor(Math.random()*100000)
            }
            :
           call

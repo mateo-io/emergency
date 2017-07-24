@@ -17,7 +17,8 @@ export default class CallView extends React.Component {
   llamadaInformativa = (evt) => {
     if(!(this.props.call.callStatus=="COLGADA")) { alert(`La llamada aun no ha sido colgada`); return}
       this.props.actions.llamadaInformativa(this.props.call.id);
-      updateDB(this.props.call);
+      const newCall = Object.assign({}, this.props.call, {type: 'INFORMATIVA'});
+      updateDB(newCall);
       this.props.history.replace('/dashboard');
   }
 
