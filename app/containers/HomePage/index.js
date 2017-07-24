@@ -4,11 +4,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { CallActions } from 'actions';
 import Home from 'components/Home';
+import { withRouter } from 'react-router-dom'
 
 // ALL TODO  THIS IS A COPY!!!!!!!!
-const HomePage = ({activeCalls, actions}) => (
+const HomePage = ({history, activeCalls, actions}) => (
   <div>
-    <Home activeCalls={activeCalls} actions={actions} />
+    <Home history={history} activeCalls={activeCalls} actions={actions} />
   </div>
 )
 
@@ -25,4 +26,4 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(CallActions, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomePage))

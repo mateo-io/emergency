@@ -4,7 +4,7 @@ import CallView from 'components/CallView';
 import { CallActions } from 'actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import { withRouter } from 'react-router-dom'
 
   class Call extends React.Component {
     render(){
@@ -42,4 +42,4 @@ import PropTypes from 'prop-types';
       actions: bindActionCreators(CallActions, dispatch)
   })
 
-  export default connect(mapStateToProps, mapDispatchToProps)(Call)
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Call))

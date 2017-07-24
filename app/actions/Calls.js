@@ -31,6 +31,7 @@ export const updateArrived4 = (id, date) => ({ type: 'UPDATE_ARRIVED4', id, date
 
 
 export const completeCall = id => ({ type: types.COMPLETE_CALL, id })
+export const llamadaInformativa = id => ({ type: 'COMPLETE_INFORMATIVA', id })
 export const openCall = id => ({ type: types.OPEN_CALL, id })
 export const addPhoneInfo = (id, data) => ({ type: types.ADD_PHONE_INFO, id, data})
 

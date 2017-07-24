@@ -161,7 +161,11 @@ const optionsCursorTrueWithMargin = {
                     </TableRowColumn>
 
                     <TableRowColumn >
-                      {<Icons type={call.type} />}
+                    {
+                      (call.type==='INFORMATIVA') ?
+                      <span>Informativa</span> :
+                      <Icons type={call.type} />
+                    }
                     </TableRowColumn>
 
                     <TableRowColumn>

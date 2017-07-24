@@ -14,17 +14,19 @@ import { updateDB, updateCallDB} from 'helpers/api';
 
 export default class CallView extends React.Component {
 
+  llamadaInformativa = (evt) => {
+    if(!(this.props.call.callStatus=="COLGADA")) { alert(`La llamada aun no ha sido colgada`); return}
+      this.props.actions.llamadaInformativa(this.props.call.id);
+      updateDB(this.props.call);
+      this.props.history.replace('/dashboard');
+  }
 
   cancelCall = (evt) => {
     if(this.props.call.callStatus=="COLGADA") { alert(`No se puede cancelar una llamada ya colgada`); return}
       this.props.actions.completeCall(this.props.call.id)
-      if(this.props.call.id>0){
-        this.props.history.push('/dashboard')
-        //this.props.history.replace(`/dashboard/call/${call.id-1}`)
-      } else {
-        this.props.history.replace('/dashboard/')
-      }
+        this.props.history.replace('/dashboard')
   }
+
 
   completeCall = (evt) => {
     if(this.props.call.dispatched && !this.props.call.arrived) { alert('Servicio 1 no completado'); return}
@@ -182,7 +184,7 @@ export default class CallView extends React.Component {
             <RaisedButton label="Finalizar Servicio"
             backgroundColor={'green'}
             labelColor={'#f5f5f5'}
-            style={ {position: 'relative', left: '20%', width: '250px', height: '80px', margin: '12px 10px', top: '70px'} }
+            style={ {position: 'relative', left: '20%', width: '280px', height: '80px', margin: '12px 10px', top: '70px'} }
             overlayStyle={ { display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             onClick={ this.completeCall}
             />
@@ -199,16 +201,14 @@ export default class CallView extends React.Component {
             /> :
             <div></div>
           }
-            <div>
               <RaisedButton label="Llamada Informativa"
               backgroundColor={'blue'}
               labelColor={'#f5f5f5'}
               style={ {position: 'relative',left: '20%', width: '130px', height: '50px', borderRadius: '25px' , margin: '12px 10px', top: '80px'} }
               overlayStyle={ { display: 'flex', alignItems: 'center', justifyContent: 'center'}}
-              onClick={ this.cancelCall}
+              onClick={ this.llamadaInformativa}
               />
             </div>
-          </div>
           </div>
         </div>
 

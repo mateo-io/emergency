@@ -273,6 +273,20 @@ export default function calls(state = initialState, action) {
           call
       )
 
+
+    case 'COMPLETE_INFORMATIVA':
+      return state.map(call =>
+        call.id === action.id ?
+          { ...call,
+            open: false,
+            llamadaInformativa: true,
+            type: 'INFORMATIVA'
+           }
+           :
+          call
+      )
+
+
     case COMPLETE_CALL:
       return state.map(call =>
         call.id === action.id ?

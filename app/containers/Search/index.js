@@ -83,14 +83,11 @@ const getCallsByDuration = (calls, startDate, endDate) => {
 
 
 const getCallsByCallDuration = (calls, startDate, endDate) => {
-  if (calls==undefined) { return }
-  if (startDate==undefined) {return calls}
-  if (endDate == undefined) {
-    return calls.filter( (call) => {
-      return call.callDuration >= startDate
-    })
+  if (calls === null ) { return 'calls is null' }
+  else if (startDate === null ) { return calls }
+  else if (endDate === null ) {
+    return calls.filter((call) =>  call.callDuration >= startDate)
   }
-
 
   return calls.filter( (call) => {
     console.log(call.callDuration)
@@ -161,7 +158,7 @@ class Search extends React.Component {
         visibilityFilter={visibilityFilter}
         calls={calls}
         callActions={callActions}
-        searchActions={searchActions} 
+        searchActions={searchActions}
         />
         </div>
       )
