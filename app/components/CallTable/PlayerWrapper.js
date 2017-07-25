@@ -67,7 +67,7 @@ getRecordingPath = (poste, uniqueid) => {
       {this.props.show ?
       <ReactAudioPlayer
       style={ {width: '110px'} }
-      src={`${this.props.audioPath}.wav`}
+      src={`${this.props.audioPath}.mp3`}
       controls
       />
       :
