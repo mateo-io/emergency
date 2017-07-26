@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { UserActions } from 'actions';
 import UserComponent from 'components/UserComponent';
 import UserNavbar from './UserNavbar';
+import PosteNavbar from './PosteNavbar';
 import { withRouter } from 'react-router-dom'
 
 // ALL TODO  THIS IS A COPY!!!!!!!!
@@ -21,6 +22,7 @@ class UsersControlPanel extends  React.Component {
     const {history, actions, userList} = this.props;
     return(
       <div>
+      <PosteNavbar />
       <UserNavbar history={history} actions={actions} />
       {userList.map(user => {
         return(
