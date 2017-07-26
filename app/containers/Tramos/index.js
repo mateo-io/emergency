@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { UserActions } from 'actions';
 import TramosComponent from 'components/TramosComponent';
 
@@ -29,4 +30,4 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(UserActions, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tramos)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Tramos))

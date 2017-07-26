@@ -17,25 +17,13 @@ import Input from './Input';
  * A modal dialog can only be closed by selecting one of the actions.
  */
 export default class NewSegment extends React.Component {
-  state = {
-    name: '',
-    open: false
-  };
-
-  componentWillMount() {
-    this.handleOpen();
+  constructor(props){
+    super(props);
+    this.state = {
+      name: '',
+    };
   }
 
-  handleOpen = () => {
-    console.log("HELLOOOOOOOOOOOOOOOOO", this.props)
-    this.setState({open: true});
-  };
-
-  handleClose = () => {
-    let tramoId = this.props.match.params['id'];
-    this.setState({open: false});
-    this.props.history.push(`/tramos/${tramoId}`);
-  };
 
   handleInputChange = (event) => {
    const target = event.target;
@@ -47,11 +35,11 @@ export default class NewSegment extends React.Component {
    });
  }
 
-  onSubmitForm = () => {
-    const tramoId = this.props.match.params['id'];
+  onSubmitForm = (evt) => {
+    evt.preventDefault();
     const data = JSON.stringify(
       {"name":this.state.name,
-      "tramoId":tramoId,
+      "tramoId":this.props.tramoId,
       "prInicial":this.state.prInicial,
       "prFinal":this.state.prFinal
      }
@@ -72,8 +60,8 @@ export default class NewSegment extends React.Component {
         console.log("Segmento created", value);
         console.log("Data sent: ", data);
         this.props.addSegmento(value);
-        this.handleClose();
-        return 'Segmento created';
+        this.props.handleClose();
+        //return 'Segmento created';
         //ACTION TO CREATE A TRAMO
       })
     .catch((res) => {
@@ -101,8 +89,8 @@ export default class NewSegment extends React.Component {
         <Dialog
           actions={actions}
           modal={false}
-          open={this.state.open}
-          onRequestClose={this.handleClose}
+          open={this.props.open}
+          onRequestClose={this.props.handleClose}
           actionsContainerStyle={ {textAlign: 'center'} }
           bodyStyle={ {height: 'auto'} }
           contentStyle={ {height: 'auto', width: '550px'} }

@@ -20,25 +20,9 @@ export default class NewTramo extends React.Component {
     super(props);
 
     this.state = {
-      open: false,
       name: '',
     };
   }
-  componentDidMount(){
-    this.handleOpen();
-    console.log("New Tramo mounted", this.state.open)
-  }
-
-  handleOpen = () => {
-    console.log("HELLOOOOOOOOOOOOOOOOO", this.props)
-    this.setState({open: true});
-  };
-
-  handleClose = () => {
-    this.setState({open: false});
-    this.props.history.push('/tramos');
-  };
-
   handleInputChange = (event) => {
    const target = event.target;
    const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -50,7 +34,8 @@ export default class NewTramo extends React.Component {
  }
 
   //Login to API
-  onSubmitForm = () => {
+  onSubmitForm = (evt) => {
+    evt.preventDefault();
     const data = JSON.stringify(
       {"name":this.state.name,
       "concesionId":this.props.concesionId
@@ -72,7 +57,7 @@ export default class NewTramo extends React.Component {
         console.log("Tramo created", value);
         console.log("Data sent: ", data);
         this.props.addTramo(value);
-        this.handleClose();
+        this.props.handleClose();
         return 'Tramo created';
         //ACTION TO CREATE A TRAMO
       })
@@ -81,10 +66,6 @@ export default class NewTramo extends React.Component {
       console.log("ERROR!", res);
     })
 }
-
-  componentDidMount() {
-    this.handleOpen();
-  }
 
 
   render() {
@@ -105,8 +86,8 @@ export default class NewTramo extends React.Component {
         <Dialog
           actions={actions}
           modal={false}
-          open={this.state.open}
-          onRequestClose={this.handleClose}
+          open={this.props.open}
+          onRequestClose={this.props.handleClose}
           actionsContainerStyle={ {textAlign: 'center'} }
           bodyStyle={ {height: 'auto'} }
           contentStyle={ {height: 'auto', width: '550px'} }

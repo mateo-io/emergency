@@ -22,29 +22,30 @@ const style = {
 export default class UserNavbar extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      newModalOpen: false,
+    }
   }
 
 
 
-renderNewUser = (props) => {
-  return (
-    <NewUser
-    addUserToArray={this.props.actions.addUserToArray}
-    {...props}
-    />
-  )
-}
 
   render() {
     console.log("UserNavBar props", this.props);
     const {actions} = this.props;
         return(
           <div style={style.container}>
-            <RaisedButton containerElement={<Link to={`/users/new`} />} label="Nuevo Usuario" secondary={true} style={style.button} />
+
+            <NewUser
+              open={this.state.newModalOpen}
+              handleClose={() => this.setState({newModalOpen: false})}
+              addUserToArray={this.props.actions.addUserToArray}
+            />
+
+            <RaisedButton onClick={() => this.setState({newModalOpen: true})} label="Nuevo Usuario" secondary={true} style={style.button} />
             <div style={style.header}>
               <H1>Usuarios</H1>
             </div>
-            <Route path={`/users/new`} component={this.renderNewUser} />
           </div>
         )
   }

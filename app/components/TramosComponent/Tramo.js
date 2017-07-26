@@ -23,6 +23,9 @@ const style = {
 export default class Tramo extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      open: false
+    }
   }
 
   componentWillMount() {
@@ -35,15 +38,6 @@ export default class Tramo extends React.Component {
   }
 
 
-    renderNewSegmento = (props) => {
-    return (
-      <NewSegment
-        addSegmento={this.props.addSegmento}
-        {...props}
-      />
-    )
-  }
-
 
   render() {
     let { segmentos } = this.props;
@@ -51,8 +45,15 @@ export default class Tramo extends React.Component {
     console.log("Tramo props", this.props);
     return(
       <div style={style.paper}>
+
+        <NewSegment
+          tramoId={tramoId}
+          open={this.state.open}
+          handleClose={() => this.setState({open: false})}
+          addSegmento={this.props.addSegmento} />
+
         <h2 style={style.header}>Segmentos</h2>
-        <RaisedButton  containerElement={<Link to={`/tramos/newSegment/${tramoId}`} />} label="Nuevo Segmento" secondary={true} style={style.button} />
+        <RaisedButton onClick={() => this.setState({open: true})}  label="Nuevo Segmento" secondary={true} style={style.button} />
         <div className="segmentos">
           {segmentos && segmentos.map((segmento) => {
             const { id, name, prInicial, prFinal } = segmento;
@@ -62,7 +63,6 @@ export default class Tramo extends React.Component {
 
           })}
       </div>
-      <Route path={`/tramos/newSegment/:id`} component={this.renderNewSegmento} />
     </div>
     )
 

@@ -21,6 +21,9 @@ const style = {
 export default class TramosComponent extends React.Component {
 constructor(props) {
     super(props);
+    this.state = {
+      open: false
+    }
   }
 
   handleAddSegments = (tramoId) => {
@@ -39,6 +42,7 @@ constructor(props) {
   renderTramo = (props) => {
     return (
       <Tramo
+        match ={this.props.match}
         segmentos={this.props.concesion.Segmentos}
         addSegmento={this.props.actions.addSegmento}
         {...props}
@@ -46,29 +50,30 @@ constructor(props) {
     )
   }
 
-    renderNewTramo = (props) => {
-    return (
-      <NewTramo
-        concesionId={this.props.concesion.id}
-        addTramo={this.props.actions.addTramo}
-        {...props}
-      />
-    )
-  }
-
-
-
   render() {
     const { concesion, actions } = this.props;
     const { Tramos, Segmentos } = concesion;
+    console.log("TramosComponent match: ", this.props.match);
     return (
       <div>
+        <NewTramo
+          concesionId={concesion.id}
+          open={this.state.open}
+          handleClose={() => this.setState({open: false})}
+          addTramo={actions.addTramo} />
+
         <div style={{textAlign:'center', margin:'20px'}}>
           <h2>{concesion.name}</h2>
         </div>
         <div className="tramos" style={style.container}>
           <h2 style={{display:'inline-block'}}>Tramos</h2>
-          <RaisedButton containerElement={<Link to="/tramos/new"/>} label="Nuevo Tramo" primary={true} style={style.button} />
+
+          <RaisedButton
+            onClick={() => this.setState({open: true})}
+            label="Nuevo Tramo"
+            primary={true}
+            style={style.button} />
+
         </div>
 
         <Tabs
@@ -90,7 +95,6 @@ constructor(props) {
           })
         } </Tabs>
         <Route path={`/tramos/:id`} component={this.renderTramo} />
-        <Route path="/tramos/new" component={this.renderNewTramo} />
         </div>
       )
     }

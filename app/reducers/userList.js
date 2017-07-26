@@ -7,7 +7,7 @@ export default function user(state = initialState, action) {
     case 'ADD_USER_TO_ARRAY':
     return [
       ...state,
-      ...action.user
+      action.user
     ]
 
     case 'RECEIVE_USERS':

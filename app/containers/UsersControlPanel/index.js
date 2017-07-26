@@ -9,6 +9,10 @@ import { withRouter } from 'react-router-dom'
 
 // ALL TODO  THIS IS A COPY!!!!!!!!
 class UsersControlPanel extends  React.Component {
+  constructor() {
+    super()
+  }
+
   componentWillMount() {
     this.props.actions.fetchUsers();
   }

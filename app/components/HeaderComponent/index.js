@@ -85,7 +85,6 @@ export default class HeaderComponent extends React.Component {
 
   render() {
     const { activeCalls, actions, user } = this.props;
-    console.log('activeCalls down there: ', activeCalls);
 
     if(user.cedula) {
     return(

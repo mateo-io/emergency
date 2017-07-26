@@ -32,15 +32,6 @@ export default class NewUser extends React.Component {
     };
   }
 
-  handleOpen = () => {
-    this.setState({open: true});
-  };
-
-  handleClose = () => {
-    this.setState({open: false});
-    console.log("HISTORY INSIDE NewUser", this.props.history)
-    this.props.history.push("/users");
-  };
 
   handleDropdownChange = (event, index, value ) => {
     this.setState({
@@ -60,7 +51,8 @@ export default class NewUser extends React.Component {
     });
   }
 
-  onSubmitForm = () => {
+  onSubmitForm = (evt) => {
+    evt.preventDefault();
     const data = JSON.stringify(
       {"name":this.state.name,
       "cedula":this.state.cedula,
@@ -85,8 +77,8 @@ export default class NewUser extends React.Component {
     console.log("User created", value);
     console.log("Data sent: ", data);
     let parsedUser = JSON.parse(data)
-    this.props.addUserToArray(parsedUser);
-    this.handleClose();
+    this.props.addUserToArray(value);
+    this.props.handleClose();
     return 'Segmento created';
     //ACTION TO CREATE A TRAMO
   })
@@ -94,11 +86,6 @@ export default class NewUser extends React.Component {
     console.log("Values sent", data);
     console.log("ERROR!", res);
   })
-}
-
-componentWillMount() {
-  console.log("NewUser Modal rendered.");
-  this.handleOpen();
 }
 
 
@@ -121,8 +108,8 @@ render() {
     <Dialog
     actions={actions}
     modal={false}
-    open={this.state.open}
-    onRequestClose={this.handleClose}
+    open={this.props.open}
+    onRequestClose={this.props.handleClose}
     actionsContainerStyle={ {textAlign: 'center'} }
     bodyStyle={ {height: 'auto'} }
     contentStyle={ {height: 'auto', width: '550px'} }

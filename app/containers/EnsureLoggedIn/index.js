@@ -7,7 +7,6 @@ class EnsureLoggedIn extends React.Component {
 
   render() {
     const { isLoggedIn } = this.props
-    console.log('loggedin???', isLoggedIn)
     if (isLoggedIn) {
       return this.props.children
     } else {
