@@ -10,6 +10,17 @@ export default function user(state = initialState, action) {
       action.user
     ]
 
+
+    case 'UPDATE_USER_ARRAY':
+      console.log("Update usar array got called");
+      return state.map(user =>
+        user.id === action.id ?
+        { ...user,
+          ...action.user
+        } :
+        user
+      )
+
     case 'RECEIVE_USERS':
     return [
       ...action.usersList

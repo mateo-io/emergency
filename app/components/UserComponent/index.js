@@ -7,25 +7,40 @@ const style = {
     display: 'inline-block',
     margin: '20px',
     textAlign: 'center',
-    lineHeight: '3em',
+    lineHeight: '1em',
     height: '300px',
-    width: '400px'
+    width: '350px'
+  },
+  attributeContainer : {
+    marginTop: '34px',
+    position: 'relative'
   }
 
 }
 
-const UserComponent = ({user}) => {
-  const { name, cedula, isAdmin }  = user;
+const UserComponent = ({user, actions, onClick}) => {
+  const { id, name, cedula, isAdmin }  = user;
+  console.log("user id", id)
   return(
     <Paper style={style.paper}>
-      <Text>Nombre: </Text>
-      <h4>{name}</h4>
+      <div style={style.attributeContainer}>
+        <h4>{name}</h4>
+        <Text plain small>NOMBRE</Text>
+      </div>
 
-      <Text>Cedula</Text>
+    <div style={style.attributeContainer}>
       <h4>{cedula}</h4>
+      <Text plain small>CEDULA</Text>
+    </div>
 
-      <Text>Administrador</Text>
-      <h4>{isAdmin==="true" ? 'Si' : 'No'}</h4>
+    <div style={style.attributeContainer}>
+      <h4>{String(isAdmin)==='true' ? 'Si' : 'No'}</h4>
+      <Text plain small>ADMIN</Text>
+    </div>
+
+    <div style={style.attributeContainer}>
+      <button value={user.id} onClick={onClick}>Editar</button>
+    </div>
 
     </Paper>
   )

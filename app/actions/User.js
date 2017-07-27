@@ -37,3 +37,4 @@ export function fetchUsers() {
 }
 
 export const addUserToArray = (user) => ({ type: 'ADD_USER_TO_ARRAY', user });
+export const updateUser = (id, user) => ({ type: 'UPDATE_USER_ARRAY', id, user });

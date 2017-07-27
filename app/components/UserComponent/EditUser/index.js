@@ -18,17 +18,36 @@ import Input from './Input';
 /**
 * A modal dialog can only be closed by selecting one of the actions.
 */
-export default class NewUser extends React.Component {
+export default class EditUser extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      value: 0,
-      open: false,
       name: '',
       cedula: '',
-      isAdmin: false
-    };
+      isAdmin: false,
+      value: 0
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("On receive props. Next props are", nextProps);
+
+    if(!nextProps.user) { return }
+
+    if(nextProps.user.id && nextProps.user.id!==this.state.id) {
+      const { id, name, cedula, isAdmin } = nextProps.user;
+
+      console.log("Inside willReceiveNextProps", name, cedula, isAdmin);
+
+      this.setState({
+        id,
+        name,
+        cedula,
+        isAdmin,
+        value: isAdmin===true ? 1 : 0,
+        userLoaded: true
+      });
+    }
   }
 
 
@@ -53,11 +72,13 @@ export default class NewUser extends React.Component {
   onSubmitForm = (evt) => {
     evt.preventDefault();
     const data = JSON.stringify(
-      {"name":this.state.name,
-      "cedula":this.state.cedula,
-      "concesionId":1,
-      "password":this.state.password,
-      "isAdmin":this.state.isAdmin
+      {
+        "id": this.state.id,
+        "name":this.state.name,
+        "cedula":this.state.cedula,
+        "concesionId":1,
+        "password":this.state.password,
+        "isAdmin":this.state.isAdmin
     }
   );
   const configuration = new Headers({
@@ -66,7 +87,7 @@ export default class NewUser extends React.Component {
     "Access-Control-Allow-Origin":"*"
   })
 
-  fetch("http://localhost:3000/api/users", {
+  fetch("http://localhost:3000/api/users/update", {
     method: "POST",
     headers: configuration,
     body: data
@@ -76,7 +97,8 @@ export default class NewUser extends React.Component {
     console.log("User created", value);
     console.log("Data sent: ", data);
     let parsedUser = JSON.parse(data)
-    this.props.addUserToArray(value);
+    let userId = this.state.id;
+    this.props.updateUser(userId, value);
     this.props.handleClose();
     return 'Segmento created';
     //ACTION TO CREATE A TRAMO
@@ -124,7 +146,7 @@ render() {
     hintText="nombre"
     floatingLabelText="NOMBRE"
     name="name"
-    value={this.props.name}
+    value={this.state.name}
     onChange={this.handleInputChange}
     /><br />
 
@@ -135,7 +157,7 @@ render() {
     hintText="cedula"
     floatingLabelText="CEDULA"
     name="cedula"
-    value={this.props.cedula}
+    value={this.state.cedula}
     onChange={this.handleInputChange}
     /><br />
 
