@@ -106,7 +106,7 @@ export default class StatusBar extends React.Component {
                 hintText={"# poste"}
                 onChange={posteInputChange}
                 />
-                <span style={{fontSize:'20px', display: 'inline-block'}}>|   {callerNumber.poste}</span>
+                <span style={{fontSize:'20px', display: 'inline-block'}}>|   {callerNumber}</span>
                 </div>
 
                 <div style={{textAlign:'center', height: '20px'}} className="col-sm-6">
@@ -114,7 +114,7 @@ export default class StatusBar extends React.Component {
                 <Text small plain>Tramo</Text>
                 <TramoSelector callId={callId} concesion={concesion} addTramo={addTramo} addSegmento={addSegmento} />
                 {
-                  callerNumber.lugar1 ?
+                  callerNumber && callerNumber.lugar1 ?
                <div>
                  <span value={callerNumber.lugar1} onClick={updateDestino}>
                  {callerNumber.lugar1===destino ?

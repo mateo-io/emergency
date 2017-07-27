@@ -8,7 +8,7 @@ import Divider from 'material-ui/Divider';
 import CallComments from './CallComments';
 import RaisedButton from 'material-ui/RaisedButton';
 import AlertDialog from 'components/AlertDialog';
-import getPoste from 'helpers/getPoste';
+import { readPoste } from 'helpers/posteApi';
 import { updateDB, updateCallDB} from 'helpers/api';
 
 
@@ -109,7 +109,7 @@ export default class CallView extends React.Component {
           origin={origin}
           poste={poste}
           callStart={callStart}
-          callerNumber={getPoste(callerNumber)}
+          callerNumber={readPoste(callerNumber)}
           status={status}
           services={services}
           duration={duration}

@@ -5,7 +5,7 @@ import FilterBar from 'components/FilterBar';
 import PaperBox from 'components/PaperBox';
 import moment from 'moment';
 import PlayerWrapper from './PlayerWrapper';
-import getPoste from 'helpers/getPoste';
+import { readPoste } from 'helpers/posteApi';
 import ReactHover from 'react-hover';
 import {blueGrey100} from 'material-ui/styles/colors';
 import Icons from 'components/Icons';
@@ -130,7 +130,7 @@ const optionsCursorTrueWithMargin = {
                           options={optionsCursorTrueWithMargin}>
                           <ReactHover.Trigger>
                           <div>
-                          {getPoste(call.callerNumber).poste}
+                          {readPoste(call.callerNumber)}
                           ({call.userPoste ? call.userPoste : 'NA'})
                           </div>
                           </ReactHover.Trigger>
