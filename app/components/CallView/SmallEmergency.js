@@ -344,6 +344,7 @@ class SmallEmergency extends React.Component {
 
       <BottomNavigationItem
       key={5}
+      style={ {textAlign: '-webkit-center'} }
       label="CarroTaller"
       icon={<SvgIcon color={styles.icon[4]['CARROTALLER']} style={iconStyle}>
       <OtherIcon />
@@ -449,18 +450,18 @@ class SmallEmergency extends React.Component {
     const iconStyle ={height: '30px', width: '30px'}
 
     return (
-      <PaperBox style={ {minHeight: '240px', height: 'auto'}} center blank zDepth={2}>
+      <PaperBox style={ {minHeight: '240px', display: 'flex', alignItems: 'center', height: 'auto'}} center blank zDepth={2}>
+      {scenes}
       {this.props.services < 4 ?
-        <div style={{position: 'absolute', right: '10%', top: '30%', zIndex: '3'}}>
+        <div style={{position: 'absolute', right: '100px' }}>
 
-        <FloatingActionButton onTouchTap={this.handleAddService} primary={true} style={{height: '50px', width: '50px'}}>
-        <ContentAdd />
+        <FloatingActionButton onTouchTap={this.handleAddService} primary={true} iconStyle={{height: '75px', width: '75px'}}>
+        <ContentAdd style={{height: '30px', width: '30px'}} />
         </FloatingActionButton>
         </div>
 
         : ''
       }
-      {scenes}
       </PaperBox>
     );
   }

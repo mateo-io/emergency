@@ -18,7 +18,7 @@ const style = {
 
 }
 
-const UserComponent = ({user, actions, onClick}) => {
+const UserComponent = ({user, actions, onClickUpdate, onClickDestroy}) => {
   const { id, name, cedula, isAdmin }  = user;
   console.log("user id", id)
   return(
@@ -39,7 +39,8 @@ const UserComponent = ({user, actions, onClick}) => {
     </div>
 
     <div style={style.attributeContainer}>
-      <button value={user.id} onClick={onClick}>Editar</button>
+      <button value={user.id} onClick={onClickUpdate}>Editar</button>
+      <button value={user.id} onClick={onClickDestroy}>Borrar</button>
     </div>
 
     </Paper>

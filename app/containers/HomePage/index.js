@@ -7,18 +7,20 @@ import Home from 'components/Home';
 import { withRouter } from 'react-router-dom'
 
 // ALL TODO  THIS IS A COPY!!!!!!!!
-const HomePage = ({history, activeCalls, actions}) => (
+const HomePage = ({history, user, activeCalls, actions}) => (
   <div>
-    <Home history={history} activeCalls={activeCalls} actions={actions} />
+    <Home history={history} user={user} activeCalls={activeCalls} actions={actions} />
   </div>
 )
 
 HomePage.propTypes = {
+  user: PropTypes.object.isRequired,
   activeCalls: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
+  user: state.user,
   activeCalls: state.calls.filter( (call) => call.open)
 })
 

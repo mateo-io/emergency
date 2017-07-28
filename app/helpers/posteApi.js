@@ -5,6 +5,9 @@ import path from 'path';
 let allPostes = require('/postes/postes.json');
 const postesPath = '/postes/postes.json';
 
+const getAllPostes = () => {
+  return allPostes;
+}
 
 const readPoste = (celular) => {
   if (allPostes[celular]) {
@@ -28,4 +31,4 @@ const removePoste = (celular) => {
 
 
 
-export { readPoste, addPoste, removePoste };
+export { readPoste, addPoste, removePoste, getAllPostes };

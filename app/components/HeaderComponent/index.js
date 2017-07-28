@@ -36,18 +36,18 @@ export default class HeaderComponent extends React.Component {
     socket.on('insert', function(data) {
       console.log("Data inserted into db");
       this.getActiveCalls()
-        .then( activeCalls => {
+      .then( activeCalls => {
 
-          console.log("Active calls are: ", activeCalls);
-          let liveCalls = this.props.activeCalls
-            .filter( (call) => {
-              return !call.uniqueid
-            })
-          console.log("Live calls", liveCalls);
-          let id = liveCalls[liveCalls.length-1].id
-          console.log("Active call id is: ", id);
-          this.props.actions.addPhoneInfo(id, data);
+        console.log("Active calls are: ", activeCalls);
+        let liveCalls = this.props.activeCalls
+        .filter( (call) => {
+          return !call.uniqueid
         })
+        console.log("Live calls", liveCalls);
+        let id = liveCalls[liveCalls.length-1].id
+        console.log("Active call id is: ", id);
+        this.props.actions.addPhoneInfo(id, data);
+      })
     }.bind(this))
   }
 
@@ -55,8 +55,8 @@ export default class HeaderComponent extends React.Component {
     return new Promise((resolve, reject) => {
       this.props.searchActions.fetchCalls()
       .then(calls => resolve(calls) )
-  })
-}
+    })
+  }
 
   reconnect = () => {
     this.props.searchActions.fetchCalls()
@@ -67,10 +67,6 @@ export default class HeaderComponent extends React.Component {
     })
   }
 
-  handleAddCall = () => {
-      console.log("Handle add call");
-      this.props.actions.addCall(this.props.user.nombre);
-  }
 
 
   componentWillMount() {
@@ -86,59 +82,42 @@ export default class HeaderComponent extends React.Component {
   render() {
     const { activeCalls, actions, user } = this.props;
 
-    if(user.cedula) {
     return(
       <div>
-        <div>
         <Navbar>
-        <HeaderLink to="/dashboard">
-        {activeCalls.length} | Llamadas
+          <HeaderLink to="/dashboard">
+          {activeCalls.length} | Llamadas
         </HeaderLink>
 
         <HeaderLink to="/table">
-        Tabla
+          Tabla
         </HeaderLink>
 
         <HeaderLink to="/tramos">
-        Tramos
+            Tramos
+        </HeaderLink>
+
+        <HeaderLink to="/postes">
+            Postes
         </HeaderLink>
 
         <HeaderLink to="/statistics">
-        Estadísticas
-        </HeaderLink>
-
-        <HeaderLink to="/usuario">
-         {user.name}
+          Estadísticas
         </HeaderLink>
 
         {user.isAdmin==="true" ?
           (<HeaderLink to="/users">
-          Administrar
+            Administrar
           </HeaderLink>)
-          : ''
+        : ''
         }
 
         <HeaderLink to="/login" onClick={this.props.userActions.logout}>
           Cerrar Sesion
         </HeaderLink>
-
-        <span>
-          |
-        </span>
-
-        <HeaderLink to="/dashboard" onClick={this.handleAddCall}>
-        Nueva Llamada
-        </HeaderLink>
-
         </Navbar>
-
-      </div>
-      {this.props.children}
+        {this.props.children}
     </div>
     )
-
-  } else {
-    return null
-  }
   }
 }

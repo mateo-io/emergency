@@ -5,6 +5,20 @@ import CallTabs from 'components/CallTabs';
 import { Redirect } from 'react-router-dom';
 
 
+const EmptyCalls = ({actions, user}) => (
+  <div style={{ textAlign: 'center' }}>
+    <h1>No hay llamadas activas</h1>
+
+    <div style={{marginTop: '50px'}} className="row">
+
+      <div className="col-sm-6">
+        <button onClick={() => actions.addCall(user.nombre)} style={{height: '200px', width: '200px'}}>
+          Nueva Llamada
+        </button>
+      </div>
+    </div>
+  </div>
+  )
 
 
 export default class Home extends Component {
@@ -17,7 +31,7 @@ export default class Home extends Component {
     }
 
   render() {
-    const { activeCalls, actions } = this.props;
+    const { activeCalls, actions, user } = this.props;
     let calls = activeCalls;
     console.log("call props!!!!!!!!!!!!!!!!!!!!!!!!!!", this.props);
 
@@ -30,8 +44,12 @@ export default class Home extends Component {
           <div>
             <Redirect to={`/dashboard/call/${calls[0].id}`} />
           </div>
-          : <div style={{ textAlign: 'center' }}>
-            <h1>No hay llamadas activas</h1>
+          :
+          <div>
+            <EmptyCalls
+              user={user}
+              actions={actions}
+             />
           </div>
         }
 

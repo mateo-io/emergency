@@ -2,7 +2,7 @@ import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import PropTypes from 'prop-types';
 import { Link, Route, Redirect } from 'react-router-dom';
-import Tramo from './Tramo';
+import SegmentoList from './SegmentoList';
 import * as constants from 'constants/Colors';
 import Title from 'components/Title';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -39,12 +39,14 @@ constructor(props) {
       })
   }
 
-  renderTramo = (props) => {
+  renderSegmentos = (props) => {
     return (
-      <Tramo
+      <SegmentoList
         match ={this.props.match}
         segmentos={this.props.concesion.Segmentos}
         addSegmento={this.props.actions.addSegmento}
+        updateSegmento={this.props.actions.updateSegmento}
+        removeSegmento={this.props.actions.removeSegmentoFromArray}
         {...props}
       />
     )
@@ -94,7 +96,7 @@ constructor(props) {
             )
           })
         } </Tabs>
-        <Route path={`/tramos/:id`} component={this.renderTramo} />
+        <Route path={`/tramos/:id`} component={this.renderSegmentos} />
         </div>
       )
     }

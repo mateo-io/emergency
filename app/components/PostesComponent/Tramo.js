@@ -3,7 +3,8 @@ import Segmento from 'components/Segmento';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link, Route } from 'react-router-dom';
-import NewSegment from './NewSegment/';
+import Poste from './Poste';
+import PosteNavbar from './PosteNavbar';
 
 
 const style = {
@@ -28,6 +29,7 @@ export default class Tramo extends React.Component {
     }
   }
 
+  /*
   componentWillMount() {
     const tramoId = this.props.match.params['id'];
     console.log("Tramo is is ", tramoId);
@@ -36,34 +38,29 @@ export default class Tramo extends React.Component {
       .then( res => console.log("Segmentos from ", tramoId, " son ", res))
       .catch( err => console.log('Error fetching segments'))
   }
+  */
+
 
 
 
   render() {
-    let { segmentos } = this.props;
+    let { postes } = this.props;
     const tramoId = this.props.match.params['id'];
     console.log("Tramo props", this.props);
     return(
       <div style={style.paper}>
 
-        <NewSegment
-          tramoId={tramoId}
-          open={this.state.open}
-          handleClose={() => this.setState({open: false})}
-          addSegmento={this.props.addSegmento} />
-
-        <h2 style={style.header}>Segmentos</h2>
+        <PosteNavbar />
         <RaisedButton onClick={() => this.setState({open: true})}  label="Nuevo Segmento" secondary={true} style={style.button} />
-        <div className="segmentos">
-          {segmentos && segmentos.map((segmento) => {
-            const { id, name, prInicial, prFinal } = segmento;
+        <div className="postes">
+          {postes && postes.map((poste) => {
             return(
-              <Segmento key={id} name={name} prInicial={prInicial} prFinal={prFinal} />
+              <Poste />
             )
 
           })}
-      </div>
     </div>
+  </div>
     )
 
   }

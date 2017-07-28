@@ -11,6 +11,7 @@ import Tramos from 'containers/Tramos';
 import NotFound from 'components/NotFound';
 import EnsureLoggedIn from 'containers/EnsureLoggedIn';
 import UsersControlPanel from 'containers/UsersControlPanel';
+import Postes from 'containers/Postes';
 
 
 import App from './containers/App';
@@ -34,6 +35,7 @@ export default () => (
         <Route path="/statistics" component={Search} />
         <Route path="/table" component={Search} />
         <Route path="/tramos" component={Tramos} />
+        <Route path="/postes" component={Postes} />
         <Route path="/usuario" component={User} />
         <Route path="/users" component={UsersControlPanel} />
       </Header>

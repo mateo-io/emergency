@@ -10,6 +10,12 @@ export default function user(state = initialState, action) {
       action.user
     ]
 
+    case 'REMOVE_USER_FROM_ARRAY':
+    return state.filter(user =>
+      user.id !== action.id
+    )
+
+
 
     case 'UPDATE_USER_ARRAY':
       console.log("Update usar array got called");

@@ -24,6 +24,16 @@ const HeaderLink = styled((props) =>
 
   background: ${(props) => props.white && 'white'};
 
+  &:focus {
+    color: #00BCD4;
+    text-decoration: none !important;
+  }
+
+  &:active {
+    color: #00BCD4;
+    text-decoration: none !important;
+  }
+
   &:hover {
     color: ${constants.accent}};
     text-decoration: none !important;

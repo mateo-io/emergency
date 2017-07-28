@@ -3,42 +3,45 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { UserActions } from 'actions';
-import UserComponent from 'components/UserComponent';
-import UserNavbar from './UserNavbar';
+import Tramo from 'components/Tramo';
+// import TramoNavbar from './TramoNavbar';
 import { withRouter } from 'react-router-dom'
-import EditUser from 'components/UserComponent/EditUser';
+import EditTramo from 'components/TramosComponent/EditTramo';
 import AlertDelete from 'components/AlertDelete';
-import TramoControlPanel from './TramoControlPanel';
 
 // ALL TODO  THIS IS A COPY!!!!!!!!
-class UsersControlPanel extends  React.Component {
+class TramoControlPanel extends  React.Component {
   constructor() {
     super()
     this.state = {
       editModalOpen: false,
       openAlert: false,
-      user: null
+      currentTramo: null
     } }
 
   componentWillMount() {
-    this.props.actions.fetchUsers();
+    // this.props.actions.fetchTramos();
   }
 
+  /*
   componentWillReceiveProps(nextProps) {
     console.log("componentWillReceiveProps");
     console.log("nextProps", nextProps);
-    if(!nextProps.user) { return }
-    if(!nextProps.userList) { return }
-    this.setState({user: nextProps.userList.map((user) => user.id === nextProps.user.id)});
+    if(!nextProps.tramos) { return }
+    if(!nextProps.tramos) { return }
+    this.setState({tramos: nextProps.tramos.map((tramo) => tramo.id === nextProps.tramo.id)});
   }
+  */
+
 
   cancelDestroy = () => {
     this.setState({openAlert: false})
   }
 
-  reallyDestroyUser = (id) => {
-    if(this.state.currentUser) {
-      console.log("reallyDestroyingUser", this.state.currentUser, id);
+  reallyDestroyTramo = (evt) => {
+    if(this.state.currentTramo) {
+      console.log("reallyDestroyingTramo", this.state.currentTramo, id);
+      let id = this.state.currentTramo.id;
 
     const data = JSON.stringify(
       {
@@ -51,7 +54,7 @@ class UsersControlPanel extends  React.Component {
     "Access-Control-Allow-Origin":"*"
   })
 
-  fetch("http://localhost:3000/api/users/destroy", {
+  fetch("http://localhost:3000/api/tramos/destroy", {
     method: "POST",
     headers: configuration,
     body: data
@@ -59,7 +62,7 @@ class UsersControlPanel extends  React.Component {
   .then(res => res.json())
   .then((value) => {
     this.setState({openAlert: false});
-    this.props.actions.removeUserFromArray(id);
+    this.props.actions.removeTramoFromArray(id);
     return {message: value};
   })
   .catch((res) => {
@@ -68,60 +71,58 @@ class UsersControlPanel extends  React.Component {
   })
 
     } else {
-      console.log("DestroyUser. Current user is none");
+      console.log("DestroyTramo. Current tramo is none");
     }
   }
 
 
-  handleDestroyUser = (evt) => {
+  handleDestroyTramo = (evt) => {
     console.log("This evt traget", evt.target);
     console.log("This evt value", evt.target.value);
-    const userId = evt.target.value;
-    console.log("Destroying user", userId);
+    const tramoId = evt.target.value;
+    console.log("Destroying tramo", tramoId);
     this.setState({
-        currentUser: this.props.userList.filter((user) => user.id == userId)[0],
+        currentTramo: this.props.tramos.filter((tramo) => tramo.id == tramoId)[0],
         openAlert: true
       })
 }
 
-  handleUpdateUser = (evt) => {
+  handleUpdateTramo = (evt) => {
     console.log("This evt traget", evt.target);
     console.log("This evt value", evt.target.value);
-    const userId = evt.target.value;
+    const tramoId = evt.target.value;
     this.setState({
-        currentUser: this.props.userList.filter((user) => user.id == userId)[0],
+        currentTramo: this.props.tramos.filter((tramo) => tramo.id == tramoId)[0],
         editModalOpen: true
       })
 }
 
   render() {
-    const {history, actions, userList} = this.props;
-    let { id } = this.state.currentUser ? this.state.currentUser.id : 0;
+    const {history, actions, tramos} = this.props;
+    let { id } = this.state.currentTramo ? this.state.currentTramo.id : 0;
     return(
       <div>
-        <TramoControlPanel />
       <AlertDelete
         tipo='usuario'
         id={id}
-        reallyDestroy={() => this.reallyDestroyUser(this.state.currentUser.id)}
+        reallyDestroy={() => this.reallyDestroyTramo(this.state.currentTramo.id)}
         cancelDestroy={this.cancelDestroy}
         open={this.state.openAlert} />
 
-      <EditUser
+      <EditTramo
         open={this.state.editModalOpen}
         handleClose={() => this.setState({editModalOpen: false})}
-        updateUser={this.props.actions.updateUser}
-        user={this.state.currentUser}
+        updateTramo={this.props.actions.updateTramo}
+        tramo={this.state.currentTramo}
       />
 
-      <UserNavbar history={history} actions={actions} />
-      {userList.map(user => {
+      {tramos.map(tramo => {
         return(
-          <UserComponent
-          key={user.id}
-          onClickUpdate={this.handleUpdateUser}
-          onClickDestroy={this.handleDestroyUser}
-          user={user}
+          <Tramo
+          key={tramo.id}
+          onClickUpdate={this.handleUpdateTramo}
+          onClickDestroy={this.handleDestroyTramo}
+          tramo={tramo}
           actions={actions} />
         )
       })
@@ -132,17 +133,17 @@ class UsersControlPanel extends  React.Component {
   }
 }
 
-UsersControlPanel.propTypes = {
-  userList: PropTypes.array.isRequired,
+TramoControlPanel.propTypes = {
+  tramos: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  userList: state.userList
+  tramos: state.concesion.Tramos
 })
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(UserActions, dispatch)
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UsersControlPanel))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TramoControlPanel))

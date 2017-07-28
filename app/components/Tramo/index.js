@@ -8,8 +8,8 @@ const style = {
     padding: '10px',
     textAlign: 'center',
     margin: '10px',
-    height: '180px',
-    width: '200px'
+    height: '140px',
+    width: '180px'
   },
   attributeContainer : {
     marginTop: '34px',
@@ -18,19 +18,11 @@ const style = {
 
 }
 
-const Segmento = ({name, id, prInicial, prFinal, onClickUpdate, onClickDestroy}) => {
+const Tramo = ({tramo, id, onClickUpdate, onClickDestroy}) => {
+  const { name } = tramo;
   return(
     <Paper style={style.paper}>
       <h4>{name}</h4>
-
-      <div>
-        <Text small>PR INICIAL  </Text><Text>{prInicial}</Text>
-      </div>
-
-      <div>
-        <Text small>PR FINAL  </Text><Text>{prFinal}</Text>
-      </div>
-
 
     <div style={style.attributeContainer}>
       <button value={id} onClick={onClickUpdate}>Editar</button>
@@ -40,4 +32,4 @@ const Segmento = ({name, id, prInicial, prFinal, onClickUpdate, onClickDestroy})
   )
 }
 
-export default Segmento;
+export default Tramo;

@@ -141,7 +141,7 @@ export default class StatusBar extends React.Component {
            </div>
 
 
-           <div className="row" style={{marginTop: '20px'}}>
+           <div className="row" style={{marginTop: '20px', height: 'auto'}}>
                <div className="col-sm-3">
                <RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
                  <RadioButton
@@ -160,14 +160,15 @@ export default class StatusBar extends React.Component {
                </RadioButtonGroup>
            </div>
 
-            <div className="col-sm-3">
+            <div className="col-sm-3" style={{height: 'auto'}}>
                 <TextField
                 style={ {width: '100px', height: '40px', marginLeft: '10px', display: 'inline-block'} }
                 hintStyle={{fontSize: '12px', size: '12px'}}
                 hintText={"ej. 300 mt"}
                 onChange={posteDistanceInputChange}
                 />
-                <Text block small plain>Distancia del poste</Text>
+                <Text block small plain>Distancia del </Text>
+                <Text block small plain>poste </Text>
             </div>
 
                 <div style={{marginLeft: '-45px', textAlign:'center', height: '20px'}} className="col-sm-4">
@@ -180,7 +181,7 @@ export default class StatusBar extends React.Component {
         </PaperBox>
       </div>
 
-      <div className="col-sm-2">
+      <div className="call-status col-sm-2">
          <PaperBox  center style={ style[callStatus] } zDepth={2} >
         <H2>{callStatus}</H2>
         <MiniClock duration={callDuration} callStart={callStart}/>
@@ -188,7 +189,7 @@ export default class StatusBar extends React.Component {
         </PaperBox>
       </div>
 
-      <div className="col-sm-4">
+      <div className="services-status col-sm-4">
          { services ?
          <PaperBox blank center style={ style[status] } zDepth={2} >
            {servicesArray}
@@ -197,11 +198,17 @@ export default class StatusBar extends React.Component {
          <PaperBox center style={ style[status] } zDepth={2} >
         <H2>{status}</H2>
 
-        <p>{status=='DESPACHADO' ?
+        <div>{status=='DESPACHADO' ?
         <div>{moment(dispatched1).format('HH:mm')} (<MiniClock inline callStart={dispatched1}/>)</div>:
-         ''} </p>
+         ''}
+       </div>
 
-        <p>{status=='FINALIZADO' ? <div>{moment(arrived1).format('HH:mm')} (<MiniClock callStart={0} inline duration={(arrived1-dispatched1)/1000}/>)</div> : ''}</p>
+        <div>{status=='FINALIZADO' ?
+          <div>{moment(arrived1).format('HH:mm')}
+            (<MiniClock callStart={0} inline duration={(arrived1-dispatched1)/1000}/>)
+          </div> :
+             ''}
+       </div>
         <Text plain>Estado Servicio</Text>
         </PaperBox>
 

@@ -3,7 +3,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { readPoste, addPoste, removePoste } from 'helpers/posteApi';
 import { Link, Route } from 'react-router-dom';
 import H1 from 'components/H1';
-import NewUser from 'components/UserComponent/NewUser';
 
 const style = {
   container : {
@@ -40,7 +39,6 @@ export default class PosteNavbar extends React.Component {
             <span onClick={() => addPoste('3002891', '50')}>Nuevo poste</span>
             <span onClick={() => removePoste('3002891', '50')}>Remover poste poste</span>
 
-            <RaisedButton onClick={() => this.setState({newModalOpen: true})} label="Nuevo Usuario" secondary={true} style={style.button} />
             <div style={style.header}>
               <H1>Postes</H1>
             </div>
