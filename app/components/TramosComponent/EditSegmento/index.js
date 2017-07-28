@@ -23,9 +23,8 @@ export default class EditSegmento extends React.Component {
     super(props);
     this.state = {
       name: '',
-      cedula: '',
-      isAdmin: false,
-      value: 0
+      prInicial: '',
+      prFinal: false
     }
   }
 
@@ -64,7 +63,7 @@ export default class EditSegmento extends React.Component {
 
   onSubmitForm = (evt) => {
     evt.preventDefault();
-    const data = JSON.stringify(
+    const payload = JSON.stringify(
       {
         "id": this.state.id,
         "data" : {
@@ -83,21 +82,23 @@ export default class EditSegmento extends React.Component {
   fetch("http://localhost:3000/api/segmento/update", {
     method: "POST",
     headers: configuration,
-    body: data
+    body: payload
   })
   .then(res => res.json())
   .then((value) => {
     console.log("User created", value);
     console.log("Data sent: ", data);
-    let parsedUser = JSON.parse(data)
-    let userId = this.state.id;
-    this.props.updateSegmento(userId, value);
+
+    let { data, id } = JSON.parse(payload);
+    console.log("Update segmento. ", data, id);
+
+    this.props.updateSegmento(id, data);
     this.props.handleClose();
     return 'Segmento updated';
     //ACTION TO CREATE A TRAMO
   })
   .catch((res) => {
-    console.log("Values sent", data);
+    console.log("Values sent", payload);
     console.log("ERROR!", res);
   })
 }
